@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-18 15:51:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.manager.entity.Material" table="tblmaterial">
+     	<composite-id name="id" class="com.manager.entity.MaterialId" >
+     		<key-property name="partnumber" type="java.lang.String">
+				<column name="partnumber"  />
+			</key-property>
+			<key-property name="partRev" type="java.lang.String">
+				<column name="partRev"  />
+			</key-property>
+			<key-property name="partActive" type="java.lang.String">
+				<column name="partActive" />
+			</key-property>
+     	</composite-id>
+        <property name="partName" type="java.lang.String">
+            <column name="partName" />
+        </property>
+        <property name="partDesc" type="java.lang.String">
+            <column name="partDesc" />
+        </property>
+        <property name="tuNumber" type="java.lang.String">
+            <column name="tuNumber" />
+        </property>
+        <property name="partSpec" type="java.lang.String">
+            <column name="partSpec" />
+        </property>
+        <property name="partStandard" type="java.lang.String">
+            <column name="partStandard" />
+        </property>
+        <property name="partModel" type="java.lang.String">
+            <column name="partModel" />
+        </property>
+        <property name="partType" type="java.lang.String">
+            <column name="partType" />
+        </property>
+        <property name="partUnit" type="java.lang.String">
+            <column name="partUnit" />
+        </property>
+        <property name="partCost" type="java.lang.String">
+            <column name="partCost" />
+        </property>
+        <property name="partRemark" type="java.lang.String">
+            <column name="partRemark" />
+        </property>
+        <property name="partQty" type="java.math.BigDecimal">
+            <column name="partQty" />
+        </property>
+         <property name="partPrice" type="java.math.BigDecimal">
+            <column name="partPrice" />
+        </property>
+        <property name="temp1" type="java.lang.String">
+            <column name="temp1" />
+        </property>
+          <property name="temp2" type="java.lang.String">
+            <column name="temp2" />
+        </property>
+          <property name="temp3" type="java.lang.String">
+            <column name="temp3" />
+        </property>
+          <property name="temp4" type="java.math.BigDecimal">
+            <column name="temp4" />
+        </property>
+        <property name="temp5" type="java.util.Date">
+            <column name="temp5" />
+        </property>
+        <property name="editor" type="java.lang.String">
+            <column name="EDITOR" />
+        </property>
+        <property name="datetime" type="java.util.Date">
+            <column name="DATETIME" />
+        </property>
+    </class>
+</hibernate-mapping>

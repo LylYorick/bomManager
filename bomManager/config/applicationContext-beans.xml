@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- acion层 -->
+	<bean id="randomAction" class="com.manager.action.RandomAction"
+		scope="prototype">
+	</bean> 
+	<bean id="userAction" class="com.manager.action.UserAction"
+		scope="prototype">
+		<property name="userService" ref="userService"></property>	
+	</bean> 
+	<bean id="materialAction" class="com.manager.action.MaterialAction"
+		scope="prototype">
+		<property name="materialService" ref="materialService"></property>	
+	</bean> 
+	<bean id="supplierAction" class="com.manager.action.SupplierAction"
+		scope="prototype">
+		<property name="supplierService" ref="supplierService"></property>	
+	</bean> 
+	<bean id="invlogAction" class="com.manager.action.InvlogAction"
+		scope="prototype">
+		<property name="invlogService" ref="invlogService"></property>	
+	</bean> 
+	<bean id="inventoryAction" class="com.manager.action.InventoryAction"
+		scope="prototype">
+		<property name="inventoryService" ref="inventoryService"></property>	
+	</bean> 
+	<bean id="executeSqlAction" class="com.manager.action.ExecuteSqlAction"
+		scope="prototype">
+		<property name="inventoryService" ref="inventoryService"></property>	
+	</bean> 
+	<bean id="orderAction" class="com.manager.action.OrderAction"
+		scope="prototype">
+		 <property name="orderService" ref="orderService"></property>	
+	</bean>
+	<!-- service层 -->
+	<bean id="userService" class="com.manager.service.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="materialService" class="com.manager.service.impl.MaterialServiceImpl">
+		<property name="materialDAO" ref="materialDAO"></property>
+	</bean>
+	<bean id="supplierService" class="com.manager.service.impl.SupplierServiceImpl">
+		<property name="supplierDAO" ref="supplierDAO"></property>
+		<property name="materialDAO" ref="materialDAO"></property>
+	</bean>
+	<bean id="invlogService" class="com.manager.service.impl.InvlogServiceImpl">
+		<property name="inventoryDAO" ref="inventoryDAO"></property>
+		<property name="invlogDAO" ref="invlogDAO"></property>
+	</bean>
+	<bean id="inventoryService" class="com.manager.service.impl.InventoryServiceImpl">
+		<property name="inventoryDAO" ref="inventoryDAO"></property>
+	</bean>
+	<bean id="orderService" class="com.manager.service.impl.OrderServiceImpl">
+		<property name="orderDAO" ref="orderDAO"></property>
+	</bean>
+	
+	<!-- dao层 -->
+	<bean id="baseDAO" class="com.manager.dao.impl.BaseDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="userDAO" class="com.manager.dao.impl.UserDAOImpl" parent="baseDAO">
+	</bean>
+	<bean id="materialDAO" class="com.manager.dao.impl.MaterialDAOImpl" parent="baseDAO">
+	</bean>
+	<bean id="supplierDAO" class="com.manager.dao.impl.SupplierDAOImpl" parent="baseDAO">
+	</bean>	
+	<bean id="inventoryDAO" class="com.manager.dao.impl.InventoryDAOImpl" parent="baseDAO">
+	</bean>	
+	<bean id="invlogDAO" class="com.manager.dao.impl.InvlogDAOImpl" parent="baseDAO">
+	</bean>	
+	<bean id="orderDAO" class="com.manager.dao.impl.OrderDAOImpl" parent="baseDAO">
+	</bean>	
+</beans>

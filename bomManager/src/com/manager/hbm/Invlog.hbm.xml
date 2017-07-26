@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-13 17:04:49 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.manager.entity.Invlog" table="tblinvlog" catalog="bom">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="partnumber" type="string">
+            <column name="Partnumber" length="50" not-null="true" />
+        </property>
+        <property name="partName" type="string">
+            <column name="PartName" length="100" />
+        </property>
+        <property name="partRev" type="string">
+            <column name="PartRev" length="10" not-null="true" />
+        </property>
+        <property name="supplierName" type="string">
+            <column name="SupplierName" length="50" not-null="true" />
+        </property>
+        <property name="partUnit" type="string">
+            <column name="PartUnit" length="50" />
+        </property>
+        <property name="qty" type="java.math.BigDecimal">
+            <column name="Qty" precision="22" scale="0" />
+        </property>
+        <property name="MIo" type="string">
+            <column name="M_IO" length="1" />
+        </property>
+        <property name="orderNumber" type="string">
+            <column name="OrderNumber" length="100" />
+        </property>
+        <property name="editor" type="string">
+            <column name="Editor" length="50" />
+        </property>
+        <property name="datetime" type="timestamp">
+            <column name="Datetime" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

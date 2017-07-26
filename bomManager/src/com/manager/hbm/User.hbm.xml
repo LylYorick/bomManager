@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-18 15:51:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.manager.entity.UserInfo" table="tbluser">
+        <id name="u_Number" type="string">
+            <column name="U_NUMBER" />
+            <generator class="assigned" />
+        </id>
+        <property name="u_Name" type="java.lang.String">
+            <column name="u_Name" />
+        </property>
+        <property name="u_Password" type="java.lang.String">
+            <column name="U_Password"  />
+        </property>
+        <property name="u_Phone" type="java.lang.String">
+            <column name="U_Phone"  />
+        </property>
+        <property name="u_Title" type="java.lang.String">
+            <column name="U_Title" />
+        </property>
+        <property name="u_Comany" type="java.lang.String">
+            <column name="U_Comany"  />
+        </property>
+        <property name="u_Address" type="java.lang.String">
+            <column name="U_Address"/>
+        </property>
+        <property name="u_Level" type="int">
+            <column name="U_Level" />
+        </property>
+          <property name="u_Active" type="java.lang.String">
+            <column name="U_Active" />
+        </property>
+          <property name="u_CreateDate" type="java.util.Date">
+            <column name="U_CreateDate" />
+        </property>  
+        <property name="u_Temp1" type="java.lang.String">
+            <column name="U_Temp1" />
+        </property>
+          <property name="u_Temp2" type="java.lang.String">
+            <column name="U_Temp2" />
+        </property>
+          <property name="u_Temp3" type="java.lang.String">
+            <column name="U_Temp3" />
+        </property>
+          <property name="u_Temp4" type="double">
+            <column name="U_Temp4" />
+        </property>
+        <property name="u_Temp5" type="java.util.Date">
+            <column name="U_Temp5" />
+        </property>
+        <property name="editor" type="java.lang.String">
+            <column name="EDITOR" />
+        </property>
+        <property name="datetime" type="java.util.Date">
+            <column name="DATETIME" />
+        </property>
+    </class>
+</hibernate-mapping>

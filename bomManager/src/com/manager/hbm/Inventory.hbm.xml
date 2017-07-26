@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-18 15:51:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.manager.entity.Inventory" table="tblinventory">
+     	<composite-id name="id" class="com.manager.entity.SupplierId" >
+     		<key-property name="partnumber" type="java.lang.String">
+				<column name="partnumber"  />
+			</key-property>
+			<key-property name="partRev" type="java.lang.String">
+				<column name="PartRev"  />
+			</key-property>
+			<key-property name="supplierName" type="java.lang.String">
+				<column name="supplierName" />
+			</key-property>
+     	</composite-id>
+        <property name="partName" type="java.lang.String">
+            <column name="partName" />
+        </property>
+        <property name="partUnit" type="java.lang.String">
+            <column name="partUnit" />
+        </property>
+        <property name="i_Qty" type="java.math.BigDecimal">
+            <column name="i_Qty" />
+        </property>
+        <property name="m_Editor" type="java.lang.String">
+            <column name="M_EDITOR" />
+        </property>
+        <property name="m_Datetime" type="java.util.Date">
+            <column name="M_DATETIME" />
+        </property>
+    </class>
+</hibernate-mapping>

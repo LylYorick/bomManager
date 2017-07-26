@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-13 14:21:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.manager.entity.Order" table="tblorder" catalog="bom">
+        <id name="orderNumber" type="string">
+            <column name="OrderNumber" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="orderMode" type="string">
+            <column name="OrderMode" length="50" />
+        </property>
+        <property name="orderName" type="string">
+            <column name="OrderName" length="50" />
+        </property>
+        <property name="orderType" type="string">
+            <column name="OrderType" length="50" />
+        </property>
+        <property name="orderQty" type="java.lang.Double">
+            <column name="OrderQty" precision="22" scale="0" />
+        </property>
+        <property name="orderMaterial" type="string">
+            <column name="OrderMaterial" length="50" />
+        </property>
+        <property name="orderDesc" type="string">
+            <column name="OrderDesc" length="500" />
+        </property>
+        <property name="reqDate" type="date">
+            <column name="ReqDate" length="10" />
+        </property>
+        <property name="contact" type="string">
+            <column name="Contact" length="50" />
+        </property>
+        <property name="cellPhone" type="string">
+            <column name="CellPhone" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" length="500" />
+        </property>
+        <property name="orderPrice" type="java.lang.Double">
+            <column name="OrderPrice" precision="22" scale="0" />
+        </property>
+        <property name="orderConfirm" type="string">
+            <column name="OrderConfirm" length="1" />
+        </property>
+        <property name="orderStatus" type="string">
+            <column name="OrderStatus" length="50" />
+        </property>
+        <property name="verifyTime" type="timestamp">
+            <column name="VerifyTime" length="19" />
+        </property>
+        <property name="verifyBy" type="string">
+            <column name="VerifyBy" length="20" />
+        </property>
+        <property name="confirmTime" type="timestamp">
+            <column name="confirmTime" length="19" />
+        </property>
+        <property name="confirmBy" type="string">
+            <column name="confirmBy" length="20" />
+        </property>
+        <property name="delivered" type="string">
+            <column name="Delivered" length="1" />
+        </property>
+        <property name="deliveryTime" type="timestamp">
+            <column name="DeliveryTime" length="19" />
+        </property>
+        <property name="payment" type="java.lang.Double">
+            <column name="Payment" precision="22" scale="0" />
+        </property>
+        <property name="payWay" type="string">
+            <column name="PayWay" length="20" />
+        </property>
+        <property name="paid" type="string">
+            <column name="Paid" length="1" />
+        </property>
+        <property name="express" type="string">
+            <column name="Express" length="20" />
+        </property>
+        <property name="expressNum" type="string">
+            <column name="ExpressNum" length="20" />
+        </property>
+        <property name="fileName" type="string">
+            <column name="FileName" length="255" />
+        </property>
+    </class>
+</hibernate-mapping>

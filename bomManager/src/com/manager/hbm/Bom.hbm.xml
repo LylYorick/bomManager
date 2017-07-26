@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-14 16:34:52 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.manager.entity.Bom" table="tblbom" catalog="bom">
+        <composite-id name="id" class="com.manager.entity.BomId">
+            <key-property name="topPartnumber" type="string">
+                <column name="Top_Partnumber" length="50" />
+            </key-property>
+            <key-property name="FPartnumber" type="string">
+                <column name="F_Partnumber" length="50" />
+            </key-property>
+            <key-property name="partNumber" type="string">
+                <column name="PartNumber" length="50" />
+            </key-property>
+        </composite-id>
+        <property name="topName" type="string">
+            <column name="Top_Name" length="100" />
+        </property>
+        <property name="partName" type="string">
+            <column name="PartName" length="100" not-null="true" />
+        </property>
+        <property name="FName" type="string">
+            <column name="F_name" length="100" />
+        </property>
+        <property name="secq" type="java.lang.Integer">
+            <column name="Secq" />
+        </property>
+        <property name="useQty" type="java.lang.Double">
+            <column name="UseQty" precision="22" scale="0" />
+        </property>
+        <property name="editor" type="string">
+            <column name="Editor" />
+        </property>
+        <property name="datetime" type="timestamp">
+            <column name="Datetime" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>
