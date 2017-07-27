@@ -87,6 +87,7 @@ public class UserServiceImpl implements UserService{
 		UserInfo item = userInfo.castToSon();
 		item.setU_Password(property.getU_Password());
 		item.setEditor(property.getU_Name());
+		item.setU_Active(property.getU_Active());
 		item.setDatetime(new  Date());
 		if(item.getU_Level() == 0 ){
 			item.setU_Level(property.getU_Level());
