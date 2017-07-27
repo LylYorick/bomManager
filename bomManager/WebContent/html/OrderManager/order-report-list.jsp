@@ -44,10 +44,10 @@
 				<span class="select-box">
 					<select class="select"  name="entity.orderStatus" id="orderStatus">
 		    			<option value="">==请选择==</option>
-		    			<option value="待审核" <s:if test="entity.orderStatus.equals('待审核')">selected</s:if> >待审核</option>
-		    			<option value="已审核"  <s:if test="entity.orderStatus.equals('已审核')">selected</s:if>>已审核</option>
-		    			<option value="已确认" <s:if test="entity.orderStatus.equals('已确认')">selected</s:if>>已确认</option>
-		    			<option value="已完成"  <s:if test="entity.orderStatus.equals('已完成')">selected</s:if>>已完成</option>
+		    			<option value="待审核" <s:if test="'待审核'.equals(entity.orderStatus)">selected</s:if> >待审核</option>
+		    			<option value="已审核"  <s:if test="'已审核'.equals(entity.orderStatus)">selected</s:if>>已审核</option>
+		    			<option value="已确认" <s:if test="'已确认'.equals(entity.orderStatus)">selected</s:if>>已确认</option>
+		    			<option value="已完成"  <s:if test="'已完成'.equals(entity.orderStatus)">selected</s:if>>已完成</option>
 		   		   </select>
 				</span>
 			</td>
@@ -58,11 +58,11 @@
 				<span class="select-box">
 					<select class="select"  name="entity.orderMode" id="orderMode" >
 		    			<option value="">==请选择==</option>
-		    			<option value="机加定制" <s:if test="entity.orderMode.equals('机加定制')">selected</s:if> >机加定制</option>
-		    			<option value="PCB定制"  <s:if test="entity.orderMode.equals('PCB定制')">selected</s:if>>PCB定制</option>
-		    			<option value="定制采购" <s:if test="entity.orderMode.equals('定制采购')">selected</s:if>>定制采购</option>
-		    			<option value="系统定制" <s:if test="entity.orderMode.equals('系统定制')">selected</s:if>>系统定制</option>
-		    			<option value="个性定制" <s:if test="entity.orderMode.equals('个性定制')">selected</s:if>>个性定制</option>
+		    			<option value="机加定制" <s:if test="'机加定制'.equals(entity.orderMode)">selected</s:if> >机加定制</option>
+		    			<option value="PCB定制"  <s:if test="'PCB定制'.equals(entity.orderMode)">selected</s:if>>PCB定制</option>
+		    			<option value="定制采购" <s:if test="'定制采购'.equals(entity.orderMode)">selected</s:if>>定制采购</option>
+		    			<option value="系统定制" <s:if test="'系统定制'.equals(entity.orderMode)">selected</s:if>>系统定制</option>
+		    			<option value="个性定制" <s:if test="'个性定制'.equals(entity.orderMode)">selected</s:if>>个性定制</option>
 		   		   </select>
 				</span>
 			</td>
@@ -84,8 +84,8 @@
 				<span class="select-box">
 					<select class="select"  name="entity.paid" id="paid">
 		    			<option value="">==请选择==</option>
-		    			<option value="Y" <s:if test="entity.paid.equals('Y'.toString())">selected</s:if>>是</option>
-		    			<option value="N" <s:if test="entity.paid.equals('N'.toString())">selected</s:if>>否</option>
+		    			<option value="Y" <s:if test="'Y'.toString().equals(entity.paid)">selected</s:if>>是</option>
+		    			<option value="N" <s:if test="'N'.toString().equals(entity.paid)">selected</s:if>>否</option>
 		   		   </select>
 				</span>
 			</td>
@@ -101,8 +101,8 @@
 				<span class="select-box">
 					<select class="select"  name="entity.delivered" id="delivered">
 						<option value="">==请选择==</option>
-		    			<option value="Y" <s:if test="entity.delivered.equals('Y'.toString())">selected</s:if>>是</option>
-		    			<option value="N" <s:if test="entity.delivered.equals('N'.toString())">selected</s:if>>否</option>
+		    			<option value="Y" <s:if test="'Y'.toString().equals(entity.delivered)">selected</s:if>>是</option>
+		    			<option value="N" <s:if test="'N'.toString().equals(entity.delivered)">selected</s:if>>否</option>
 		   		   </select>
 				</span>
 			</td>
@@ -113,9 +113,9 @@
 				<span class="select-box">
 					<select class="select"  name="orderTime" id="orderTime">
 		    			<option value="">==请选择==</option>
-		    			<option value="1" <s:if test="orderTime.equals('1'.toString())">selected</s:if>>最近一周</option>
-		    			<option value="2" <s:if test="orderTime.equals('2'.toString())">selected</s:if>>最近一个月</option>
-		    			<option value="3" <s:if test="orderTime.equals('3'.toString())">selected</s:if>>最近一年</option>
+		    			<option value="1" <s:if test="'1'.toString().equals(orderTime)">selected</s:if>>最近一周</option>
+		    			<option value="2" <s:if test="'2'.toString().equals(orderTime)">selected</s:if>>最近一个月</option>
+		    			<option value="3" <s:if test="'3'.toString().equals(orderTime)">selected</s:if>>最近一年</option>
 		   		   </select>
 				</span>
 			</td>
