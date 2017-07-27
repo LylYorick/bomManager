@@ -65,7 +65,7 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户等级：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 		<span class="select-box">
-			<select class="select"  name="u_level">
+			<select class="select"  name="u_Level">
 					<s:iterator  value="#session.allLevels" var="index">
 						 <option value='<s:property value="#index"/>' <s:if test="#index == u_Level"> selected</s:if>  ><s:property value="#index"/></option> 
 					</s:iterator> 
