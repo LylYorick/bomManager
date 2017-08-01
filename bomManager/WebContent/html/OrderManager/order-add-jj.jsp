@@ -119,6 +119,8 @@ $(function(){
 			},
 			'entity.orderQty':{
 				required:true,
+				minNumber:true,
+				isFloatGteZero:true,
 			},
 			'entity.orderMaterial':{
 				required:true,
@@ -134,7 +136,6 @@ $(function(){
 			},
 			'img':{
 				required:true,
-				checkPic:['jpg','jpeg','png','bmp'],
 			},
 		},
 		onkeyup:false,
@@ -146,7 +147,6 @@ $(function(){
 				url: "order-doAdd", 
 				data:{"entity.orderMode":"机加定制"},
 				success: function(data){
-					//alert(data);
 					if(data == "1"){
 						layer.msg('添加成功!',{icon:1,time:1000});
 						setTimeout(function(){

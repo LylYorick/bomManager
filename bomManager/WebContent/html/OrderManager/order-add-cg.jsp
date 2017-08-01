@@ -119,6 +119,8 @@ $(function(){
 			},
 			'entity.orderQty':{
 				required:true,
+				minNumber:true,
+				isFloatGteZero:true,
 			},
 			'entity.orderMaterial':{
 				required:true,
