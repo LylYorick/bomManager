@@ -90,7 +90,7 @@
 				</span>
 			</td>
 			<td>
-			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i>搜索订单信息</button>
+			<button type="button" class="btn btn-success radius" id="" name="" onclick="doSearch()"><i class="Hui-iconfont">&#xe665;</i>搜索订单信息</button>
 			</td>
 			</tr>
 			<tr>
@@ -128,7 +128,7 @@
 			<td>
 			</td>
 			<td>
-				<button type="button" class="btn btn-success radius" id="" name=""  onclick="doExportExcel()"><i class="Hui-iconfont">&#xe665;</i> 导出订单信息</button>
+				<button type="button" class="btn btn-success radius" id="" name=""  onclick="doExportExcel()">导出订单信息</button>
 			</td>
 			</tr>
 			</table>
@@ -235,14 +235,13 @@
 		$("#currentPage").val(currentPage);
 		$("#fenyeForm").submit();
 	}
-	function doExportExcel(obj,id){
-		$("#orderForm").ajaxSubmit({
-			url:'order-doExport',
-			success: function(data){
-				console.log(data);
-			}
-		});
-		
+	function doExportExcel(){
+		$("#orderForm").attr("action","order-doExport")
+		$("#orderForm").submit();
+	}
+	function doSearch(){
+		$("#orderForm").attr("action","order-toReport")
+		$("#orderForm").submit();
 	}
 	</script>
 </body>

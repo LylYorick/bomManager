@@ -129,6 +129,12 @@
 		        <param name="contentType">text/html</param>
 		        <param name="inputName">inputStream</param>
 		    </result>	
+		     <result type="stream" name="file-downLoad">
+		        <param name="contentType">application/x-xls</param>
+		        <param name="inputName">inputStream</param>
+		     <param name="contentDisposition">attachment;filename="${imgFileName}"</param>
+		    </result>	
+		    
         </action>
     </package> 
 </struts>

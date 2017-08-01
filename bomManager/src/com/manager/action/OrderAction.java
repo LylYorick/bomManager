@@ -8,6 +8,8 @@
  */
 package com.manager.action;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +21,7 @@ import javax.servlet.ServletContext;
 import org.apache.struts2.ServletActionContext;
 
 import com.manager.common.Const;
+import com.manager.common.tools.DateUtil;
 import com.manager.common.tools.FileUtil;
 import com.manager.common.tools.TimeHelper;
 import com.manager.entity.Order;
@@ -252,7 +255,7 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		request.put(Const.Order_LIST, list);
 		return "toReport";
 	}
-	public String doExport(){
+	public String doExport() throws Exception{
 		Order order = model.getEntity();
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
 		HashMap formParams = new HashMap<String,Object>();
@@ -264,13 +267,25 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		request.put(Const.SUM, sum);
 		pageBean.setAllRows(sum);
 		pageBean.setTotalPages();
+		//获取查询结果
 		List<Order> list = orderService.getList(formParams, order);
 		request.put(Const.Order_LIST, list);
+		//生成excel
 		PoiUtil poiUtil = new PoiUtil();
+		// 获取临时存储的文件夹并清空文件夹中的全部文件
 		ServletContext servletContext = ServletActionContext.getServletContext();
-		String fileUrl = servletContext.getRealPath("/OrderFile/" + "1.xls");
+		String directoryUrl = servletContext.getRealPath("/OrderFile/ExcelTmp");
+		FileUtil.clearDir(directoryUrl);
+		//创建服务端临时的Excel文件 生成规则 为当前时间
+		String fileName = DateUtil.getCurrentDateTime()+".xls";
+		//设置客户端下载时看到的文件名
+		model.setImgFileName(fileName);
+		//构建excel文件
+		String fileUrl = directoryUrl + File.separatorChar+fileName;
 		poiUtil.setFileUrl(fileUrl);
 		poiUtil.buildExcel(list);
-		return "excelReport";
+		//导出excel文件
+		inputStream = new FileInputStream(fileUrl);
+		return "file-downLoad";
 	}
 }

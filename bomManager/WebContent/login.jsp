@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+ <%@ taglib prefix="s" uri="/struts-tags" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,13 +33,14 @@
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="u_Number" name="u_Number" type="text" placeholder="账户" class="input-text size-L">
+          <input id="u_Number" name="u_Number" type="text" placeholder="账户" class="input-text size-L" value="">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="u_Password" name="u_Password" type="password" placeholder="密码" class="input-text size-L">
+          <input id="u_Password" name="u_Password" type="password" placeholder="密码" class="input-text size-L" value="">
+          <s:fielderror fieldName="loginError" cssStyle="color:red;"></s:fielderror>
         </div>
       </div>
       <div class="row cl">

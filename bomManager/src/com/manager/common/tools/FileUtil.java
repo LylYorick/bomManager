@@ -163,7 +163,31 @@ public class FileUtil {
 		} else
 			delpath.delete();
 	}
-
+	
+	/**
+	 * 清除文件夹中的全部内容
+	 * @param dir
+	 */
+	public static void clearDir(File dir) throws FileNotFoundException,
+	IOException{
+		File[] filelist = dir.listFiles();
+		if (filelist.length != 0) {
+			for (int i = 0; i < filelist.length; i++) {
+				if (filelist[i].isDirectory())
+					deletefile(filelist[i]);
+				else
+					filelist[i].delete();
+			}
+		}
+	}
+	/**
+	 * 清除文件夹中的全部内容
+	 * @param dirPath 
+	 */
+	public static void clearDir(String dirPath) throws FileNotFoundException,IOException{
+		File dir = new File(dirPath);
+		clearDir(dir);
+	}
     /**
      * 获得指定文件的byte数组 
      * @param filePath
@@ -262,37 +286,18 @@ public class FileUtil {
     	return file.length()+"";
     }
     
+
 	public static void main(String[] args)
 	{
-		try
-		{
-			FileUtil.writeFile("D:\\aa\\BankCode.dat", "333333333");
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		/**
-		File file1=new File("c:\\tttt");
-		  try
-		  {
-		   deletefile(file1);
-		  }
-		  catch(Exception e)
-		  {
-		   e.printStackTrace();
-		  }
-		  **/
-		
-		try {
-			//System.out.println(FileUtil.getFileFirstLine("c:\\bd_temp\\Customer_Import_00_20070811141020.txt"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
+			String  dir = "D:/123";
+			try {
+				clearDir(new File(dir));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
-
+  
 	
 }

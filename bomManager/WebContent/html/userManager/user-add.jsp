@@ -7,10 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/H-ui.css" />
-	<link rel="stylesheet" type="text/css" href="css/hui/H-ui.admin.css" />
-	<link rel="stylesheet" type="text/css" href="css/hui/iconfont.css" />
-	<link rel="stylesheet" type="text/css" href="css/hui/skin/default/skin.css" id="skin" />
-	<link rel="stylesheet" type="text/css" href="css/hui/style.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/H-ui.admin.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/skin/default/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/style.css" />
 </head>
 <body>
 <article class="page-container">
@@ -61,14 +61,14 @@
 </article>
 </body>
 	<!-- _footer 作为公共模版分离出去 -->
-	<script type="text/javascript" src="js/jquery.js"></script> 
-	<script type="text/javascript" src="js/hui/layer/2.4/layer.js"></script>
-	<script type="text/javascript" src="js/hui/H-ui.js"></script>
-	<script type="text/javascript" src="js/hui/H-ui.admin.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
 <!-- /_footer 作为公共模版分离出去 -->
-<script type="text/javascript" src="js/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="js/jquery.validation/1.14.0/validate-methods.js"></script> 
-<script type="text/javascript" src="js/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
 <script type="text/javascript">
 $(function(){
 	$("#form-user-add").validate({
