@@ -53,7 +53,7 @@
 				<dt><a data-href="user-list.action" data-title="用户管理" href="javascript:void(0)">用户管理</a></dt>
 				<s:if test="#session.currentUser.u_Level > 1">
 					<dt><a data-href="material-list" data-title="材料管理" href="javascript:void(0)">材料管理</a></dt>
-					<dt><a data-href="empty.jsp" data-title="BOM管理" href="javascript:void(0)">BOM管理</a></dt>
+					<dt><a data-href="bom-list" data-title="BOM管理" href="javascript:void(0)">BOM管理</a></dt>
 			
 					<dt><a data-href="supplier-list" data-title="供应商管理" href="javascript:void(0)">供应商管理</a></dt>
 					<dl id="menu-member">

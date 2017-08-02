@@ -129,6 +129,17 @@
 		        <param name="contentType">text/html</param>
 		        <param name="inputName">inputStream</param>
 		    </result>	
+		     <result type="stream" name="file-downLoad">
+		        <param name="contentType">application/x-xls</param>
+		        <param name="inputName">inputStream</param>
+		     <param name="contentDisposition">attachment;filename="${imgFileName}"</param>
+		    </result>	
+        </action>
+        <action name="bom-*" class="bomAction"
+        	method="{1}"> 
+        	<result name="fontPage">/html/frontPage.jsp</result>
+        	<result name="input">login.jsp</result>
+        	<result name="list">/html/BomManager/bom-list.jsp</result>
         </action>
     </package> 
 </struts>
