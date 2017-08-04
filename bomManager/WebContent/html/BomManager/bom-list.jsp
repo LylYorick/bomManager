@@ -25,6 +25,7 @@
 <title>Insert title here</title>
 </head>
 	<body>
+		
 		<nav class="breadcrumb">
 			<i class="Hui-iconfont">&#xe667;</i> 
 			首页
@@ -34,7 +35,6 @@
 		<div class="page-container">
 		<div class="text-c">
 		<form id="orderForm" class="Huiform" method="get" action="order-toReport"  target="_self">
-			
 			<table class="table table-border table-bordered radius">
 			<tr>
 			<td> 
@@ -60,8 +60,8 @@
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 		 <span class="r">共有数据：<strong><%-- ${request.sum} --%></strong> 条</span> 
 		</div>
-		<table class="table table-border table-bordered table-bg">
-			<thead>
+		<table class="table table-border table-bordered table-bg" id="bomTb">
+			<!-- <thead>
 				<tr>
 					<th scope="col" colspan="18">管理列表</th>
 				</tr>
@@ -83,29 +83,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%-- <s:iterator value="#request.OrderList">
 					<tr class="text-c">
-						<td>${orderNumber}</td>
-						<td>${orderMode}</td>
-						<td>${orderName}</td>
-						<td>${orderType}</td>
-						<td>${orderQty}</td>
-						<td>${orderMaterial}</td>
-						<td>${orderDesc}</td> 
-						<td><s:date name="reqDate" format="yyyy-MM-dd hh:mm:ss"/></td>
-						<td>${contact}</td>
-						<td>${cellPhone}</td>
-						<td>${address}</td>
-						<td>${orderPrice}</td>
-						<td>${orderStatus}</td>
-						<td class="td-manage">
-						<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-								 <i class="Hui-iconfont">&#xe715;</i>
-						</a>
-						</td>
-					</tr>
-				</s:iterator> --%>
-			</tbody>
+						
+			</tbody> -->
 		</table>
 		<center>
         <font size="4">当前第<font color="red"><s:property value="pageBean.currentPage"/></font>页</font>&nbsp;&nbsp;
@@ -166,6 +146,65 @@
 		$("#orderForm").attr("action","order-toReport")
 		$("#orderForm").submit();
 	}
+	function initBom(){
+		var bomList = eval('<s:text name="#request.bomJson"></s:text>');
+		if(bomList == null ||bomList == undefined ||  bomList.length == 0){
+			return;
+		}
+		var minLevel = 100;
+		var maxLevel = 0;
+		minLevel = bomList[0].secq;
+		for(var i = 0; i<bomList.length; i++){
+			var bom = bomList[i];
+			if(bom.secq > maxLevel){
+				maxLevel = bom.secq;
+			}
+		}
+		console.log(minLevel+"minLevel");
+		console.log(maxLevel+"maxLevel");
+		var tbsum = maxLevel - minLevel + 1;
+		//创建表头
+		var bomTb = $("#bomTb").empty();
+		var bomstring="";
+		bomstring +="<thead>";
+		bomstring +="<tr> <th scope='col' colspan='18'>管理列表</th> </tr>";
+		bomstring +=" <tr class='text-c'></tr>";
+		bomstring +=" <tr class='text-c'></tr>";
+		bomstring +=" <tr class='text-c'></tr>";
+		for(var i = minLevel; i < maxLevel+1 ; i++){
+			bomstring += "<th width='100'>第"+i+"级</th>";
+		}
+		bomstring += "<th width='100'>	图样代号</th>";
+		bomstring += "<th width='100'>	材料/规格</th>";
+		bomstring += "<th width='100'>	执行标准</th>";
+		bomstring += "<th width='100'>	单台部件数量</th>";
+		bomstring += "<th width='100'>	单台零件数量</th>";
+		bomstring += "</tr></thead>";
+		//创建文字部分
+		bomstring +="<tbody>"; 
+		for(var i = 0; i< bomList.length; i++){
+			bomstring += "<tr class='text-c' id=>";
+			var bom = bomList[i];
+			for(var j = minLevel; j< maxLevel+1;j++){
+				if(j == bom.secq){
+					bomstring += "<td>"+bom.partName+ "</td>";
+					//bomTb.append("<td>"+bom.partName+ "</td>");
+				}else{
+					bomstring += "<td></td>";
+					//bomTb.append("<td></td>");
+				}
+			}
+			bomstring += "<td>"+bom.id.partNumber+ "</td>";
+			bomstring += "<td>"+"材料/规格"+ "</td>";
+			bomstring += "<td>"+"执行标准"+ "</td>";
+			bomstring += "<td>"+"单台部件数量"+ "</td>";
+			bomstring += "<td>"+"单台零件数量"+ "</td>";
+			bomstring +="</tr>";
+		}
+		bomstring +="</tbody>"
+		bomTb.append(bomstring); 
+	}
+	initBom();
 	</script>
 </body>
 </html>

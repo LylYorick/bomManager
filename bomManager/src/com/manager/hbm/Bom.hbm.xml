@@ -8,7 +8,7 @@
             <key-property name="topPartnumber" type="string">
                 <column name="Top_Partnumber" length="50" />
             </key-property>
-            <key-property name="FPartnumber" type="string">
+            <key-property name="fPartnumber" type="string">
                 <column name="F_Partnumber" length="50" />
             </key-property>
             <key-property name="partNumber" type="string">

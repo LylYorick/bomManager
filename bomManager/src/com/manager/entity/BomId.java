@@ -8,17 +8,22 @@ package com.manager.entity;
 public class BomId implements java.io.Serializable {
 
 	private String topPartnumber;
-	private String FPartnumber;
+	private String fPartnumber;
 	private String partNumber;
 
 	public BomId() {
 	}
 
-	public BomId(String topPartnumber, String FPartnumber, String partNumber) {
-		this.topPartnumber = topPartnumber;
-		this.FPartnumber = FPartnumber;
-		this.partNumber = partNumber;
+
+	public String getfPartnumber() {
+		return fPartnumber;
 	}
+
+
+	public void setfPartnumber(String fPartnumber) {
+		this.fPartnumber = fPartnumber;
+	}
+
 
 	public String getTopPartnumber() {
 		return this.topPartnumber;
@@ -26,14 +31,6 @@ public class BomId implements java.io.Serializable {
 
 	public void setTopPartnumber(String topPartnumber) {
 		this.topPartnumber = topPartnumber;
-	}
-
-	public String getFPartnumber() {
-		return this.FPartnumber;
-	}
-
-	public void setFPartnumber(String FPartnumber) {
-		this.FPartnumber = FPartnumber;
 	}
 
 	public String getPartNumber() {
@@ -44,45 +41,19 @@ public class BomId implements java.io.Serializable {
 		this.partNumber = partNumber;
 	}
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof BomId))
-			return false;
-		BomId castOther = (BomId) other;
-
-		return ((this.getTopPartnumber() == castOther.getTopPartnumber()) || (this
-				.getTopPartnumber() != null
-				&& castOther.getTopPartnumber() != null && this
-				.getTopPartnumber().equals(castOther.getTopPartnumber())))
-				&& ((this.getFPartnumber() == castOther.getFPartnumber()) || (this
-						.getFPartnumber() != null
-						&& castOther.getFPartnumber() != null && this
-						.getFPartnumber().equals(castOther.getFPartnumber())))
-				&& ((this.getPartNumber() == castOther.getPartNumber()) || (this
-						.getPartNumber() != null
-						&& castOther.getPartNumber() != null && this
-						.getPartNumber().equals(castOther.getPartNumber())));
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
 	}
 
-	public int hashCode() {
-		int result = 17;
 
-		result = 37
-				* result
-				+ (getTopPartnumber() == null ? 0 : this.getTopPartnumber()
-						.hashCode());
-		result = 37
-				* result
-				+ (getFPartnumber() == null ? 0 : this.getFPartnumber()
-						.hashCode());
-		result = 37
-				* result
-				+ (getPartNumber() == null ? 0 : this.getPartNumber()
-						.hashCode());
-		return result;
+	public BomId(String topPartnumber, String fPartnumber, String partNumber) {
+		super();
+		this.topPartnumber = topPartnumber;
+		this.fPartnumber = fPartnumber;
+		this.partNumber = partNumber;
 	}
+
 
 }

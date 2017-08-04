@@ -12,10 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.manager.entity.Material;
-import com.manager.entity.Order;
-import com.manager.entity.Supplier;
-import com.manager.entity.SupplierId;
+import com.manager.entity.Bom;
 
 /**
  * TODO添加类描述
@@ -25,8 +22,9 @@ import com.manager.entity.SupplierId;
  */
 public interface BomService {
 
-	public void builhql(StringBuffer hql, Map formParams, Order order, HashMap sqlParams);
+	public void builhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams);
 	
-	
+	public String getList(Map formParams,Bom bom);
+	public void buildTree(String partNumber,List<Bom> resultList);
 }
 

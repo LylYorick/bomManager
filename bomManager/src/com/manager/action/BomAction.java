@@ -8,28 +8,11 @@
  */
 package com.manager.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
-import javax.servlet.ServletContext;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.manager.common.Const;
-import com.manager.common.tools.DateUtil;
-import com.manager.common.tools.FileUtil;
-import com.manager.common.tools.TimeHelper;
-import com.manager.entity.Order;
-import com.manager.entity.common.Pagebean;
-import com.manager.entity.common.PoiUtil;
+import com.manager.entity.Bom;
+import com.manager.entity.BomId;
 import com.manager.entity.model.BomModel;
-import com.manager.entity.model.OrderModel;
-import com.manager.entity.view.UserInfoView;
 import com.manager.service.BomService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -59,6 +42,13 @@ public class BomAction extends BaseAction implements ModelDriven {
 		return model;
 	}
 	public String list(){
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+		BomId id = new BomId();
+		id.setPartNumber("HT2016.01");
+		bom.setId(id);
+		String json = bomService.getList(formParams, bom);
+		request.put("bomJson", json);
 		return "list";
 	}
 
