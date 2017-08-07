@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <!-- Generated 2017-7-14 16:34:52 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.manager.entity.Bom" table="tblbom" catalog="bom">
@@ -21,7 +22,7 @@
         <property name="partName" type="string">
             <column name="PartName" length="100" not-null="true" />
         </property>
-        <property name="FName" type="string">
+        <property name="fName" type="string">
             <column name="F_name" length="100" />
         </property>
         <property name="secq" type="java.lang.Integer">

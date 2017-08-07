@@ -140,6 +140,11 @@
         	<result name="fontPage">/html/frontPage.jsp</result>
         	<result name="input">login.jsp</result>
         	<result name="list">/html/BomManager/bom-list.jsp</result>
+        	  <result type="stream" name="file-downLoad">
+		        <param name="contentType">application/x-xls</param>
+		        <param name="inputName">inputStream</param>
+		     <param name="contentDisposition">attachment;filename="${docFileName}"</param>
+		    </result>	
         </action>
     </package> 
 </struts>

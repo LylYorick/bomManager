@@ -24,7 +24,9 @@ public interface BomService {
 
 	public void builhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams);
 	
-	public String getList(Map formParams,Bom bom);
+	public String getListJson(Map formParams,Bom bom);
+	public List getList(Map formParams,Bom bom);
+	public List getTopBom(Map formParams,Bom bom);
 	public void buildTree(String partNumber,List<Bom> resultList);
 }
 

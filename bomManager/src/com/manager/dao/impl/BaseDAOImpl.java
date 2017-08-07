@@ -34,6 +34,11 @@ public class BaseDAOImpl implements BaseDAO{
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
 	//获取和当前线程绑定的 Session. 
 	public Session getSession(){
 		return sessionFactory.getCurrentSession();

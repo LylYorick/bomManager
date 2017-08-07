@@ -34,89 +34,55 @@
 		</nav>
 		<div class="page-container">
 		<div class="text-c">
-		<form id="orderForm" class="Huiform" method="get" action="order-toReport"  target="_self">
+		<form id="bomForm" class="Huiform" method="get"  target="_self">
 			<table class="table table-border table-bordered radius">
 			<tr>
 			<td> 
-				</span>订单状态：</label>
+				<label>请选择顶阶产品：</label>
 			</td> 
 			<td>
 				<span class="select-box">
-					<select class="select"  name="entity.orderStatus" id="orderStatus">
-		    			<option value="">==请选择==</option>
-		    			<!-- <option value="待审核" <s:if test="'待审核'.equals(entity.orderStatus)">selected</s:if> >待审核</option>
-		    			<option value="已审核"  <s:if test="'已审核'.equals(entity.orderStatus)">selected</s:if>>已审核</option>
-		    			<option value="已确认" <s:if test="'已确认'.equals(entity.orderStatus)">selected</s:if>>已确认</option>
-		    			<option value="已完成"  <s:if test="'已完成'.equals(entity.orderStatus)">selected</s:if>>已完成</option>
-		   		    --></select>
+					<select class="select"  name="entity.id.topPartnumber" id="topPartnumber">
+	   		   			<s:iterator value="#request.topPartList">
+	   		   				<option value="<s:property/>"><s:property/></option>
+	   		   			</s:iterator>
+		   		    </select>
 				</span>
 			</td>
-	
+			<td> 
+				<label>材料料号：</label>
+			</td> 
+			<td>
+				<input type="text" class="input-text" style="width:250px" placeholder="材料料号" id="" name="entity.id.partNumber" value="${entity.id.partNumber}">
+			</td>
+			<td> 
+				<label>材料名称：</label>
+			</td> 
+			<td>
+				<input type="text" class="input-text" style="width:250px" placeholder="材料名称" id="" name="entity.partName" value="${entity.partName}">
+			</td>
+			<td>
+				<button type="button" class="btn btn-success radius" id="" name="" onclick="doSearch()"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+			</td>
+			<td>
+				<button type="button" class="btn btn-success radius" id="" name=""  onclick="doExportExcel()">导出订单信息</button>
+			</td>
 			</tr>
-			
 			</table>
 		</form>
 		</div>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-		 <span class="r">共有数据：<strong><%-- ${request.sum} --%></strong> 条</span> 
+		 <span class="l">
+		 	<a href="javascript:;" onclick="material_add('添加材料','material-toAdd.action','600','600')" class="btn btn-primary radius">
+		 	<i class="Hui-iconfont">&#xe600;</i> 添加材料
+		 </a>
+		 </span>
+		  <span class='r'>共:<strong id='totalSum'>0</strong>元</span>
 		</div>
 		<table class="table table-border table-bordered table-bg" id="bomTb">
-			<!-- <thead>
-				<tr>
-					<th scope="col" colspan="18">管理列表</th>
-				</tr>
-				<tr class="text-c">
-					<th width="150">订单编号</th>
-					<th width="100">订单分类</th>
-					<th width="100">名称</th>
-					<th width="100">类型</th>
-					<th width="100">数量</th>
-					<th width="100">材料</th>
-					<th width="100">描述</th>
-					<th width="100">需求日期</th>
-					<th width="100">联系人</th>
-					<th width="100">联系电话</th>
-					<th width="100">联系地址</th>
-					<th width="100">报价</th>
-					<th width="100">订单状态</th>
-					<th width="100">操作</th>
-				</tr>
-			</thead>
-			<tbody>
-					<tr class="text-c">
-						
-			</tbody> -->
 		</table>
 		<center>
-        <font size="4">当前第<font color="red"><s:property value="pageBean.currentPage"/></font>页</font>&nbsp;&nbsp;
-        <font size="4">共<font color="red"><s:property value="pageBean.totalPages"/></font>页 </font>
-        <s:if test="pageBean.currentPage == 1">
-            首页&nbsp;&nbsp;&nbsp;上一页
-        </s:if>
-        <s:else>
-            <a href="inventory-list">首页</a>
-            &nbsp;&nbsp;&nbsp;
-        	<a href="javascript:void(0)" onclick="formSubmit(<s:property value="pageBean.currentPage  - 1"/>)">上一页</a>
-        </s:else>
-        <s:if test="pageBean.currentPage != pageBean.totalPages && pageBean.totalPages != 0">
-        <a href="javascript:void(0)" onclick="formSubmit(<s:property value="pageBean.currentPage  + 1"/>)">下一页</a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0)" onclick="formSubmit(<s:property value="pageBean.totalPages"/>)">尾页</a>
-        </s:if>
-        <s:else>
-            下一页&nbsp;&nbsp;&nbsp;尾页
-        </s:else>
 	</div>
-		<form  id="fenyeForm" class="Huiform" method="post" action="order-toReport" target="_self">
-			<input type="hidden" name="pageBean.currentPage" id="currentPage">
-			<s:hidden name="entity.orderStatus"></s:hidden>
-			<s:hidden name="entity.orderModel"></s:hidden>
-			<s:hidden name="entity.paid"></s:hidden>
-			<s:hidden name="entity.payWay"></s:hidden>
-			<s:hidden name="entity.delivered"></s:hidden>
-			<s:hidden name="orderTime"></s:hidden>
-		</form>
-
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript" src="js/hui/jquery.dataTables.min.js"></script> 
 	<script type="text/javascript" src="js/hui/laypage/1.2/laypage.js"></script>
@@ -134,18 +100,6 @@
 		layer_show(title,url,w,h);
 	}
 	/* 分页表单提交 */
-	function formSubmit(currentPage){
-		$("#currentPage").val(currentPage);
-		$("#fenyeForm").submit();
-	}
-	function doExportExcel(){
-		$("#orderForm").attr("action","order-doExport")
-		$("#orderForm").submit();
-	}
-	function doSearch(){
-		$("#orderForm").attr("action","order-toReport")
-		$("#orderForm").submit();
-	}
 	function initBom(){
 		var bomList = eval('<s:text name="#request.bomJson"></s:text>');
 		if(bomList == null ||bomList == undefined ||  bomList.length == 0){
@@ -160,17 +114,14 @@
 				maxLevel = bom.secq;
 			}
 		}
-		console.log(minLevel+"minLevel");
-		console.log(maxLevel+"maxLevel");
 		var tbsum = maxLevel - minLevel + 1;
 		//创建表头
 		var bomTb = $("#bomTb").empty();
 		var bomstring="";
 		bomstring +="<thead>";
-		bomstring +="<tr> <th scope='col' colspan='18'>管理列表</th> </tr>";
-		bomstring +=" <tr class='text-c'></tr>";
-		bomstring +=" <tr class='text-c'></tr>";
-		bomstring +=" <tr class='text-c'></tr>";
+		bomstring +="<tr> <th scope='col' colspan='18'>管理列表</th></tr>";
+		
+		bomstring +=" <tr class='text-c'>";
 		for(var i = minLevel; i < maxLevel+1 ; i++){
 			bomstring += "<th width='100'>第"+i+"级</th>";
 		}
@@ -182,29 +133,58 @@
 		bomstring += "</tr></thead>";
 		//创建文字部分
 		bomstring +="<tbody>"; 
+		var totalSum = 0;
+		var sum = 0;
 		for(var i = 0; i< bomList.length; i++){
 			bomstring += "<tr class='text-c' id=>";
 			var bom = bomList[i];
 			for(var j = minLevel; j< maxLevel+1;j++){
 				if(j == bom.secq){
 					bomstring += "<td>"+bom.partName+ "</td>";
-					//bomTb.append("<td>"+bom.partName+ "</td>");
 				}else{
 					bomstring += "<td></td>";
-					//bomTb.append("<td></td>");
 				}
 			}
-			bomstring += "<td>"+bom.id.partNumber+ "</td>";
-			bomstring += "<td>"+"材料/规格"+ "</td>";
-			bomstring += "<td>"+"执行标准"+ "</td>";
-			bomstring += "<td>"+"单台部件数量"+ "</td>";
-			bomstring += "<td>"+"单台零件数量"+ "</td>";
-			bomstring +="</tr>";
+			bomstring += "<td>"+bom.tuNumber+ "</td>";
+			bomstring += "<td>"+bom.partSpec+ "</td>";
+			bomstring += "<td>"+bom.partStandard+"</td>";
+			if(bom.partModel =='零件'){
+				bomstring += "<td></td>";
+				bomstring += "<td>" + bom.useQty + "</td>";
+			}else if(bom.partModel =='部件'){
+				bomstring += "<td>" + bom.useQty + "</td>";
+				bomstring += "<td></td>";
+			}else{
+				bomstring += "<td></td>";
+				bomstring += "<td></td>";
+			}
+			sum = bom.partPrice * bom.useQty * bom.partQty;
+			totalSum += sum;
 		}
-		bomstring +="</tbody>"
+		bomstring +="</tbody>";
 		bomTb.append(bomstring); 
+		$("#totalSum").text(totalSum);
 	}
 	initBom();
+	//回显上一次查询时的顶阶料号
+	function initSelect(){
+		var options  = $("#topPartnumber").find("option");
+		options.each(function (){
+			if(this.value =='${entity.id.topPartnumber}'){
+				this.selected = true;
+			};
+			
+		})
+	}
+	initSelect();
+	function doExportExcel(){
+		$("#bomForm").attr("action","bom-doExport")
+		$("#bomForm").submit();
+	}
+	function doSearch(){
+		$("#bomForm").attr("action","bom-list")
+		$("#bomForm").submit();
+	}
 	</script>
 </body>
 </html>

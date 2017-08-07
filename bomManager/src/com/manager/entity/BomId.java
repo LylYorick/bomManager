@@ -56,4 +56,43 @@ public class BomId implements java.io.Serializable {
 	}
 
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fPartnumber == null) ? 0 : fPartnumber.hashCode());
+		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
+		result = prime * result + ((topPartnumber == null) ? 0 : topPartnumber.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BomId other = (BomId) obj;
+		if (fPartnumber == null) {
+			if (other.fPartnumber != null)
+				return false;
+		} else if (!fPartnumber.equals(other.fPartnumber))
+			return false;
+		if (partNumber == null) {
+			if (other.partNumber != null)
+				return false;
+		} else if (!partNumber.equals(other.partNumber))
+			return false;
+		if (topPartnumber == null) {
+			if (other.topPartnumber != null)
+				return false;
+		} else if (!topPartnumber.equals(other.topPartnumber))
+			return false;
+		return true;
+	}
+
+
 }

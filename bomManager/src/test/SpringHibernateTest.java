@@ -2,6 +2,7 @@ package test;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -24,14 +25,13 @@ import com.manager.service.impl.BomServiceImpl;
 public class SpringHibernateTest {
 
 	private ApplicationContext ctx;
-	private UserDAO userDao = null;
 	private UserService service  = null;
 	private BomService bomService  = null;
 	private BomDAO bomDAO  = null;
 	{
 		ctx = new ClassPathXmlApplicationContext("applicationContext*.xml");
 /*		userDao = ctx.getBean(UserDao.class);*/
-		bomDAO = ctx.getBean(BomDAOImpl.class);
+		bomDAO = (BomDAO) ctx.getBean("bomDAO");
 		bomService = (BomService) ctx.getBean("bomService");
 	}
 	@Before
@@ -49,6 +49,13 @@ public class SpringHibernateTest {
 	}
 	@Test
 	public void test2() throws SQLException {
+		HashMap sqlParams = new HashMap();
+		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
+				+ " e.topName, e.partName, e.fName, e.secq, e.useQty, e.editor, e.datetime, "
+				+ "s.partSpec, s.tuNumber, s.partStandard, s.partModel) "
+				+ "From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		System.out.println(list);
 	} 
 	
 	@Test
@@ -56,7 +63,8 @@ public class SpringHibernateTest {
 		HashMap formParams = new HashMap<String,Object>(); 
 		Bom bom =new Bom();
 		BomId id = new BomId();
-		id.setPartNumber("HT2016.01");
+//		id.setPartNumber("HT2016.01");
+		id.setTopPartnumber("HT2016.01");
 		bom.setId(id);
 		System.out.println(bomService.getList(formParams, bom));
 	} 

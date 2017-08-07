@@ -7,6 +7,8 @@
  * 修改内容：新增
  */
 package com.manager.entity.model;
+import java.io.File;
+
 import com.manager.entity.Bom;
 import com.manager.entity.Order;
 import com.manager.entity.common.Pagebean;
@@ -18,7 +20,9 @@ import com.manager.entity.common.Pagebean;
  */
 public class BomModel extends BaseModel {
 	private Bom entity;
-
+	private String  docFileName;
+	private File doc;
+	private String docContentType;
 	public Bom getEntity() {
 		return entity;
 	}
@@ -31,5 +35,30 @@ public class BomModel extends BaseModel {
 		this.entity = new Bom();
 		this.pageBean = new Pagebean();
 	}
+
+	public String getDocFileName() {
+		return docFileName;
+	}
+
+	public void setDocFileName(String docFileName) {
+		this.docFileName = docFileName;
+	}
+
+	public File getDoc() {
+		return doc;
+	}
+
+	public void setDoc(File doc) {
+		this.doc = doc;
+	}
+
+	public String getDocContentType() {
+		return docContentType;
+	}
+
+	public void setDocContentType(String docContentType) {
+		this.docContentType = docContentType;
+	}
+	
 }
 

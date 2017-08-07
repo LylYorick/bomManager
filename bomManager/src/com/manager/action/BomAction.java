@@ -8,11 +8,26 @@
  */
 package com.manager.action;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.manager.common.Const;
+import com.manager.common.tools.DateUtil;
+import com.manager.common.tools.FileUtil;
+import com.manager.common.tools.TimeHelper;
 import com.manager.entity.Bom;
 import com.manager.entity.BomId;
+import com.manager.entity.Order;
+import com.manager.entity.common.Pagebean;
+import com.manager.entity.common.PoiUtil;
 import com.manager.entity.model.BomModel;
+import com.manager.entity.view.UserInfoView;
 import com.manager.service.BomService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -44,12 +59,33 @@ public class BomAction extends BaseAction implements ModelDriven {
 	public String list(){
 		HashMap formParams = new HashMap<String,Object>();
 		Bom bom = model.getEntity();
-		BomId id = new BomId();
-		id.setPartNumber("HT2016.01");
-		bom.setId(id);
-		String json = bomService.getList(formParams, bom);
+		String json = bomService.getListJson(formParams, bom);
 		request.put("bomJson", json);
+		List<String> topPartList = bomService.getTopBom(formParams, bom);
+		request.put("topPartList", topPartList);
 		return "list";
 	}
-
+	public String doExport() throws Exception{
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+		//获取查询结果
+		List<Bom> list = bomService.getList(formParams, bom);
+		//生成excel
+		PoiUtil poiUtil = new PoiUtil();
+		//获取临时存储的文件夹并清空文件夹中的全部文件
+		ServletContext servletContext = ServletActionContext.getServletContext();
+		String directoryUrl = servletContext.getRealPath("/BomFile");
+		FileUtil.clearDir(directoryUrl);
+		//创建服务端临时的Excel文件 生成规则 为当前时间
+		String fileName = DateUtil.getCurrentDateTime()+".xls";
+		//设置客户端下载时看到的文件名
+		model.setDocFileName(fileName);
+		//构建excel文件
+		String fileUrl = directoryUrl + File.separatorChar+fileName;
+		poiUtil.setFileUrl(fileUrl);
+		poiUtil.buildBomExcel(list);
+		//导出excel文件
+		inputStream = new FileInputStream(fileUrl);
+		return "file-downLoad";
+	}
 }

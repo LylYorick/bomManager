@@ -41,32 +41,28 @@ public class BomServiceImpl implements BomService {
 
 	@Override
 	public void builhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public String getList(Map formParams, Bom bom) {
-		if (null == bom.getId()) {
-			return "";
+		
+		String topPartnumber = bom.getId().getTopPartnumber();
+		if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
+			hql.append(" and e.id.topPartnumber = :topPartnumber");
+			sqlParams.put("topPartnumber", topPartnumber.trim());
 		}
-		StringBuffer hql = new StringBuffer(" From Bom e where 1 = 1");
-		HashMap sqlParams = new HashMap();
 		String partNumber = bom.getId().getPartNumber();
 		if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
 			hql.append(" and e.id.partNumber = :partNumber");
 			sqlParams.put("partNumber", partNumber);
 		}
-		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
-		if (list.isEmpty()) {
-			return "";
-		} else if (list.size() > 1) {
-			return "查询的料号在数据库中有重复";
+		String partName = bom.getPartName();
+		if (!StringUtil.isNullOrWhiteSpace(partName)) {
+			hql.append(" and e.partName = :partName");
+			sqlParams.put("partName", partName);
 		}
-		Bom item = list.get(0);
+	}
+
+	@Override
+	public String getListJson(Map formParams, Bom bom) {
 		ArrayList<Bom> resultList = new ArrayList<Bom>();
-		resultList.add(item);
-		buildTree(item.getId().getPartNumber(), resultList);
+		resultList = (ArrayList<Bom>) getList(formParams, bom);
 		Gson gson = new Gson();
 		return gson.toJson(resultList);
 	}
@@ -75,7 +71,10 @@ public class BomServiceImpl implements BomService {
 	@Override
 	public void buildTree(String partNumber, List<Bom> resultList) {
 		HashMap sqlParams = new HashMap();
-		StringBuffer hql = new StringBuffer(" From Bom e where 1 = 1 ");
+		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
+				+ " e.topName, e.partName, e.fName, e.secq, e.useQty, e.editor, e.datetime,"
+				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
+				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
 		if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
 			hql.append("and e.id.fPartnumber = :partNumber and e.id.partNumber != :partNumber ");
 			sqlParams.put("partNumber", partNumber);
@@ -90,4 +89,41 @@ public class BomServiceImpl implements BomService {
 		}
 	}
 
+	@Override
+	public List getTopBom(Map formParams, Bom bom) {
+		HashMap sqlParams = new HashMap();
+		StringBuffer hql = new StringBuffer("select e.id.partNumber From Bom e  where 1=1 ");
+		hql.append("and e.secq = :secq");
+		sqlParams.put("secq", 1);
+		List<String> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		return list;
+	}
+
+	@Override
+	public List getList(Map formParams, Bom bom) {
+		ArrayList<Bom> resultList = new ArrayList<Bom>();
+		if (null == bom.getId()) {
+			return resultList;
+		}
+		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
+				+ " e.topName, e.partName, e.fName, e.secq, e.useQty, e.editor, e.datetime,"
+				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
+				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
+		HashMap sqlParams = new HashMap();
+		builhql(hql, formParams, bom, sqlParams);
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		if (list.isEmpty()) {
+			return resultList;
+		} 
+		/* else if (list.size() > 1) {
+			return "查询的料号在数据库中有重复";
+		}*/ 
+		Bom item = list.get(0);
+		resultList.add(item);    
+		buildTree(item.getId().getPartNumber(), resultList);
+		return resultList;
+	}	
+
+	
+	
 }

@@ -9,15 +9,13 @@ public class Material implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
-	
 	private MaterialId id;
 	private String partName;
 	private String partDesc;
 	private String tuNumber;
 	private String partSpec;
 	private String partStandard;
-	private String partModel;
+	private String partModel; 
 	private String partType;
 	private String partUnit;
 	private String partCost;
