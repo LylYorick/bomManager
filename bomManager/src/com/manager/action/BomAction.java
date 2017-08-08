@@ -70,6 +70,10 @@ public class BomAction extends BaseAction implements ModelDriven {
 		Bom bom = model.getEntity();
 		//获取查询结果
 		List<Bom> list = bomService.getList(formParams, bom);
+		//如果查询的list为空 则直接进入list();
+		if(list == null || list.isEmpty()){
+			return list();
+		}
 		//生成excel
 		PoiUtil poiUtil = new PoiUtil();
 		//获取临时存储的文件夹并清空文件夹中的全部文件

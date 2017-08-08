@@ -9,7 +9,7 @@
     <constant name="struts.devMode" value="true" />
     <package name="default" namespace="/" extends="struts-default">
     <!-- 拦截器 -->
-  	<!-- <interceptors>
+ 	<!-- <interceptors>
          <interceptor name="loginVerify" class="com.huami.intercept.LoginInterceptor">
          </interceptor>
          <interceptor-stack name="verify">
@@ -19,14 +19,18 @@
              </interceptor-ref>
              
          </interceptor-stack>
-     </interceptors>  -->       
+     </interceptors>  -->     
 	 <default-interceptor-ref name="defaultStack"></default-interceptor-ref> 
      <!--  默认首页  -->
 	  <default-action-ref name="index"></default-action-ref> 
 		
     <global-results>
      	<result name="login" type="dispatcher">login.jsp</result>
+     	<result name="exception">exception.jsp</result> 
      </global-results>
+     <global-exception-mappings>
+     	<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+     </global-exception-mappings>
    		<action name="index">
 		<result type="dispatcher">/login.jsp</result>
 		</action> 

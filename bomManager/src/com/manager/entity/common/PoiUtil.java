@@ -129,8 +129,9 @@ public class PoiUtil {
 	 * 构建bom的list
 	 * @param list
 	 * @return
+	 * @throws Exception 
 	 */
-	public boolean buildBomExcel(List<Bom> list) {
+	public boolean buildBomExcel(List<Bom> list) throws Exception {
 		// 第一步，创建一个webbook，对应一个Excel文件
 		HSSFWorkbook wb = new HSSFWorkbook();
 		// 第二步，在webbook中添加一个sheet，对应Excel文件中的 sheet
@@ -146,8 +147,10 @@ public class PoiUtil {
 		// 第五步，创建表头单元格，并设置样式
 		HSSFCell cell;
 		// 创建表头 begin
+		
 		int minLevel = list.get(0).getSecq();
 		int maxLevel = -1;
+		
 		for (Bom bom : list) {
 			int seq = bom.getSecq();
 			if (seq > maxLevel) {
