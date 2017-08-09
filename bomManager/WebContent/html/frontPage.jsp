@@ -53,8 +53,15 @@
 				<dt><a data-href="user-list.action" data-title="用户管理" href="javascript:void(0)">用户管理</a></dt>
 				<s:if test="#session.currentUser.u_Level > 1">
 					<dt><a data-href="material-list" data-title="材料管理" href="javascript:void(0)">材料管理</a></dt>
-					<dt><a data-href="bom-list" data-title="BOM管理" href="javascript:void(0)">BOM管理</a></dt>
-			
+					<dl id="menu-member">
+						<dt><i class="Hui-iconfont"></i> BOM管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+						<dd>
+							<ul>
+								<li><a data-href="bom-list" data-title="Bom结构查询" href="javascript:;">Bom结构查询</a></li>
+								<li><a data-href="bom-normalList" data-title="Bom结构管理" href="javascript:;">Bom结构管理</a></li>
+							</ul>
+						</dd>
+					</dl>
 					<dt><a data-href="supplier-list" data-title="供应商管理" href="javascript:void(0)">供应商管理</a></dt>
 					<dl id="menu-member">
 						<dt><i class="Hui-iconfont"></i> 库存管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>

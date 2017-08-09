@@ -28,9 +28,9 @@
      	<result name="login" type="dispatcher">login.jsp</result>
      	<result name="exception">exception.jsp</result> 
      </global-results>
-     <global-exception-mappings>
+ <!--     <global-exception-mappings>
      	<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
-     </global-exception-mappings>
+     </global-exception-mappings> -->
    		<action name="index">
 		<result type="dispatcher">/login.jsp</result>
 		</action> 

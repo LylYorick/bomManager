@@ -68,7 +68,6 @@ public class MaterialServiceImpl implements MaterialService{
 
 	@Override
 	public boolean AddMaterial(Material material) {
-	/*	Material material  =  materialView.castToSon();*/
 	
 		return 	materialDAO.Add(material);
 	}

@@ -8,21 +8,27 @@ package com.manager.entity;
 public class BomId implements java.io.Serializable {
 
 	private String topPartnumber;
-	private String fPartnumber;
+	private String f_Partnumber;
 	private String partNumber;
 
 	public BomId() {
 	}
 
 
-	public String getfPartnumber() {
-		return fPartnumber;
+
+
+	public String getF_Partnumber() {
+		return f_Partnumber;
 	}
 
 
-	public void setfPartnumber(String fPartnumber) {
-		this.fPartnumber = fPartnumber;
+
+
+	public void setF_Partnumber(String f_Partnumber) {
+		this.f_Partnumber = f_Partnumber;
 	}
+
+
 
 
 	public String getTopPartnumber() {
@@ -48,23 +54,19 @@ public class BomId implements java.io.Serializable {
 	}
 
 
-	public BomId(String topPartnumber, String fPartnumber, String partNumber) {
-		super();
-		this.topPartnumber = topPartnumber;
-		this.fPartnumber = fPartnumber;
-		this.partNumber = partNumber;
-	}
 
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((fPartnumber == null) ? 0 : fPartnumber.hashCode());
+		result = prime * result + ((f_Partnumber == null) ? 0 : f_Partnumber.hashCode());
 		result = prime * result + ((partNumber == null) ? 0 : partNumber.hashCode());
 		result = prime * result + ((topPartnumber == null) ? 0 : topPartnumber.hashCode());
 		return result;
 	}
+
+
 
 
 	@Override
@@ -76,10 +78,10 @@ public class BomId implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BomId other = (BomId) obj;
-		if (fPartnumber == null) {
-			if (other.fPartnumber != null)
+		if (f_Partnumber == null) {
+			if (other.f_Partnumber != null)
 				return false;
-		} else if (!fPartnumber.equals(other.fPartnumber))
+		} else if (!f_Partnumber.equals(other.f_Partnumber))
 			return false;
 		if (partNumber == null) {
 			if (other.partNumber != null)
@@ -93,6 +95,21 @@ public class BomId implements java.io.Serializable {
 			return false;
 		return true;
 	}
+
+
+
+
+	public BomId(String topPartnumber, String f_Partnumber, String partNumber) {
+		super();
+		this.topPartnumber = topPartnumber;
+		this.f_Partnumber = f_Partnumber;
+		this.partNumber = partNumber;
+	}
+
+
+
+
+
 
 
 }

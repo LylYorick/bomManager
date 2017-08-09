@@ -20,7 +20,7 @@ public class Bom implements java.io.Serializable {
 	private BomId id;
 	private String topName;
 	private String partName;
-	private String fName;
+	private String f_Name;
 	private Integer secq;
 	private Double useQty;
 	private String editor;
@@ -61,13 +61,12 @@ public class Bom implements java.io.Serializable {
 		this.partName = partName;
 	}
 
-
-	public String getfName() {
-		return fName;
+	public String getF_Name() {
+		return f_Name;
 	}
 
-	public void setfName(String fName) {
-		this.fName = fName;
+	public void setF_Name(String f_Name) {
+		this.f_Name = f_Name;
 	}
 
 	public Integer getSecq() {
@@ -177,14 +176,14 @@ public class Bom implements java.io.Serializable {
 		this.partQty = partQty;
 	}
 
-	public Bom(BomId id, String topName, String partName, String fName, Integer secq, Double useQty, String editor,
+	public Bom(BomId id, String topName, String partName, String f_Name, Integer secq, Double useQty, String editor,
 			Date datetime, String partSpec, String tuNumber, String partStandard, String partModel,
 			BigDecimal partPrice, BigDecimal partQty) {
 		super();
 		this.id = id;
 		this.topName = topName;
 		this.partName = partName;
-		this.fName = fName;
+		this.f_Name = f_Name;
 		this.secq = secq;
 		this.useQty = useQty;
 		this.editor = editor;
@@ -196,6 +195,8 @@ public class Bom implements java.io.Serializable {
 		this.partPrice = partPrice;
 		this.partQty = partQty;
 	}
+
+	
 
 
 	

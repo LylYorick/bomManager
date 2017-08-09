@@ -9,7 +9,7 @@
             <key-property name="topPartnumber" type="string">
                 <column name="Top_Partnumber" length="50" />
             </key-property>
-            <key-property name="fPartnumber" type="string">
+            <key-property name="f_Partnumber" type="string">
                 <column name="F_Partnumber" length="50" />
             </key-property>
             <key-property name="partNumber" type="string">
@@ -22,7 +22,7 @@
         <property name="partName" type="string">
             <column name="PartName" length="100" not-null="true" />
         </property>
-        <property name="fName" type="string">
+        <property name="f_Name" type="string">
             <column name="F_name" length="100" />
         </property>
         <property name="secq" type="java.lang.Integer">

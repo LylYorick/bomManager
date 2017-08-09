@@ -21,6 +21,11 @@ public class Const {
 	public static String MATERIAL_VIEW_LIST="MaterialViewList";
 	
 	/**
+	 * MaterialList
+	 */
+	public static String MATERIAL_LIST="MaterialList";
+	
+	/**
 	 * SupplierList
 	 */
 	public static String SUPPLIER_LIST="SupplierList";
@@ -35,6 +40,10 @@ public class Const {
 	 * OrderList
 	 */
 	public static String Order_LIST="OrderList";
+	/**
+	 * BomList
+	 */
+	public static String BOM_LIST="BomList";
 
 	public static String SUM="sum";
 	

@@ -30,7 +30,7 @@
 			<i class="Hui-iconfont">&#xe667;</i> 
 			首页
 			<span class="c-gray en">&gt;</span>
-			bom管理
+			bom结构查询
 		</nav>
 		<div class="page-container">
 		<div class="text-c">

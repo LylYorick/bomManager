@@ -9,6 +9,7 @@
 package com.manager.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,9 @@ import com.google.gson.Gson;
 import com.manager.common.tools.StringUtil;
 import com.manager.dao.BomDAO;
 import com.manager.entity.Bom;
+import com.manager.entity.BomId;
+import com.manager.entity.Material;
 import com.manager.service.BomService;
-import com.mchange.v2.c3p0.stmt.GooGooStatementCache;
 
 /**
  * TODO添加类描述
@@ -41,17 +43,19 @@ public class BomServiceImpl implements BomService {
 
 	@Override
 	public void builhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams) {
+		if(null != bom.getId()){
+			String topPartnumber = bom.getId().getTopPartnumber();
+			if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
+				hql.append(" and e.id.topPartnumber = :topPartnumber");
+				sqlParams.put("topPartnumber", topPartnumber.trim());
+			}
+			String partNumber = bom.getId().getPartNumber();
+			if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
+				hql.append(" and e.id.partNumber = :partNumber");
+				sqlParams.put("partNumber", partNumber);
+			}
+		}
 		
-		String topPartnumber = bom.getId().getTopPartnumber();
-		if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
-			hql.append(" and e.id.topPartnumber = :topPartnumber");
-			sqlParams.put("topPartnumber", topPartnumber.trim());
-		}
-		String partNumber = bom.getId().getPartNumber();
-		if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
-			hql.append(" and e.id.partNumber = :partNumber");
-			sqlParams.put("partNumber", partNumber);
-		}
 		String partName = bom.getPartName();
 		if (!StringUtil.isNullOrWhiteSpace(partName)) {
 			hql.append(" and e.partName = :partName");
@@ -72,11 +76,11 @@ public class BomServiceImpl implements BomService {
 	public void buildTree(String partNumber, List<Bom> resultList) {
 		HashMap sqlParams = new HashMap();
 		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
-				+ " e.topName, e.partName, e.fName, e.secq, e.useQty, e.editor, e.datetime,"
+				+ " e.topName, e.partName, e.f_Name, e.secq, e.useQty, e.editor, e.datetime,"
 				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
 				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
 		if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
-			hql.append("and e.id.fPartnumber = :partNumber and e.id.partNumber != :partNumber ");
+			hql.append("and e.id.f_Partnumber = :partNumber and e.id.partNumber != :partNumber ");
 			sqlParams.put("partNumber", partNumber);
 		}
 		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
@@ -106,7 +110,7 @@ public class BomServiceImpl implements BomService {
 			return resultList;
 		}
 		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
-				+ " e.topName, e.partName, e.fName, e.secq, e.useQty, e.editor, e.datetime,"
+				+ " e.topName, e.partName, e.f_Name, e.secq, e.useQty, e.editor, e.datetime,"
 				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
 				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
 		HashMap sqlParams = new HashMap();
@@ -122,8 +126,71 @@ public class BomServiceImpl implements BomService {
 		resultList.add(item);    
 		buildTree(item.getId().getPartNumber(), resultList);
 		return resultList;
-	}	
+	}
 
+	
+	@Override
+	public int getNormalCount(Map formParams, Bom bom) {
+		StringBuffer hql = new StringBuffer("SELECT count(*) From Bom e where 1=1 ");
+		HashMap sqlParams = new HashMap();
+		builhql(hql, formParams, bom, sqlParams);
+		return bomDAO.getCount(hql.toString(), sqlParams);
+	}
+
+	@Override
+	public List getNormalList(Map formParams, Bom bom,int offset,int length) {
+		StringBuffer hql = new StringBuffer("From Bom e where 1 = 1");
+		HashMap sqlParams = new HashMap();
+		builhql(hql, formParams, bom, sqlParams);
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), formParams, offset, length);
+		return list;
+	}
+
+	@Override
+	public Bom getBom(BomId id) {
+		Bom bom  = (Bom) bomDAO.get(Bom.class, id);
+		return bom;
+	}
+
+	@Override
+	public List getAllMertial() {
+		StringBuffer hql = new StringBuffer("From Material e where 1=1 ");
+		HashMap sqlParams = new HashMap();
+		List<Material> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		return list;
+	}
+
+	@Override
+	public boolean saveTopMaterial(Bom bom) {
+		BomId id = bom.getId();
+		if(null == id){
+			return false;
+		}
+		String topPartnumber = id.getTopPartnumber();
+		id.setPartNumber(topPartnumber);
+		id.setF_Partnumber(topPartnumber);
+		String partName = bom.getPartName();
+		if(StringUtil.isNullOrWhiteSpace(partName)){
+			return false;
+		}
+		bom.setF_Name(partName);
+		bom.setTopName(partName);
+		return  saveNoralMaterial(bom);		
+	}
+
+	@Override
+	public boolean saveNoralMaterial(Bom bom) {
+		bom.setDatetime(new Date());
+		Bom item = getBom(bom.getId());
+		if(item != null){
+			return false;
+		}
+		bomDAO.saveOrUpdate(bom);
+		return true;
+	}	
+	
+	
+	
 	
 	
 }

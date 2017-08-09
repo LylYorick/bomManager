@@ -23,6 +23,8 @@ import com.manager.common.tools.FileUtil;
 import com.manager.common.tools.TimeHelper;
 import com.manager.entity.Bom;
 import com.manager.entity.BomId;
+import com.manager.entity.Material;
+import com.manager.entity.MaterialId;
 import com.manager.entity.Order;
 import com.manager.entity.common.Pagebean;
 import com.manager.entity.common.PoiUtil;
@@ -65,6 +67,43 @@ public class BomAction extends BaseAction implements ModelDriven {
 		request.put("topPartList", topPartList);
 		return "list";
 	}
+	/**
+	 * bom管理的查询
+	 * @return
+	 */
+	public String normalList(){
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+		Pagebean pageBean = model.getPageBean();
+		int sum  = bomService.getNormalCount(formParams,bom);
+		pageBean.setOffset();
+		request.put(Const.SUM, sum);
+		pageBean.setAllRows(sum);
+		pageBean.setTotalPages();
+		List<Bom> list = bomService.getNormalList(formParams, bom,pageBean.getOffset(),pageBean.pageSize);
+		request.put(Const.BOM_LIST, list);
+		return "normalList";
+	}
+	public String toEdit() {
+		Bom bom = model.getEntity();
+		BomId id = bom.getId();
+		Bom item = bomService.getBom(id);
+		model.setEntity(item);
+		return "toEdit";
+	}
+	public String toTopAdd() {
+		List<Material> materilList = bomService.getAllMertial();
+		request.put(Const.MATERIAL_LIST, materilList);
+		return "toTopAdd";
+	}
+	public String doTopAdd() {
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
+		bom.setEditor(currentuser.getU_Number());
+		bomService.saveTopMaterial(bom);
+		return "toTopAdd";
+	}
 	public String doExport() throws Exception{
 		HashMap formParams = new HashMap<String,Object>();
 		Bom bom = model.getEntity();
@@ -92,4 +131,5 @@ public class BomAction extends BaseAction implements ModelDriven {
 		inputStream = new FileInputStream(fileUrl);
 		return "file-downLoad";
 	}
+	
 }

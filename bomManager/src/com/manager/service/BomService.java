@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.manager.entity.Bom;
+import com.manager.entity.BomId;
 
 /**
  * TODO添加类描述
@@ -26,7 +27,13 @@ public interface BomService {
 	
 	public String getListJson(Map formParams,Bom bom);
 	public List getList(Map formParams,Bom bom);
+	public int getNormalCount(Map formParams,Bom bom);
+	public Bom getBom(BomId id);
+	public List getNormalList(Map formParams,Bom bom,int offset,int length);
 	public List getTopBom(Map formParams,Bom bom);
+	public List getAllMertial();
 	public void buildTree(String partNumber,List<Bom> resultList);
+	public boolean saveTopMaterial(Bom bom);
+	public boolean saveNoralMaterial(Bom bom);
 }
 
