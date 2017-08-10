@@ -69,8 +69,12 @@ public class SpringHibernateTest {
 		System.out.println(bomService.getList(formParams, bom));
 	} 
 	@Test
-	public void deletTest(){
-		
+	public void test4(){
+		BomId fatherId = new BomId();
+		fatherId.setTopPartnumber("HT2016.01");
+		fatherId.setPartNumber("HT2016.01");
+		fatherId.setF_Partnumber("HT2016.01");
+		System.out.println(bomService.getBom(fatherId));
 	}
 	
  

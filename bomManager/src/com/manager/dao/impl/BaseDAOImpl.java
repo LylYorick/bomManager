@@ -60,7 +60,6 @@ public class BaseDAOImpl implements BaseDAO{
 	}
 	@Override
 	public Object get(Class refClass, Serializable key) {
-		
 		return getSession().get(refClass, key);
 	}
 	@Override
@@ -133,6 +132,13 @@ public class BaseDAOImpl implements BaseDAO{
 		return query.list();
 	}
 	
+	
+	@Override
+	public Object executeHQLPeak(String hql, Map sqlParams) {
+		Query query = getQuery(hql, sqlParams);
+		return query.uniqueResult();
+	}
+
 	@Override
 	public int getCount(String hql, Map sqlParams) {
 		Query query = getQuery(hql, sqlParams);

@@ -44,7 +44,12 @@ public class Const {
 	 * BomList
 	 */
 	public static String BOM_LIST="BomList";
-
+	
+	/**
+	 * topBomList
+	 */
+	public static String TOP_BOM_LIST="TopBomList";
+	
 	public static String SUM="sum";
 	
 	/*public static  int [] allLevels =  {1,2,3,4,5};*/

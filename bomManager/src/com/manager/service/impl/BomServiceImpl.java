@@ -42,7 +42,7 @@ public class BomServiceImpl implements BomService {
 	}
 
 	@Override
-	public void builhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams) {
+	public void buildhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams) {
 		if(null != bom.getId()){
 			String topPartnumber = bom.getId().getTopPartnumber();
 			if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
@@ -102,6 +102,24 @@ public class BomServiceImpl implements BomService {
 		List<String> list = bomDAO.executeHQL(hql.toString(), sqlParams);
 		return list;
 	}
+	
+	@Override
+	public List getAllTopBom() {
+		HashMap sqlParams = new HashMap();
+		StringBuffer hql = new StringBuffer("From Bom e  where 1=1 ");
+		hql.append("and e.secq = :secq");
+		sqlParams.put("secq", 1);
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		return list;
+	}
+
+	@Override
+	public List getAllBom() {
+		HashMap sqlParams = new HashMap();
+		StringBuffer hql = new StringBuffer("From Bom e  where 1=1 ");
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		return list;
+	}
 
 	@Override
 	public List getList(Map formParams, Bom bom) {
@@ -114,7 +132,7 @@ public class BomServiceImpl implements BomService {
 				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
 				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
 		HashMap sqlParams = new HashMap();
-		builhql(hql, formParams, bom, sqlParams);
+		buildhql(hql, formParams, bom, sqlParams);
 		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
 		if (list.isEmpty()) {
 			return resultList;
@@ -133,7 +151,7 @@ public class BomServiceImpl implements BomService {
 	public int getNormalCount(Map formParams, Bom bom) {
 		StringBuffer hql = new StringBuffer("SELECT count(*) From Bom e where 1=1 ");
 		HashMap sqlParams = new HashMap();
-		builhql(hql, formParams, bom, sqlParams);
+		buildhql(hql, formParams, bom, sqlParams);
 		return bomDAO.getCount(hql.toString(), sqlParams);
 	}
 
@@ -141,7 +159,7 @@ public class BomServiceImpl implements BomService {
 	public List getNormalList(Map formParams, Bom bom,int offset,int length) {
 		StringBuffer hql = new StringBuffer(" from Bom e where 1 = 1 ");
 		HashMap sqlParams = new HashMap();
-		builhql(hql, formParams, bom, sqlParams);
+		buildhql(hql, formParams, bom, sqlParams);
 		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams, offset, length);
 		return list;
 	}
@@ -176,17 +194,53 @@ public class BomServiceImpl implements BomService {
 		bom.setF_Name(topName);
 		bom.setPartName(topName);
 		bom.setSecq(1);
-		return  saveNoralMaterial(bom);		
+		return  saveNormalMaterial(bom);		
 	}
 
 	@Override
-	public boolean saveNoralMaterial(Bom bom) {
+	public boolean saveNormalMaterial(Bom bom) {
 		bom.setDatetime(new Date());
+		//判断是否有重复的bom
 		Bom item = getBom(bom.getId());
 		if(item != null){
 			return false;
 		}
+		if(null == bom.getSecq() || Bom.TOP_SECQ != bom.getSecq()){
+			Bom fatherMaterial = getFatherMaterial(bom);
+			if(null == fatherMaterial ){
+				return false;
+			}
+			int secq = fatherMaterial.getSecq();
+			bom.setSecq(secq + 1);
+		}
+		
 		bomDAO.saveOrUpdate(bom);
 		return true;
+	}
+
+	@Override
+	public Bom getFatherMaterial(Bom bom) {
+		BomId fatherId = new BomId();
+		StringBuffer hql = new StringBuffer("From Bom e where 1=1 ");
+		HashMap sqlParams = new HashMap();
+		String topPartnumber = bom.getId().getTopPartnumber();
+		if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
+			hql.append(" and e.id.topPartnumber = :topPartnumber");
+			sqlParams.put("topPartnumber", topPartnumber.trim());
+		}
+		String f_PartNumber = bom.getId().getF_Partnumber();
+		if (!StringUtil.isNullOrWhiteSpace(f_PartNumber)) {
+			hql.append(" and e.id.partNumber = :partNumber");
+			sqlParams.put("partNumber", f_PartNumber);
+		}
+		Bom fatherMaterial = (Bom) bomDAO.executeHQLPeak(hql.toString(), sqlParams);
+		return fatherMaterial;
+	}
+
+	@Override
+	public List getNormalMaterial() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
+	
 }

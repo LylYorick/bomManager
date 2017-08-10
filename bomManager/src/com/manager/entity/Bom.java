@@ -17,6 +17,7 @@ public class Bom implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public final static int TOP_SECQ = 1;
 	private BomId id;
 	private String topName;
 	private String partName;

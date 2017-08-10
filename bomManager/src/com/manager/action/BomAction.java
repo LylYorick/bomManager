@@ -109,6 +109,37 @@ public class BomAction extends BaseAction implements ModelDriven {
 		}
 		return "ajax-success";
 	}
+	
+	public String toAdd() {
+		List<Bom> topBoms = bomService.getAllTopBom();
+		request.put(Const.TOP_BOM_LIST, topBoms);
+		List<Bom> boms = bomService.getAllBom();
+		request.put(Const.BOM_LIST, boms);
+		List<Material> materilList = bomService.getAllMertial();
+		request.put(Const.MATERIAL_LIST, materilList);
+		return "toAdd";
+	}
+	public String doAdd() {
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
+		bom.setEditor(currentuser.getU_Number());
+		if(bomService.saveNormalMaterial(bom)){
+			setInputStream("1");
+		}else{
+			setInputStream("0");
+		}
+		return "ajax-success";
+	}
+	public String getNormal() {
+		
+		//TODO 4.1	BOM结构建立 未完成  获取非顶阶材料 新增struts2 转换为json
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+	/*	List<Bom> list = bomService.getNormalMaterial(bom);*/
+		return  "ajax-success";
+	}
+	
 	public String doExport() throws Exception{
 		HashMap formParams = new HashMap<String,Object>();
 		Bom bom = model.getEntity();
@@ -136,5 +167,6 @@ public class BomAction extends BaseAction implements ModelDriven {
 		inputStream = new FileInputStream(fileUrl);
 		return "file-downLoad";
 	}
+	
 	
 }

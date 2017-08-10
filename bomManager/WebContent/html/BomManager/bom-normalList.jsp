@@ -11,17 +11,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/H-ui.css" />
-	<link rel="stylesheet" type="text/css" href="css/hui/H-ui.admin.css" />
-	<link rel="stylesheet" type="text/css" href="css/hui/iconfont.css" />
-	<link rel="stylesheet" type="text/css" href="css/hui/skin/default/skin.css" id="skin" />
-	<link rel="stylesheet" type="text/css" href="css/hui/style.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/H-ui.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/H-ui.admin.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/skin/default/skin.css" id="skin" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/style.css" />
 	<!-- _footer 作为公共模版分离出去 -->
-	<script type="text/javascript" src="js/jquery.js"></script> 
-	<script type="text/javascript" src="js/hui/layer/2.4/layer.js"></script>
-	<script type="text/javascript" src="js/hui/H-ui.js"></script>
-	<script type="text/javascript" src="js/hui/H-ui.admin.js"></script>
-<!-- /_footer 作为公共模版分离出去 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
+
+<!-- footer 作为公共模版分离出去 -->
 <title>Insert title here</title>
 </head>
 	<body>
@@ -138,9 +139,9 @@
 		</form>
 
 	<!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript" src="js/hui/jquery.dataTables.min.js"></script> 
-	<script type="text/javascript" src="js/hui/laypage/1.2/laypage.js"></script>
-	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/jquery.dataTables.min.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script type="text/javascript">
 	/*
 		参数解释：

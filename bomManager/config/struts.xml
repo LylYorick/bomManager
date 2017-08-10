@@ -99,7 +99,7 @@
         	<result name="input">login.jsp</result>
         	<result name="toEdit">/html/SupplierManager/supplier-edit.jsp</result>
         	<result name="toAdd">/html/invlogManager/invlog-add.jsp</result>
-        	<result name="toDelivery">/html/InvlogManager/invlog-delivery.jsp</result>
+        	<result name="toDelivery">/html/invlogManager/invlog-delivery.jsp</result>
         	 <result type="stream" name="ajax-success">
 		        <param name="contentType">text/html</param>
 		        <param name="inputName">inputStream</param>
@@ -147,6 +147,7 @@
         	<result name="normalList">/html/BomManager/bom-normalList.jsp</result>
         	<result name="toEdit">/html/BomManager/bom-edit.jsp</result>
         	<result name="toTopAdd">/html/BomManager/bom-topAdd.jsp</result>
+        	<result name="toAdd">/html/BomManager/bom-Add.jsp</result>
         	 <result type="stream" name="ajax-success">
 		        <param name="contentType">text/html</param>
 		        <param name="inputName">inputStream</param>

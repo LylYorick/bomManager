@@ -23,7 +23,7 @@ import com.manager.entity.BomId;
  */
 public interface BomService {
 
-	public void builhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams);
+	public void buildhql(StringBuffer hql, Map formParams, Bom bom, HashMap sqlParams);
 	
 	public String getListJson(Map formParams,Bom bom);
 	public List getList(Map formParams,Bom bom);
@@ -32,8 +32,12 @@ public interface BomService {
 	public List getNormalList(Map formParams,Bom bom,int offset,int length);
 	public List getTopBom(Map formParams,Bom bom);
 	public List getAllMertial();
+	public List getAllTopBom();
+	public List getAllBom();
+	public List getNormalMaterial();
+	public Bom getFatherMaterial(Bom bom);
 	public void buildTree(String partNumber,List<Bom> resultList);
 	public boolean saveTopMaterial(Bom bom);
-	public boolean saveNoralMaterial(Bom bom);
+	public boolean saveNormalMaterial(Bom bom);
 }
 

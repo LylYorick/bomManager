@@ -34,6 +34,7 @@ public interface BaseDAO {
 	public List executeHQL(String hql, Map params, int offset,int length);
 	public void saveOrUpdate(Object obj);
 	public List executeHQL(String hql, Map sqlParams);
+	public Object executeHQLPeak(String hql, Map sqlParams);
 	public int executeSql(String sql);
 	public List executeSqlSelct(String sql);
 	public int getCount(String hql, Map sqlParams);
