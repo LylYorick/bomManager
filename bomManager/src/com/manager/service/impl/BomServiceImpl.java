@@ -139,10 +139,10 @@ public class BomServiceImpl implements BomService {
 
 	@Override
 	public List getNormalList(Map formParams, Bom bom,int offset,int length) {
-		StringBuffer hql = new StringBuffer("From Bom e where 1 = 1");
+		StringBuffer hql = new StringBuffer(" from Bom e where 1 = 1 ");
 		HashMap sqlParams = new HashMap();
 		builhql(hql, formParams, bom, sqlParams);
-		List<Bom> list = bomDAO.executeHQL(hql.toString(), formParams, offset, length);
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams, offset, length);
 		return list;
 	}
 
@@ -169,12 +169,13 @@ public class BomServiceImpl implements BomService {
 		String topPartnumber = id.getTopPartnumber();
 		id.setPartNumber(topPartnumber);
 		id.setF_Partnumber(topPartnumber);
-		String partName = bom.getPartName();
-		if(StringUtil.isNullOrWhiteSpace(partName)){
+		String topName = bom.getTopName();
+		if(StringUtil.isNullOrWhiteSpace(topName)){
 			return false;
 		}
-		bom.setF_Name(partName);
-		bom.setTopName(partName);
+		bom.setF_Name(topName);
+		bom.setPartName(topName);
+		bom.setSecq(1);
 		return  saveNoralMaterial(bom);		
 	}
 
@@ -188,9 +189,4 @@ public class BomServiceImpl implements BomService {
 		bomDAO.saveOrUpdate(bom);
 		return true;
 	}	
-	
-	
-	
-	
-	
 }

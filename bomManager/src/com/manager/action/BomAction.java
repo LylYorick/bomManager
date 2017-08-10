@@ -101,8 +101,13 @@ public class BomAction extends BaseAction implements ModelDriven {
 		Bom bom = model.getEntity();
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
 		bom.setEditor(currentuser.getU_Number());
-		bomService.saveTopMaterial(bom);
-		return "toTopAdd";
+		
+		if(bomService.saveTopMaterial(bom)){
+			setInputStream("1");
+		}else{
+			setInputStream("0");
+		}
+		return "ajax-success";
 	}
 	public String doExport() throws Exception{
 		HashMap formParams = new HashMap<String,Object>();

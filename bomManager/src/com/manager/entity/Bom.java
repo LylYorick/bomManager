@@ -28,8 +28,7 @@ public class Bom implements java.io.Serializable {
 	
 
 	
-	public Bom() {
-	}
+
 
 	public Bom(BomId id, String partName) {
 		this.id = id;
@@ -175,7 +174,9 @@ public class Bom implements java.io.Serializable {
 	public void setPartQty(BigDecimal partQty) {
 		this.partQty = partQty;
 	}
-
+	
+	public Bom() {
+	}
 	public Bom(BomId id, String topName, String partName, String f_Name, Integer secq, Double useQty, String editor,
 			Date datetime, String partSpec, String tuNumber, String partStandard, String partModel,
 			BigDecimal partPrice, BigDecimal partQty) {
@@ -195,8 +196,21 @@ public class Bom implements java.io.Serializable {
 		this.partPrice = partPrice;
 		this.partQty = partQty;
 	}
-
 	
+
+	public Bom(BomId id, String topName, String partName, String f_Name, Integer secq, Double useQty, String editor,
+			Date datetime){
+		super();
+		this.id = id;
+		this.topName = topName;
+		this.partName = partName;
+		this.f_Name = f_Name;
+		this.secq = secq;
+		this.useQty = useQty;
+		this.editor = editor;
+		this.datetime = datetime;
+	}
+
 
 
 	

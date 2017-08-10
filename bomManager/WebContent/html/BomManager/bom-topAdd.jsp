@@ -19,11 +19,12 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>顶阶料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">	
-				 <select class="multiSelect"  name="id.topPartnumber" id="topPartnumber">
+				 <select class="multiSelect"  name="entity.id.topPartnumber" id="topPartnumber">
    		   			<s:iterator value="#request.MaterialList" id="item" >
-   		   				<option value='<s:property value="#item.id.partnumber"/>'/><s:property value="#item.id.partnumber"/> <s:property value="#item.partName"/></option>
+   		   				<option value='<s:property value="#item.id.partnumber"/>' topName='<s:property value="#item.partName"/>'/><s:property value="#item.id.partnumber"/> <s:property value="#item.partName"/></option>
    		   			</s:iterator>
 	   		    </select>
+				<input type="hidden"  name="entity.topName"  id="topName" >
 		</div>
 	</div>
 	 <div class="row cl">
@@ -34,7 +35,7 @@
 	</div>
 	</div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="checkId()">
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" >
 		</div>
 	</div>
 	</form>
@@ -54,6 +55,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/select2/select2.js"></script> 
 <script type="text/javascript">
 $(function(){
+	  $(".multiSelect").select2({ 
+		  width: "300px",
+		  placeholder:"sjss",
+		  allowClear:true,
+	 });
+	 $("#topPartnumber").change(function(){
+		  var topName =  $(this).find("option:selected").attr("topName");
+		  $("#topName").val(topName);  
+	 });
 	$("#form-user-add").validate({
 		rules:{
 			'id.topPartnumber':{
@@ -94,13 +104,6 @@ $(function(){
 	
 	});
 });  
-$(document).ready(function() {
-  $(".multiSelect").select2({ 
-		   width: "300px",
-		  placeholder:"sjss",
-		  allowClear:true,
-  });
-});
 
 
 </script> 

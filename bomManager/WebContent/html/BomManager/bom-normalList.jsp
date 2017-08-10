@@ -33,7 +33,7 @@
 		</nav>
 		<div class="page-container">
 		<div class="text-c">
-		<form class="Huiform" method="post" action="material-list" target="_self">
+		<form  id="bomForm" class="Huiform" method="post"   target="_self">
 			<table class="table table-border table-bordered radius">
 				<tr>
 					<td> 
@@ -132,7 +132,7 @@
         </s:else>
 	</div>
 		<form  id="fenyeForm" class="Huiform" method="post" action="bom-normalList" target="_self">
-		<s:hidden name="entity.id.partnumber"></s:hidden>
+		<s:hidden name="entity.id.partNumber"></s:hidden>
 		<s:hidden name="entity.partName"></s:hidden>
 		<input type="hidden" name="pageBean.currentPage" id="currentPage">
 		</form>
@@ -184,6 +184,10 @@
 	function formSubmit(currentPage){
 		$("#currentPage").val(currentPage);
 		$("#fenyeForm").submit();
+	}
+	function doSearch(){
+		$("#bomForm").attr("action","bom-normalList")
+		$("#bomForm").submit();
 	}
 	</script>
 </body>
