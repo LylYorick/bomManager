@@ -104,9 +104,11 @@
 							<a title="编辑" href="javascript:;" onclick="admin_edit('bom材料编辑','bom-toEdit.action?entity.id.partNumber=${id.partNumber}&&entity.id.f_Partnumber=${id.f_Partnumber}&&entity.id.topPartnumber=${id.topPartnumber}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe6df;</i>
 							</a>
-							<a title="删除" href="javascript:;" onclick="admin_del(this,${id.partNumber})" class="ml-5" style="text-decoration:none">
-							 	<i class="Hui-iconfont">&#xe6e2;</i>
-							</a>
+							<s:if test="secq != 1">
+								<a title="删除" href="javascript:;" onclick="admin_del(this,'${id.topPartnumber}','${id.f_Partnumber}','${id.partNumber}')" class="ml-5" style="text-decoration:none" >
+								 	<i class="Hui-iconfont">&#xe6e2;</i>
+								</a>
+							</s:if>
 						</td> 
 					</tr>
 				</s:iterator>
@@ -156,11 +158,16 @@
 		layer_show(title,url,w,h);
 	}
 	/*管理员-删除*/
-	function admin_del(obj,id){
+	function admin_del(obj,topPartnumber,f_Partnumber,partNumber){
 		layer.confirm('确认要删除吗？',function(index){
 			$.ajax({
 				type: 'POST',
-				url: 'user-delete?u_Number='+id,
+				url: 'bom-delete',
+				data:{
+					'entity.id.topPartnumber':topPartnumber,
+					'entity.id.f_Partnumber':f_Partnumber,
+					'entity.id.partNumber':partNumber,
+				},
 				dataType: 'text',
 				success: function(data){
 					if (data == "1") {

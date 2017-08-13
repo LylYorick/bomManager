@@ -239,10 +239,36 @@ public class BomServiceImpl implements BomService {
 			hql.append(" and e.id.partNumber = :partNumber");
 			sqlParams.put("partNumber", f_PartNumber);
 		}
+		
 		Bom fatherMaterial = (Bom) bomDAO.executeHQLPeak(hql.toString(), sqlParams);
 		return fatherMaterial;
 	}
 	
+
+	@Override
+	public List getSonMaterial(Bom bom) {
+		BomId sonId = new BomId();
+		StringBuffer hql = new StringBuffer("From Bom e where 1=1 ");
+		HashMap sqlParams = new HashMap();
+		String topPartnumber = bom.getId().getTopPartnumber();
+		if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
+			hql.append(" and e.id.topPartnumber = :topPartnumber");
+			sqlParams.put("topPartnumber", topPartnumber.trim());
+		}
+		String f_Partnumber = bom.getId().getPartNumber();
+		if (!StringUtil.isNullOrWhiteSpace(f_Partnumber)) {
+			hql.append(" and e.id.f_Partnumber = :f_Partnumber");
+			sqlParams.put("f_Partnumber", f_Partnumber.trim());
+		}
+		int secq = bom.getSecq();
+		if( secq >0){
+			hql.append(" and e.secq = :secq");
+			sqlParams.put("secq", secq + 1);
+		}
+		
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		return list;
+	}
 
 	@Override
 	public List getNormalMaterial(Bom bom) {
@@ -311,6 +337,17 @@ public class BomServiceImpl implements BomService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean deleteBom(Bom bom) {
+		List<Bom> sonList = getSonMaterial(bom);
+		if (!sonList.isEmpty()) {
+			for(Bom item :sonList){
+				deleteBom(item);
+			}
+		}
+		return bomDAO.delete(bom);
 	}
 
 	

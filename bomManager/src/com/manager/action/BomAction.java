@@ -187,5 +187,20 @@ public class BomAction extends BaseAction implements ModelDriven {
 		return "file-downLoad";
 	}
 	
+	public String delete() {
+		HashMap formParams = new HashMap<String,Object>();
+		Bom bom = model.getEntity();
+		Bom property = bomService.getBom(bom.getId());
+		if( null == property){
+			setInputStream("0");
+			return "ajax-success";
+		}
+		if(bomService.deleteBom(property)){
+			setInputStream("1");
+		}else{
+			setInputStream("0");
+		}
+		return "ajax-success";
+	}
 	
 }
