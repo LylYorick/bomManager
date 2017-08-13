@@ -30,10 +30,10 @@
 		<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>父阶料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">	
-				 <select class="multiSelect"  name="entity.id.f_Partnumber" id="f_Partnumber">
-   		   			<s:iterator value="#request.BomList" id="item" >
+				 <select   name="entity.id.f_Partnumber" id="f_Partnumber">
+   		   			<%-- <s:iterator value="#request.BomList" id="item" >
    		   				<option value='<s:property value="#item.id.partNumber"/>' f_Name='<s:property value="#item.partName"/>'/><s:property value="#item.id.partNumber"/> <s:property value="#item.partName"/></option>
-   		   			</s:iterator>
+   		   			</s:iterator> --%>
 	   		    </select>
 				<input type="hidden"  name="entity.f_Name"  id="f_Name" >
 		</div>
@@ -76,6 +76,26 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/select2/select2.js"></script> 
 <script type="text/javascript">
+function getF_pratNumber(topPartnumber){
+	var control = $("#f_Partnumber");
+	$.post("bom-getNormal",{
+		'entity.id.topPartnumber':topPartnumber,
+	},function(data,status){
+		//请空父阶材料的所有option
+		control.empty();
+		//重新填充父阶材料的option
+		if($.isEmptyObject(data)){
+			return;
+		};
+		for(var i=0;i<data.length;i++){
+		 var item = data[i];
+		 control.append("<option value='" +item.id.partNumber + "' f_Name='"+item.partName+"'> "+ item.id.partNumber+item.partName + "</option>");
+		}
+		//父阶材料select指向提示框
+		control.val(null).trigger("change");
+	},"json");
+}
+
 $(function(){
 	  $(".multiSelect").select2({ 
 		  width: "300px",
@@ -83,10 +103,17 @@ $(function(){
 		  allowClear:true,
 	 });
 	  $(".multiSelect").val(null).trigger("change");
-	  
+	  $("#f_Partnumber").select2({
+		 	 placeholder:'请选择',
+			 allowClear:true,
+			 width: "300px",
+	  });
 	 $("#topPartnumber").change(function(){
 		  var topName =  $(this).find("option:selected").attr("topName");
 		  $("#topName").val(topName);  
+		 var toppratNumber = $(this).val();
+		  getF_pratNumber(toppratNumber);
+		 
 	 });
 	 $("#f_Partnumber").change(function(){
 		  var f_Name =  $(this).find("option:selected").attr("f_Name");
@@ -98,14 +125,20 @@ $(function(){
 	 });
 	$("#form-user-add").validate({
 		rules:{
-			'id.topPartnumber':{
+			'entity.id.f_Partnumber':{
 				required:true,
 			},
+			'entity.id.partNumber':{
+				required:true,
+			}, 
 			'entity.useQty':{
 				required:true,
 				minNumber:true,
 				isFloatGteZero:true,
 			},
+			'entity.id.topPartnumber':{
+				required:true,
+			}
 		},
 		onkeyup:false,
 		focusCleanup:true,
@@ -133,10 +166,7 @@ $(function(){
 			});	
 			
 		}
-	
 	});
-});  
-
-
+	});  
 </script> 
 </html>

@@ -107,7 +107,7 @@ public class MaterialServiceImpl implements MaterialService{
 
 	@Override
 	public Material getMaterial(MaterialId id) {
-		Material material = 	(Material) materialDAO.get(Material.class, id);
+		Material material = (Material) materialDAO.get(Material.class, id);
 		return material;
 	}
 

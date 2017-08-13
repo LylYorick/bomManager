@@ -89,7 +89,26 @@ public class BomAction extends BaseAction implements ModelDriven {
 		BomId id = bom.getId();
 		Bom item = bomService.getBom(id);
 		model.setEntity(item);
+		List<Material> materilList = bomService.getAllMertial();
+		request.put(Const.MATERIAL_LIST, materilList);
 		return "toEdit";
+	}
+	public String doEdit() {
+		Bom bom = model.getEntity();
+		String alterPartNumber = model.getAlterPartNumber();
+		HashMap formParams = new HashMap<String,Object>();
+		formParams.put("alterPartNumber", alterPartNumber);
+		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
+		bom.setEditor(currentuser.getU_Number());
+		if(bomService.getBom(bom.getId()) == null){
+			setInputStream("0");
+		}
+		if(	bomService.editBom(bom,formParams)){
+			setInputStream("1");
+		}else{
+			setInputStream("0");
+		}
+		return "ajax-success";
 	}
 	public String toTopAdd() {
 		List<Material> materilList = bomService.getAllMertial();
@@ -132,12 +151,12 @@ public class BomAction extends BaseAction implements ModelDriven {
 		return "ajax-success";
 	}
 	public String getNormal() {
-		
 		//TODO 4.1	BOM结构建立 未完成  获取非顶阶材料 新增struts2 转换为json
 		HashMap formParams = new HashMap<String,Object>();
 		Bom bom = model.getEntity();
-	/*	List<Bom> list = bomService.getNormalMaterial(bom);*/
-		return  "ajax-success";
+	    List<Bom> list = bomService.getNormalMaterial(bom);
+	    model.setEntityList(list);
+		return  "json-ajax";
 	}
 	
 	public String doExport() throws Exception{

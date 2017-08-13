@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.manager.common.tools.DateUtil;
 import com.manager.common.tools.StringUtil;
 import com.manager.dao.BomDAO;
 import com.manager.entity.Bom;
@@ -48,6 +49,11 @@ public class BomServiceImpl implements BomService {
 			if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
 				hql.append(" and e.id.topPartnumber = :topPartnumber");
 				sqlParams.put("topPartnumber", topPartnumber.trim());
+			}
+			String f_Partnumber = bom.getId().getF_Partnumber();
+			if (!StringUtil.isNullOrWhiteSpace(f_Partnumber)) {
+				hql.append(" and e.id.f_Partnumber = :f_Partnumber");
+				sqlParams.put("f_Partnumber", f_Partnumber.trim());
 			}
 			String partNumber = bom.getId().getPartNumber();
 			if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
@@ -236,11 +242,77 @@ public class BomServiceImpl implements BomService {
 		Bom fatherMaterial = (Bom) bomDAO.executeHQLPeak(hql.toString(), sqlParams);
 		return fatherMaterial;
 	}
+	
 
 	@Override
-	public List getNormalMaterial() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
+	public List getNormalMaterial(Bom bom) {
+		HashMap sqlParams = new HashMap();
+		String topPartnumber = bom.getId().getTopPartnumber();
+		StringBuffer hql = new StringBuffer("From Bom e where 1=1 ");
+		if (!StringUtil.isNullOrWhiteSpace(topPartnumber)) {
+			hql.append(" and e.id.topPartnumber = :topPartnumber");
+			sqlParams.put("topPartnumber", topPartnumber);
+		}
+		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
+		return list;
+	}
+
+	@Override
+	public boolean editBom(Bom bom,HashMap formParams) {
+		String alterPartNumber = (String) formParams.get("alterPartNumber");
+		String partNumber = bom.getId().getPartNumber();
+		String  date = DateUtil.getCurrentPrettyDateTime(); 
+		if(bom.getId().getPartNumber() != alterPartNumber){
+			if(!isSingle(bom, formParams)){
+				return false;
+			}
+			StringBuffer hql = new StringBuffer("Update tblbom set ");
+			hql.append(" f_partNumber ='"+alterPartNumber + "' ");
+			hql.append(", f_Name ='"+bom.getPartName() + "'");
+			hql.append(", editor ='"+bom.getEditor() + "'");
+			hql.append(", Datetime ='"+ date + "'");
+			hql.append(" where Top_Partnumber = '" + bom.getId().getTopPartnumber() + "' ");
+			hql.append(" and f_partNumber = '" + partNumber + "' ");
+			System.out.println(hql.toString());
+			bomDAO.executeSql(hql.toString());
+			
+		}
+		StringBuffer hql = new StringBuffer("Update tblbom set ");
+		hql.append(" partNumber ='"+alterPartNumber + "' ");
+		hql.append(", partName ='"+bom.getPartName() + "'");
+		hql.append(", Datetime ='"+ date + "'");
+		hql.append(", editor ='"+bom.getEditor() + "'");
+		hql.append(", useQty ='"+bom.getUseQty() + "'");
+		hql.append(" where Top_Partnumber = '" + bom.getId().getTopPartnumber() + "' ");
+		hql.append(" and f_partNumber = '" + bom.getId().getTopPartnumber() + "' ");
+		hql.append(" and partNumber = '" + partNumber + "' ");
+		System.out.println("after:" + hql.toString());
+		bomDAO.executeSql(hql.toString());
+		return true;
+	}
+
+	@Override
+	public List getBomList(Bom bom) {
+		StringBuffer hql = new StringBuffer("From Bom e where 1=1 ");
+		HashMap sqlParams = new HashMap();
+		HashMap formParams = new HashMap();
+		buildhql(hql, formParams, bom, sqlParams);
+		return bomDAO.executeHQL(hql.toString(), sqlParams);
+	}
+
+	@Override
+	public boolean isSingle(Bom bom, HashMap formParams) {
+		String alterPartNumber = (String) formParams.get("alterPartNumber");
+		BomId id  = new BomId();
+		id.setTopPartnumber(bom.getId().getTopPartnumber());
+		id.setF_Partnumber(bom.getId().getF_Partnumber());
+		id.setPartNumber(alterPartNumber);
+		if(getBom(id) != null){
+			return false;
+		}
+		return true;
+	}
+
+	
 	
 }

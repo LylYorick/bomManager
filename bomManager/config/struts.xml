@@ -7,7 +7,7 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" /> 
     <constant name="struts.devMode" value="true" />
-    <package name="default" namespace="/" extends="struts-default">
+    <package name="default" namespace="/" extends="json-default">
     <!-- 拦截器 -->
  	<!-- <interceptors>
          <interceptor name="loginVerify" class="com.huami.intercept.LoginInterceptor">
@@ -152,6 +152,9 @@
 		        <param name="contentType">text/html</param>
 		        <param name="inputName">inputStream</param>
 		    </result>	
+		     <result type='json' name="json-ajax">
+		       		<param name="root">entityList</param>
+		      </result>
         	  <result type="stream" name="file-downLoad">
 		        <param name="contentType">application/x-xls</param>
 		        <param name="inputName">inputStream</param>

@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/style.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/select2/select2.css" />
 </head>
 <body>
 <article class="page-container">
@@ -18,7 +19,7 @@
 	<div class="row cl">
 	<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>顶阶料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">	
-			<s:hidden name="entity.id.partnumber"></s:hidden>
+			<s:hidden name="entity.id.topPartnumber"></s:hidden>
 			<label class="form-label" >${entity.id.topPartnumber}</label>
 		</div>
 	</div>
@@ -32,6 +33,7 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>父阶料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">
+			<s:hidden name="entity.id.f_Partnumber"></s:hidden>
 		<label class="form-label " >${entity.id.f_Partnumber}</label>
 		</div>
 	</div>
@@ -44,14 +46,22 @@
 	</div>
 	<div class="row cl">
 	<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>本阶料号：</label>
-		<div class="formControls col-xs-8 col-sm-9">	
-			<label class="form-label" >${entity.id.partNumber}</label>
+		<div class="formControls col-xs-8 col-sm-9">
+	  		<select class="multiSelect"  name="alterPartNumber" id="alterPartNumber">
+		   			<s:iterator value="#request.MaterialList" id="item" >
+		   				<option value='<s:property value="#item.id.partnumber"/>' partName='<s:property value="#item.partName"/>'
+		   				<s:if test="#item.id.partnumber.equals(entity.id.partNumber)">selected</s:if>
+		   				/><s:property value="#item.id.partnumber"/> <s:property value="#item.partName"/></option>
+		   			</s:iterator>
+   		    </select>
 		</div>
+   		    <s:hidden name="entity.id.partNumber"></s:hidden>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>本阶料号名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<label class="form-label" >${entity.partName}</label>
+			<label class="form-label"  id="partNameSpan">${entity.partName} </label>
+			<input type="hidden"  name="entity.partName"  id="partName" >
 		</div>
 	</div>
 	<div class="row cl">
@@ -63,7 +73,7 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用量：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="partSpec" name="useQty"  value="${entity.useQty}">
+			<input type="text" class="input-text"  placeholder="" id="useQty" name="entity.useQty"  value="${entity.useQty}">
 		</div>
 	</div>
 	<div class="row cl">
@@ -75,24 +85,33 @@
 </article>
 </body>
 	<!-- _footer 作为公共模版分离出去 -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
 <!-- /_footer 作为公共模版分离出去 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2/select2.js"></script> 
 <script type="text/javascript">
 $(function(){
+	  $(".multiSelect").select2({ 
+		  width: "300px",
+		  placeholder:"请选择",
+		  allowClear:true,
+	 });
+	 $("#alterPartNumber").change(function(){
+		  var alterPartNumber =  $(this).find("option:selected").attr("partName");
+		  $("#partName").val(alterPartNumber);  
+		  $("#partNameSpan").text(alterPartNumber)
+	 });
 	$("#form-user-add").validate({
 		rules:{
-			partnumber:{
+			'entity.useQty':{
 				required:true,
-				maxlength:50,
-			},
-			partRev:{
-				maxlength:10,
-				required:true,
+				minNumber:true,
+				isFloatGteZero:true,
 			},
 		},
 		onkeyup:false,
@@ -101,7 +120,7 @@ $(function(){
 		submitHandler:function(form){
 			$(form).ajaxSubmit({
 				type: 'post',
-				url: "material-doEdit", 
+				url: "bom-doEdit", 
 				success: function(data){
 					if(data == "1"){
 						layer.msg('修改成功!',{icon:1,time:1000});
@@ -119,9 +138,7 @@ $(function(){
 					layer.msg('error!',{icon:1,time:1000}); 
 				}
 			});	
-			
 		}
-	
 	});
 });  
 

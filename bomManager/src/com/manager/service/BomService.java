@@ -34,10 +34,13 @@ public interface BomService {
 	public List getAllMertial();
 	public List getAllTopBom();
 	public List getAllBom();
-	public List getNormalMaterial();
+	public List getNormalMaterial(Bom bom);
+	public List getBomList(Bom bom);
 	public Bom getFatherMaterial(Bom bom);
 	public void buildTree(String partNumber,List<Bom> resultList);
 	public boolean saveTopMaterial(Bom bom);
 	public boolean saveNormalMaterial(Bom bom);
+	public boolean  editBom(Bom bom,HashMap formParams);
+	public boolean  isSingle(Bom bom,HashMap formParams);
 }
 

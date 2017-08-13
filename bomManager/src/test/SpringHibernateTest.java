@@ -76,6 +76,29 @@ public class SpringHibernateTest {
 		fatherId.setF_Partnumber("HT2016.01");
 		System.out.println(bomService.getBom(fatherId));
 	}
+	@Test
+	public void testGetNormalMaterial(){
+		BomId fatherId = new BomId();
+		fatherId.setTopPartnumber("HT2016.01");
+		Bom bom = new Bom();
+		bom.setId(fatherId);
+		System.out.println(bomService.getNormalMaterial(bom));
+	}
 	
- 
+	@Test
+	public void test5(){
+		BomId id = new BomId();
+		id.setF_Partnumber("HT2016.01");
+		id.setTopPartnumber("HT2016.01");
+		id.setPartNumber("HT2016.01.01");
+		Bom bom = new Bom();
+		bom.setId(id);
+		bom.setEditor("lyl");
+		bom.setPartName("推杆");
+		bom.setUseQty(140.04);
+		HashMap formParams = new HashMap<String,Object>();
+		formParams.put("alterPartNumber", "HT2016.01.05B");
+		bomService.editBom(bom, formParams);
+	}
+	
 }

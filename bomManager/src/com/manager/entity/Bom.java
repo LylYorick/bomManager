@@ -212,6 +212,14 @@ public class Bom implements java.io.Serializable {
 		this.datetime = datetime;
 	}
 
+	@Override
+	public String toString() {
+		return "Bom [id=" + id + ", topName=" + topName + ", partName=" + partName + ", f_Name=" + f_Name + ", secq="
+				+ secq + ", useQty=" + useQty + ", editor=" + editor + ", datetime=" + datetime + ", partSpec="
+				+ partSpec + ", tuNumber=" + tuNumber + ", partStandard=" + partStandard + ", partModel=" + partModel
+				+ ", partPrice=" + partPrice + ", partQty=" + partQty + "]";
+	}
+
 
 
 	

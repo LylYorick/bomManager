@@ -8,9 +8,9 @@
  */
 package com.manager.entity.model;
 import java.io.File;
+import java.util.List;
 
 import com.manager.entity.Bom;
-import com.manager.entity.Order;
 import com.manager.entity.common.Pagebean;
 /**
  * TODO添加类描述
@@ -23,6 +23,8 @@ public class BomModel extends BaseModel {
 	private String  docFileName;
 	private File doc;
 	private String docContentType;
+	private List<Bom> entityList;
+	private String alterPartNumber;
 	public Bom getEntity() {
 		return entity;
 	}
@@ -59,6 +61,23 @@ public class BomModel extends BaseModel {
 	public void setDocContentType(String docContentType) {
 		this.docContentType = docContentType;
 	}
+
+	public List<Bom> getEntityList() {
+		return entityList;
+	}
+
+	public void setEntityList(List<Bom> entityList) {
+		this.entityList = entityList;
+	}
+
+	public String getAlterPartNumber() {
+		return alterPartNumber;
+	}
+
+	public void setAlterPartNumber(String alterPartNumber) {
+		this.alterPartNumber = alterPartNumber;
+	}
+	
 	
 }
 

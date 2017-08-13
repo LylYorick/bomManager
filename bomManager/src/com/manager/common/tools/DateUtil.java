@@ -139,18 +139,8 @@ public class DateUtil
         return prettyDateTimeByMOType.format(new Date());
     }
     
-    /**
-     * 获取當前的字符串，格式为dd/MM/yyyy HH:mm:ss
-     * 
-     * @param date
-     *            源Date
-     * @return String
-     */
-    public static String getCurrentDateTimeByMOType()
-    {
-        return new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a", Locale.ENGLISH).format(new Date());
-    }
 
+ 
     /**
      * 把日期转化成月份
      * @param month "mm/yyyy
