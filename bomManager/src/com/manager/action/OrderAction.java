@@ -288,4 +288,15 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		inputStream = new FileInputStream(fileUrl);
 		return "file-downLoad";
 	}
+	public String delete(){
+		HashMap formParams = new HashMap<String,Object>();
+		Order order= model.getEntity();
+		boolean flag = orderService.delete(order);
+		if(flag){
+			setInputStream("1");
+		}else{
+			setInputStream("0");
+		}
+		return "ajax-success";
+	}
 }

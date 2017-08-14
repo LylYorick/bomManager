@@ -178,8 +178,12 @@ public class BomServiceImpl implements BomService {
 
 	@Override
 	public List getAllMertial() {
-		StringBuffer hql = new StringBuffer("From Material e where 1=1 ");
 		HashMap sqlParams = new HashMap();
+		StringBuffer hql = new StringBuffer("From Material e where 1=1 ");
+		//选取材料时只选择有效的料号
+		hql.append(" and e.id.partActive = :partActive");
+	    sqlParams.put("partActive", "Y");
+	    
 		List<Material> list = bomDAO.executeHQL(hql.toString(), sqlParams);
 		return list;
 	}

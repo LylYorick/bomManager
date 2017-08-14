@@ -81,6 +81,9 @@
 						<td>${orderPrice}</td>
 						<td>${orderStatus}</td>
 							<td class="td-manage">
+							<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
+								 <i class="Hui-iconfont">&#xe715;</i>
+							</a>
 							<s:if test="orderStatus.equals('已审核') ">
 								<a title="确认订单" href="javascript:;" onclick="confirm(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
 									 <i class="Hui-iconfont">&#xe6e1;</i>
@@ -91,12 +94,14 @@
 									 <i class="Hui-iconfont">&#xe6df;</i>
 								</a>
 								<a title="完成订单" href="javascript:;" onclick="admin_detail('完成订单','order-toComplete.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-									 <i class="Hui-iconfont">&#xe637</i>
+									 <i class="Hui-iconfont">&#xe637;</i>
 								</a>
+								<s:if test="!orderStatus.equals('已完成') ">
+									<a title="删除" href="javascript:;" onclick="admin_del(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
+									 	<i class="Hui-iconfont">&#xe6e2;</i>
+									</a>
+								</s:if>
 							</s:if>
-							<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-								 <i class="Hui-iconfont">&#xe715;</i>
-							</a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -165,6 +170,29 @@
 				success: function(data){
 					if (data == "1") {
 						layer.msg('已确认!',{icon:1,time:1000});
+						setTimeout(function(){
+							location.reload();
+						},1000);
+					}
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});		
+		});
+	}
+	function admin_del(obj,orderNumber){
+		layer.confirm('确认要删除吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: 'order-delete',
+				dataType: 'text',
+				data:{
+					'entity.orderNumber':orderNumber,
+				},
+				success: function(data){
+					if (data == "1") {
+						layer.msg('已删除!',{icon:1,time:1000});
 						setTimeout(function(){
 							location.reload();
 						},1000);

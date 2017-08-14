@@ -194,6 +194,15 @@ public class OrderServiceImpl implements OrderService{
 		item.setOrderStatus("已完成");
 		return orderDAO.update(item);
 	}
+
+	@Override
+	public Boolean delete(Order order) {
+		Order item = (Order) orderDAO.get(Order.class, order.getOrderNumber());
+		if(item == null){
+			return false;
+		}
+		return orderDAO.delete(item);
+	}
 	
 	
 	

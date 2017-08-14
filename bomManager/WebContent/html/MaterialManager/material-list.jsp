@@ -98,9 +98,6 @@
 							<a title="编辑" href="javascript:;" onclick="admin_edit('材料编辑','material-toEdit.action?entity.id.partnumber=${id.partnumber}&&entity.id.partRev=${id.partRev}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe6df;</i>
 							</a>
-							<a title="删除" href="javascript:;" onclick="admin_del(this,${u_Number})" class="ml-5" style="text-decoration:none">
-							 	<i class="Hui-iconfont">&#xe6e2;</i>
-							</a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -150,28 +147,6 @@
 	function material_add(title,url,w,h){
 		layer_show(title,url,w,h);
 	}
-	/*管理员-删除*/
-	function admin_del(obj,id){
-		layer.confirm('确认要删除吗？',function(index){
-			$.ajax({
-				type: 'POST',
-				url: 'user-delete?u_Number='+id,
-				dataType: 'text',
-				success: function(data){
-					if (data == "1") {
-						layer.msg('已删除!',{icon:1,time:1000});
-						setTimeout(function(){
-							location.reload();
-						},1000);
-					}
-				},
-				error:function(data) {
-					console.log(data.msg);
-				},
-			});		
-		});
-	}
-	
 	/*管理员-编辑*/
 	function admin_edit(title,url,id,w,h){
 		layer_show(title,url,w,h);

@@ -43,6 +43,7 @@ public interface OrderService {
 	public Boolean edit(Order order);
 	public Boolean confirm(Order order);
 	public Boolean complete(Order order);
+	public Boolean delete(Order order);
 	
 }
 
