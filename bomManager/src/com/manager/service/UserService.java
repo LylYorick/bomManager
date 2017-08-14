@@ -52,6 +52,8 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean deleteUserInfo(UserInfo userInfo);
+	
+	public boolean alterPassword(Map formParams,UserInfoView UserInfoView);
 }
 
 

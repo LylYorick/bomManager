@@ -15,6 +15,7 @@ import java.util.List;
 
 
 import com.manager.common.Const;
+import com.manager.common.tools.MD5Util;
 import com.manager.entity.UserInfo;
 import com.manager.entity.view.UserInfoView;
 import com.manager.service.UserService;
@@ -33,6 +34,24 @@ public class UserAction extends BaseAction implements ModelDriven<UserInfoView>{
 	private UserService userService;
 	private String verification;    
 	private UserInfoView userInfo;
+	private String new_Password; 
+	private String comfirm_Password;
+
+	public String getComfirm_Password() {
+		return comfirm_Password;
+	}
+
+	public void setComfirm_Password(String comfirm_Password) {
+		this.comfirm_Password = comfirm_Password;
+	}
+
+	public String getNew_Password() {
+		return new_Password;
+	}
+
+	public void setNew_Password(String new_Password) {
+		this.new_Password = new_Password;
+	}
 
 	public String getVerification() {
 		return verification;
@@ -137,6 +156,36 @@ public class UserAction extends BaseAction implements ModelDriven<UserInfoView>{
 		return LOGIN;
 	}
 	
+	public String toAlterPassword(){
+		return "toAlterPassword";
+	}
+	
+	/**
+	 * 检查原密码是否输出正确
+	 */
+	public String checkPassword(){
+		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
+		String clientPassword = MD5Util.getMD5(userInfo.getU_Password());
+		if(currentuser.getU_Password().equals(clientPassword)){
+			setInputStream("true");
+		}else{
+			setInputStream("false");
+		}
+		return "ajax-success";
+	}
+	
+	public String doAlterPassword(){
+		HashMap formParams = new HashMap<String,Object>();
+		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
+		formParams.put("new_Password",new_Password);
+		formParams.put("comfirm_Password",comfirm_Password);
+		if(userService.alterPassword(formParams, currentuser)){
+			setInputStream("1");
+		}else{
+			setInputStream("0");
+		}
+		return "ajax-success";
+	}
 	@Override
 	public UserInfoView getModel() {
 		if(userInfo == null){

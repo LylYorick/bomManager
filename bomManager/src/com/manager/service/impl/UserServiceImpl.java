@@ -158,6 +158,21 @@ public class UserServiceImpl implements UserService{
 		List<UserInfoView> list = userDAO.executeHQL(hql.toString(), sqlParams);
 		return list;
 	}
+	@Override
+	public boolean alterPassword(Map formParams, UserInfoView userInfo) {
+		UserInfo property = userDAO.get(userInfo.getU_Number());
+		String new_Password = (String) formParams.get("new_Password");
+		String comfirm_Password = (String) formParams.get("comfirm_Password");
+		if (!new_Password.equals(comfirm_Password)) {
+			return false;
+		}
+		new_Password = MD5Util.getMD5(new_Password);
+		property.setU_Password(new_Password);
+		userDAO.update(property);;
+		return true;
+	}
+
 	
+
 }
 
