@@ -28,9 +28,6 @@ public class Bom implements java.io.Serializable {
 	private Date datetime;
 	
 
-	
-
-
 	public Bom(BomId id, String partName) {
 		this.id = id;
 		this.partName = partName;
@@ -121,12 +118,35 @@ public class Bom implements java.io.Serializable {
 	@Transient
 	private String partModel;
 	
+	/**
+	 * 单价
+	 */
 	@Transient
 	private BigDecimal partPrice;
 	
+	/**
+	 * 成本数量
+	 */
 	@Transient
 	private BigDecimal partQty;
 	
+	/**
+	 * 单台合计
+	 */
+	@Transient
+	private BigDecimal partSum;
+	
+	
+	public BigDecimal getPartSum() {
+		return partSum;
+	}
+
+
+	public void setPartSum(BigDecimal partSum) {
+		this.partSum = partSum;
+	}
+
+
 	public String getTuNumber() {
 		return tuNumber;
 	}
@@ -166,7 +186,6 @@ public class Bom implements java.io.Serializable {
 	public void setPartPrice(BigDecimal partPrice) {
 		this.partPrice = partPrice;
 	}
-
 	
 	public BigDecimal getPartQty() {
 		return partQty;

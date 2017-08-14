@@ -44,5 +44,6 @@ public interface BomService {
 	public boolean deleteBom(Bom bom);
 	public boolean  editBom(Bom bom,HashMap formParams);
 	public boolean  isSingle(Bom bom,HashMap formParams);
+	public void calculatePartSum(Bom bom);
 }
 

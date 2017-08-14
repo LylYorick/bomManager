@@ -166,6 +166,9 @@ public class PoiUtil {
 		createCell(row, cellNo - minLevel + 2, "执行标准");
 		createCell(row, cellNo - minLevel + 3, "单台部件数量");
 		createCell(row, cellNo - minLevel + 4, "单台零件数量");
+		createCell(row, cellNo - minLevel + 5, "单价");
+		createCell(row, cellNo - minLevel + 6, "成本数量");
+		createCell(row, cellNo - minLevel + 7, "单台合计");
 		// 创建表头end
 
 		
@@ -189,6 +192,9 @@ public class PoiUtil {
 			} else if ("零件".equals(item.getPartModel())) {
 				createCell(row, j - minLevel + 4, item.getUseQty());
 			}
+			createCell(row, j - minLevel + 5, item.getPartPrice()+"");
+			createCell(row, j - minLevel + 6, item.getPartQty()+"");
+			createCell(row, j - minLevel + 7, item.getPartSum()+"");
 		}
 		File file = new File(fileUrl);
 		try {

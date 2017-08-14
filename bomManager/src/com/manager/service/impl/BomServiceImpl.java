@@ -8,6 +8,7 @@
  */
 package com.manager.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.manager.common.tools.BigDecimalUtil;
 import com.manager.common.tools.DateUtil;
 import com.manager.common.tools.StringUtil;
 import com.manager.dao.BomDAO;
@@ -94,6 +96,7 @@ public class BomServiceImpl implements BomService {
 			return;
 		}
 		for(Bom item : list){ 
+			calculatePartSum(item);
 			resultList.add(item);
 			buildTree(item.getId().getPartNumber(), resultList);
 		}
@@ -143,10 +146,8 @@ public class BomServiceImpl implements BomService {
 		if (list.isEmpty()) {
 			return resultList;
 		} 
-		/* else if (list.size() > 1) {
-			return "查询的料号在数据库中有重复";
-		}*/ 
 		Bom item = list.get(0);
+		calculatePartSum(item);
 		resultList.add(item);    
 		buildTree(item.getId().getPartNumber(), resultList);
 		return resultList;
@@ -243,7 +244,6 @@ public class BomServiceImpl implements BomService {
 			hql.append(" and e.id.partNumber = :partNumber");
 			sqlParams.put("partNumber", f_PartNumber);
 		}
-		
 		Bom fatherMaterial = (Bom) bomDAO.executeHQLPeak(hql.toString(), sqlParams);
 		return fatherMaterial;
 	}
@@ -354,6 +354,14 @@ public class BomServiceImpl implements BomService {
 		return bomDAO.delete(bom);
 	}
 
-	
+	public void calculatePartSum(Bom bom){
+		BigDecimal partSum = new BigDecimal(0);
+		BigDecimal partPrice = bom.getPartPrice(); 
+		BigDecimal partQty= bom.getPartQty();
+		BigDecimal  useQty  = new BigDecimal(bom.getUseQty());
+		partSum = partPrice.multiply(partQty).multiply(useQty);
+		partSum = BigDecimalUtil.Decimalformat(partSum);
+		bom.setPartSum(partSum);
+	}
 	
 }

@@ -125,6 +125,9 @@
 		bomstring += "<th width='100'>	执行标准</th>";
 		bomstring += "<th width='100'>	单台部件数量</th>";
 		bomstring += "<th width='100'>	单台零件数量</th>";
+		bomstring += "<th width='100'>	单价</th>";
+		bomstring += "<th width='100'>	成本数量</th>";
+		bomstring += "<th width='100'>  单台合计</th>";
 		bomstring += "</tr></thead>";
 		//创建文字部分
 		bomstring +="<tbody>"; 
@@ -153,8 +156,10 @@
 				bomstring += "<td></td>";
 				bomstring += "<td></td>";
 			}
-			sum = bom.partPrice * bom.useQty * bom.partQty;
-			totalSum += sum;
+			bomstring += "<td>"+bom.partPrice+"</td>";
+			bomstring += "<td>"+bom.partQty+"</td>";
+			bomstring += "<td>"+bom.partSum+"</td>";
+			totalSum += bom.partSum;
 		}
 		bomstring +="</tbody>";
 		bomTb.append(bomstring); 
