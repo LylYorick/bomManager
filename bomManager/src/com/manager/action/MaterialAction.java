@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.manager.common.Const;
+import com.manager.entity.Bom;
 import com.manager.entity.Material;
 import com.manager.entity.MaterialId;
 import com.manager.entity.common.Pagebean;
@@ -118,6 +119,14 @@ public class MaterialAction extends BaseAction  implements ModelDriven{
 				e1.printStackTrace();
 			}
 		}
+		return "ajax-success";
+	}
+	public String soldOut() {
+		HashMap formParams = new HashMap<String,Object>();
+		Material material = model.getEntity();
+		Boolean isAllow = materialService.getAllowSoldOut(material);
+		//TODO 下架材料的功能需要等下次再做
+	
 		return "ajax-success";
 	}
 

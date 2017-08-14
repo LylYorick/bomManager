@@ -98,6 +98,9 @@
 							<a title="编辑" href="javascript:;" onclick="admin_edit('材料编辑','material-toEdit.action?entity.id.partnumber=${id.partnumber}&&entity.id.partRev=${id.partRev}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe6df;</i>
 							</a>
+							<a title="下架" href="javascript:;" onclick="admin_del(this,'${id.partnumber}','${id.partRev}','${id.partActive}')" class="ml-5" style="text-decoration:none">
+								  <i class="Hui-iconfont">&#xe6de;</i>
+							</a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -151,10 +154,37 @@
 	function admin_edit(title,url,id,w,h){
 		layer_show(title,url,w,h);
 	}
+	
 	/* 分页表单提交 */
 	function formSubmit(currentPage){
 		$("#currentPage").val(currentPage);
 		$("#fenyeForm").submit();
+	}
+	/*材料下架*/
+	function admin_del(obj,partnumber,partRev,partActive){
+		layer.confirm('确认要下架此材料吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: 'material-soldOut',
+				data:{
+					'entity.id.partnumber':partnumber,
+					'entity.id.partRev':partRev,
+					'entity.id.partActive':partActive
+				},
+				dataType: 'text',
+				success: function(data){
+					if (data == "1") {
+						layer.msg('下架成功!',{icon:1,time:1000});
+						setTimeout(function(){
+							location.reload();
+						},1000);
+					}
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});		
+		});
 	}
 	</script>
 </body>

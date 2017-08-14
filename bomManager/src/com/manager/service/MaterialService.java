@@ -38,6 +38,7 @@ public interface MaterialService {
 	public boolean updateMaterial(Material material);
 	public void builhql(StringBuffer hql,Map formParams,Material material,HashMap sqlParams);
 	public boolean AddMaterial(Material material);
+	public boolean getAllowSoldOut(Material material);
 }
 
 

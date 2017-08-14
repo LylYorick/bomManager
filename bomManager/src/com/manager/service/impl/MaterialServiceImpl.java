@@ -19,6 +19,7 @@ import com.manager.common.tools.MD5Util;
 import com.manager.common.tools.StringUtil;
 import com.manager.dao.MaterialDAO;
 import com.manager.dao.UserDAO;
+import com.manager.entity.Bom;
 import com.manager.entity.Material;
 import com.manager.entity.MaterialId;
 import com.manager.entity.UserInfo;
@@ -122,6 +123,14 @@ public class MaterialServiceImpl implements MaterialService{
 			return false;
 		}
 		return materialDAO.update(material);
+	}
+
+	@Override
+	public boolean getAllowSoldOut(Material material) {
+		//TODO 下架材料的功能需要等下次再做
+	/*	BomId = 
+		Bom bom = materialDAO.get(Bom.class, )*/
+		return false;
 	}
 	
 
