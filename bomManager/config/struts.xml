@@ -9,18 +9,17 @@
     <constant name="struts.devMode" value="true" />
     <package name="default" namespace="/" extends="json-default">
     <!-- 拦截器 -->
- 	<!-- <interceptors>
-         <interceptor name="loginVerify" class="com.huami.intercept.LoginInterceptor">
+ 	 <interceptors>
+         <interceptor name="loginVerify" class="com.manager.intercept.LoginInterceptor">
          </interceptor>
          <interceptor-stack name="verify">
         	 <interceptor-ref name="defaultStack"> </interceptor-ref>
              <interceptor-ref name="loginVerify">
-             	<param name="excludeMethods">login,execute,userLogin</param>
+             	<param name="excludeMethods">login,execute</param>
              </interceptor-ref>
-             
          </interceptor-stack>
-     </interceptors>  -->     
-	 <default-interceptor-ref name="defaultStack"></default-interceptor-ref> 
+     </interceptors>     
+	 <default-interceptor-ref name="verify"></default-interceptor-ref> 
      <!--  默认首页  -->
 	  <default-action-ref name="index"></default-action-ref> 
 		
