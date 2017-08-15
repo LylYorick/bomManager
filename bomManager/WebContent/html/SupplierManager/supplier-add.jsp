@@ -18,26 +18,26 @@
 			<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">	
-			<input type="text" class="input-text"  placeholder="" id="partnumber" name="entity.id.partnumber" value="HT2016.01.02.01B">
+			<input type="text" class="input-text"  placeholder="" id="partnumber" name="entity.id.partnumber" >
 		</div>
 	</div>
 			
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="partName" name="entity.partName" value="545" >
+			<input type="text" class="input-text"  placeholder="" id="partName" name="entity.partName" >
 		</div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版本：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text"  class="input-text"   placeholder="" id="partRev" name="entity.id.partRev" value="001" >
+			<input type="text"  class="input-text"   placeholder="" id="partRev" name="entity.id.partRev"  >
 		</div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>供应商名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"   placeholder="" id="supplierName" name="entity.id.supplierName" value="小风厂">
+			<input type="text" class="input-text"   placeholder="" id="supplierName" name="entity.id.supplierName" >
 		</div>
 	</div>
 		<div class="row cl">
@@ -126,7 +126,6 @@ $(function(){
 				type: 'post',
 				url: "supplier-doAdd", 
 				success: function(data){
-					alert(data);
 					if(data == "1"){
 						layer.msg('注册成功!',{icon:1,time:1000});
 						setTimeout(function(){
