@@ -43,7 +43,7 @@
 		<div class="formControls col-xs-8 col-sm-9">	
 				 <select class="multiSelect"  name="entity.id.partNumber" id="partNumber">
    		   			<s:iterator value="#request.MaterialList" id="item" >
-   		   				<option value='<s:property value="#item.id.partnumber"/>' partName='<s:property value="#item.partName"/>'/><s:property value="#item.id.partnumber"/> <s:property value="#item.partName"/></option>
+   		   				<option value='<s:property value="#item.partnumber"/>' partName='<s:property value="#item.partName"/>'/><s:property value="#item.partnumber"/> <s:property value="#item.partName"/></option>
    		   			</s:iterator>
 	   		    </select>
 				<input type="hidden"  name="entity.partName"  id="partName" >
@@ -120,7 +120,7 @@ $(function(){
 		  $("#f_Name").val(f_Name);  
 	 });
 	 $("#partNumber").change(function(){
-		  var partName =  $(this).find("option:selected").attr("partName");
+  		var partName =  $(this).find("option:selected").attr("partName");
 		  $("#partName").val(partName);  
 	 });
 	$("#form-user-add").validate({

@@ -86,7 +86,7 @@ public class BomServiceImpl implements BomService {
 		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
 				+ " e.topName, e.partName, e.f_Name, e.secq, e.useQty, e.editor, e.datetime,"
 				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
-				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
+				+ " From Bom e ,Material s where e.id.partNumber =  s.partnumber ");
 		if (!StringUtil.isNullOrWhiteSpace(partNumber)) {
 			hql.append("and e.id.f_Partnumber = :partNumber and e.id.partNumber != :partNumber ");
 			sqlParams.put("partNumber", partNumber);
@@ -139,7 +139,7 @@ public class BomServiceImpl implements BomService {
 		StringBuffer hql = new StringBuffer(" select new com.manager.entity.Bom(e.id,"
 				+ " e.topName, e.partName, e.f_Name, e.secq, e.useQty, e.editor, e.datetime,"
 				+ " s.partSpec, s.tuNumber, s.partStandard, s.partModel,s.partPrice,s.partQty)"
-				+ " From Bom e ,Material s where e.id.partNumber =  s.id.partnumber ");
+				+ " From Bom e ,Material s where e.id.partNumber =  s.partnumber ");
 		HashMap sqlParams = new HashMap();
 		buildhql(hql, formParams, bom, sqlParams);
 		List<Bom> list = bomDAO.executeHQL(hql.toString(), sqlParams);
@@ -314,7 +314,7 @@ public class BomServiceImpl implements BomService {
 		hql.append(", editor ='"+bom.getEditor() + "'");
 		hql.append(", useQty ='"+bom.getUseQty() + "'");
 		hql.append(" where Top_Partnumber = '" + bom.getId().getTopPartnumber() + "' ");
-		hql.append(" and f_partNumber = '" + bom.getId().getTopPartnumber() + "' ");
+		hql.append(" and f_partNumber = '" + bom.getId().getF_Partnumber() + "' ");
 		hql.append(" and partNumber = '" + partNumber + "' ");
 		System.out.println("after:" + hql.toString());
 		bomDAO.executeSql(hql.toString());

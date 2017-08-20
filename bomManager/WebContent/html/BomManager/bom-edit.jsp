@@ -49,9 +49,9 @@
 		<div class="formControls col-xs-8 col-sm-9">
 	  		<select class="multiSelect"  name="alterPartNumber" id="alterPartNumber">
 		   			<s:iterator value="#request.MaterialList" id="item" >
-		   				<option value='<s:property value="#item.id.partnumber"/>' partName='<s:property value="#item.partName"/>'
-		   				<s:if test="#item.id.partnumber.equals(entity.id.partNumber)">selected</s:if>
-		   				/><s:property value="#item.id.partnumber"/> <s:property value="#item.partName"/></option>
+		   				<option value='<s:property value="#item.partnumber"/>' partName='<s:property value="#item.partName"/>'
+		   				<s:if test="#item.partnumber.equals(entity.id.partNumber)">selected</s:if>
+		   				/><s:property value="#item.partnumber"/> <s:property value="#item.partName"/></option>
 		   			</s:iterator>
    		    </select>
 		</div>
