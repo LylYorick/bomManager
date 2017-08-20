@@ -21,9 +21,7 @@ import com.manager.dao.MaterialDAO;
 import com.manager.dao.UserDAO;
 import com.manager.entity.Bom;
 import com.manager.entity.Material;
-import com.manager.entity.MaterialId;
 import com.manager.entity.UserInfo;
-import com.manager.entity.view.MaterialView;
 import com.manager.entity.view.UserInfoView;
 import com.manager.service.MaterialService;
 import com.manager.service.UserService;
@@ -69,29 +67,16 @@ public class MaterialServiceImpl implements MaterialService{
 
 	@Override
 	public boolean AddMaterial(Material material) {
-	
 		return 	materialDAO.Add(material);
 	}
 
 	@Override
 	public void builhql(StringBuffer hql, Map formParams, Material material, HashMap sqlParams) {
-		 if(null != material.getId()){
-		 String partnumber = material.getId().getPartnumber();
+		 String partnumber = material.getPartnumber();
 		 	if(!StringUtil.isNullOrWhiteSpace(partnumber)){
-				hql.append(" and e.id.partnumber = :partnumber");
+				hql.append(" and e.partnumber = :partnumber");
 			    sqlParams.put("partnumber", partnumber);
 			}
-		 	String partRev = material.getId().getPartRev();
-		 	if(!StringUtil.isNullOrWhiteSpace(partRev)){
-				hql.append(" and e.id.partRev = :partRev");
-			    sqlParams.put("partRev", partRev);
-			}
-		 	String	partActive = material.getId().getPartActive();
-		 	if(!StringUtil.isNullOrWhiteSpace(partActive)){
-				hql.append(" and e.id.partActive = :partActive");
-			    sqlParams.put("partActive", partActive);
-			}
-		 }
 		
 		String partName = material.getPartName();
 		if(!StringUtil.isNullOrWhiteSpace(partName)){
@@ -107,32 +92,22 @@ public class MaterialServiceImpl implements MaterialService{
 	}
 
 	@Override
-	public Material getMaterial(MaterialId id) {
-		Material material = (Material) materialDAO.get(Material.class, id);
-		return material;
+	public Material getMaterial(Material material) {
+		Material prototype = (Material) materialDAO.get(Material.class,material.getPartnumber());
+		return prototype;
 	}
 
 	@Override
 	public boolean updateMaterial(Material material) {
 		// 查询参数列表
 		material.setDatetime(new Date());
-		material.getId().setPartActive("Y");
+		material.setPartActive("Y");
 		//判断是否有这个材料在数据库中
-		Material property =(Material) materialDAO.get(Material.class, material.getId());
-		if(null == property){
+		Material prototype =(Material) materialDAO.get(Material.class, material.getPartnumber());
+		if(null == prototype){
 			return false;
 		}
 		return materialDAO.update(material);
 	}
-
-	@Override
-	public boolean getAllowSoldOut(Material material) {
-		//TODO 下架材料的功能需要等下次再做
-	/*	BomId = 
-		Bom bom = materialDAO.get(Bom.class, )*/
-		return false;
-	}
-	
-
 }
 

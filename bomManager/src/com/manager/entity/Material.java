@@ -6,10 +6,21 @@ import java.util.Date;
 
 public class Material implements Serializable {
 	private int hashCode = Integer.MIN_VALUE;
-
 	private static final long serialVersionUID = 1L;
 
-	private MaterialId id;
+	public String getPartnumber() {
+		return partnumber;
+	}
+	public void setPartnumber(String partnumber) {
+		this.partnumber = partnumber;
+	}
+	public String getPartActive() {
+		return partActive;
+	}
+	public void setPartActive(String partActive) {
+		this.partActive = partActive;
+	}
+	private String partnumber;;
 	private String partName;
 	private String partDesc;
 	private String tuNumber;
@@ -19,22 +30,17 @@ public class Material implements Serializable {
 	private String partType;
 	private String partUnit;
 	private String partCost;
-	private BigDecimal partQty=new BigDecimal(0);
-	private BigDecimal partPrice=new BigDecimal(0);
+	private BigDecimal partQty;
+	private BigDecimal partPrice;
 	private String partRemark;
+	private String partActive;
 	private  String temp1;
 	private String temp2;
 	private String temp3;
 	private BigDecimal temp4;
 	private  Date temp5;
 	private String editor;
-	private Date datetime=new Date();
-	public MaterialId getId() {
-		return id;
-	}
-	public void setId(MaterialId id) {
-		this.id = id;
-	}
+	private Date datetime;
 	public String getPartName() {
 		return partName;
 	}
@@ -149,34 +155,30 @@ public class Material implements Serializable {
 	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
 	}
+	
 	@Override
 	public int hashCode() {
-		 if (Integer.MIN_VALUE == this.hashCode)
-	        {
-	            if (null == this.getId())
-	                return super.hashCode();
-	            else
-	            {
-	                String hashStr = this.getClass().getName() + ":" + this.getId().hashCode();
-	                this.hashCode = hashStr.hashCode();
-	            }
-	        }
-		return super.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((partnumber == null) ? 0 : partnumber.hashCode());
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
-
-		  if (null == obj)
-	            return false;
-	        if (!(obj instanceof Material))
-	            return false;
-	        else
-	        {
-	        	Material   material = (Material) obj;
-	            if (null == this.getId() || null == material.getId())
-	                return false;
-	            else
-	                return (this.getId().equals(material.getId()));
-	        }
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Material other = (Material) obj;
+		if (partnumber == null) {
+			if (other.partnumber != null)
+				return false;
+		} else if (!partnumber.equals(other.partnumber))
+			return false;
+		return true;
 	}
+	
+
 }

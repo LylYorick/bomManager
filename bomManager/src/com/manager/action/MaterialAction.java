@@ -17,10 +17,8 @@ import java.util.List;
 import com.manager.common.Const;
 import com.manager.entity.Bom;
 import com.manager.entity.Material;
-import com.manager.entity.MaterialId;
 import com.manager.entity.common.Pagebean;
 import com.manager.entity.model.MaterialModel;
-import com.manager.entity.view.MaterialView;
 import com.manager.entity.view.UserInfoView;
 import com.manager.service.MaterialService;
 import com.opensymphony.xwork2.ModelDriven;
@@ -69,7 +67,7 @@ public class MaterialAction extends BaseAction  implements ModelDriven{
 	public String validateId(){
 		HashMap formParams = new HashMap<String,Object>();
 		Material material = model.getEntity();
-		material.getId().setPartActive("Y");
+		material.setPartActive("Y");
 		int count =   materialService.getCount(formParams, material);	
 		if (count < 1) {
 			setInputStream("true");
@@ -84,7 +82,7 @@ public class MaterialAction extends BaseAction  implements ModelDriven{
 			Material material = model.getEntity();
 			material.setEditor(currentuser.getU_Number());
 			material.setDatetime(new Date());
-			material.getId().setPartActive("Y");
+			material.setPartActive("Y");
 			materialService.AddMaterial(material);
 			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
 		}catch(UnsupportedEncodingException e){
@@ -99,9 +97,7 @@ public class MaterialAction extends BaseAction  implements ModelDriven{
 	}
 	public String toEdit() {
 		Material material = model.getEntity();
-		MaterialId id = material.getId();
-		id.setPartActive("Y");
-		Material item = materialService.getMaterial(id);
+		Material item = materialService.getMaterial(material);
 		model.setEntity(item);
 		return "toEdit";
 	}
@@ -119,14 +115,6 @@ public class MaterialAction extends BaseAction  implements ModelDriven{
 				e1.printStackTrace();
 			}
 		}
-		return "ajax-success";
-	}
-	public String soldOut() {
-		HashMap formParams = new HashMap<String,Object>();
-		Material material = model.getEntity();
-		Boolean isAllow = materialService.getAllowSoldOut(material);
-		//TODO 下架材料的功能需要等下次再做
-	
 		return "ajax-success";
 	}
 

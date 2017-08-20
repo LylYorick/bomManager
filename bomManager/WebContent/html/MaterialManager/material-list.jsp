@@ -34,7 +34,7 @@
 		<div class="page-container">
 		<div class="text-c">
 		<form class="Huiform" method="post" action="material-list" target="_self">
-			<input type="text" class="input-text" style="width:250px" placeholder="输入料号" id="" name="entity.id.partnumber">
+			<input type="text" class="input-text" style="width:250px" placeholder="输入料号" id="" name="entity.partnumber">
 			<input type="text" class="input-text" style="width:250px" placeholder="输入料号名称" id="" name="entity.partName">
 			<input type="text" class="input-text" style="width:250px" placeholder="输入描述 - (模糊)查询" id="" name="entity.partDesc">
 			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索材料信息</button>
@@ -57,8 +57,6 @@
 					<th width="150">料号</th>
 					<th width="150">名称</th>
 					<th width="130">描述</th>
-					<th width="100">版本</th>
-					<th width="100">料号有效</th>
 					<th width="100">图样代号</th>
 					<th width="100">材料规格</th>
 					<th width="100">执行标准</th>
@@ -77,11 +75,9 @@
 			<tbody>
 				<s:iterator value="#request.MaterialViewList">
 					<tr class="text-c">
-						<td>${id.partnumber}</td>
+						<td>${partnumber}</td>
 						<td>${partName}</td>
 						<td>${partDesc}</td>
-						<td>${id.partRev}</td>
-						<td>${id.partActive}</td>
 						<td>${tuNumber}</td>
 						<td>${partSpec}</td>
 						<td>${partStandard}</td>
@@ -95,11 +91,8 @@
 						<td>${editor}</td>
 						<td><s:date name="datetime" format="yyyy-MM-dd hh:mm:ss"/></td>
 						<td class="td-manage">
-							<a title="编辑" href="javascript:;" onclick="admin_edit('材料编辑','material-toEdit.action?entity.id.partnumber=${id.partnumber}&&entity.id.partRev=${id.partRev}','800','500')" class="ml-5" style="text-decoration:none">
+							<a title="编辑" href="javascript:;" onclick="admin_edit('材料编辑','material-toEdit.action?entity.partnumber=${partnumber}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe6df;</i>
-							</a>
-							<a title="下架" href="javascript:;" onclick="admin_del(this,'${id.partnumber}','${id.partRev}','${id.partActive}')" class="ml-5" style="text-decoration:none">
-								  <i class="Hui-iconfont">&#xe6de;</i>
 							</a>
 						</td>
 					</tr>
@@ -127,7 +120,7 @@
         </s:else>
 	</div>
 		<form  id="fenyeForm" class="Huiform" method="post" action="material-list" target="_self">
-		<s:hidden name="entity.id.partnumber"></s:hidden>
+		<s:hidden name="entity.partnumber"></s:hidden>
 		<s:hidden name="entity.partName"></s:hidden>
 		<s:hidden name="entity.partDesc"></s:hidden>
 		<input type="hidden" name="pageBean.currentPage" id="currentPage">
@@ -159,32 +152,6 @@
 	function formSubmit(currentPage){
 		$("#currentPage").val(currentPage);
 		$("#fenyeForm").submit();
-	}
-	/*材料下架*/
-	function admin_del(obj,partnumber,partRev,partActive){
-		layer.confirm('确认要下架此材料吗？',function(index){
-			$.ajax({
-				type: 'POST',
-				url: 'material-soldOut',
-				data:{
-					'entity.id.partnumber':partnumber,
-					'entity.id.partRev':partRev,
-					'entity.id.partActive':partActive
-				},
-				dataType: 'text',
-				success: function(data){
-					if (data == "1") {
-						layer.msg('下架成功!',{icon:1,time:1000});
-						setTimeout(function(){
-							location.reload();
-						},1000);
-					}
-				},
-				error:function(data) {
-					console.log(data.msg);
-				},
-			});		
-		});
 	}
 	</script>
 </body>

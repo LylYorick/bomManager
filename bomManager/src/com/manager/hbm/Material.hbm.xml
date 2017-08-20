@@ -4,17 +4,13 @@
 <!-- Generated 2017-4-18 15:51:17 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.manager.entity.Material" table="tblmaterial">
-     	<composite-id name="id" class="com.manager.entity.MaterialId" >
-     		<key-property name="partnumber" type="java.lang.String">
-				<column name="partnumber"  />
-			</key-property>
-			<key-property name="partRev" type="java.lang.String">
-				<column name="partRev"  />
-			</key-property>
-			<key-property name="partActive" type="java.lang.String">
-				<column name="partActive" />
-			</key-property>
-     	</composite-id>
+		<id name="partnumber" type="string" >
+         	 <column name="partnumber" />
+            <generator class="assigned" />
+         </id>
+         <property name="partActive" type="string">
+            <column name="partActive" />
+        </property>
         <property name="partName" type="java.lang.String">
             <column name="partName" />
         </property>

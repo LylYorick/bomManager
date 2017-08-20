@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.manager.entity.Material;
-import com.manager.entity.MaterialId;
-import com.manager.entity.view.MaterialView;
-
 
 /**
  * 
@@ -34,11 +31,10 @@ public interface MaterialService {
 	 * @return
 	 */
 	public List<Material> getList(Map formParams,Material material,int offset,int length);
-	public Material getMaterial(MaterialId id);
+	public Material getMaterial(Material material);
 	public boolean updateMaterial(Material material);
 	public void builhql(StringBuffer hql,Map formParams,Material material,HashMap sqlParams);
 	public boolean AddMaterial(Material material);
-	public boolean getAllowSoldOut(Material material);
 }
 
 

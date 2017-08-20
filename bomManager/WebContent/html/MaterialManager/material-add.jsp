@@ -18,7 +18,7 @@
 		<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="partnumber" name="entity.id.partnumber">
+			<input type="text" class="input-text"  placeholder="" id="partnumber" name="entity.partnumber">
 		</div>
 	</div>
 			
@@ -32,13 +32,6 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>描述：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text"   placeholder="" id="partDesc" name="entity.partDesc">
-		</div>
-	</div>
-					
-	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版本：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="partRev" name="entity.id.partRev">
 		</div>
 	</div>
 	
@@ -129,14 +122,20 @@
 $(function(){
 	$("#form-user-add").validate({
 		rules:{
-			partnumber:{
+			'entity.partnumber':{
 				required:true,
 				maxlength:50,
 			},
-			partRev:{
-				maxlength:10,
+			'entity.partQty':{
 				required:true,
+				minNumber:true,
+				isFloatGteZero:true,
 			},
+			'entity.partPrice':{
+				required:true,
+				minNumber:true,
+				isFloatGteZero:true,
+			}
 		},
 		onkeyup:false,
 		focusCleanup:true,
@@ -191,13 +190,11 @@ function checkId(){
 		type: 'post',
 		url: "material-validateId", 
 		data:{
-				'entity.id.partnumber':$("#partnumber").val(),
-	     		'entity.id.partRev':$("#partRev").val(),
+				'entity.partnumber':$("#partnumber").val(),
 		},
 		success: function(data){
 			console.log(data);
 			if(data == "0"){
-				layer.msg('一个料号一个版本只能有一笔记录!',{icon:1,time:1000});
 			}
 		},
         error: function(XmlHttpRequest, textStatus, errorThrown){

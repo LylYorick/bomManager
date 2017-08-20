@@ -18,8 +18,8 @@
 		<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">	
-			<s:hidden name="entity.id.partnumber"></s:hidden>
-			<label class="form-label " >${entity.id.partnumber}</label>
+			<s:hidden name="entity.partnumber"></s:hidden>
+			<label class="form-label " >${entity.partnumber}</label>
 		</div>
 	</div>
 			
@@ -36,14 +36,7 @@
 		</div>
 	</div>
 					
-	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>版本：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<s:hidden name="entity.id.partRev"></s:hidden>
-			<label class="form-label " >${entity.id.partRev}</label>
-		</div>
-	</div>
-	
+
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图样代号：</label>
 		<div class="formControls col-xs-8 col-sm-9">
@@ -134,10 +127,6 @@ $(function(){
 			partnumber:{
 				required:true,
 				maxlength:50,
-			},
-			partRev:{
-				maxlength:10,
-				required:true,
 			},
 		},
 		onkeyup:false,
