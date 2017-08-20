@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/style.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/select2/select2.css" />
 </head>
 <body>
 <article class="page-container">
@@ -18,14 +19,19 @@
 			<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>料号：</label>
 		<div class="formControls col-xs-8 col-sm-9">	
-			<input type="text" class="input-text"  placeholder="" id="partnumber" name="entity.id.partnumber" >
+			 	<select class="multiSelect"  name="entity.id.partnumber" id="partNumber">
+   		   			<s:iterator value="#request.MaterialList" id="item" >
+   		   				<option value='<s:property value="#item.partnumber"/>' partName='<s:property value="#item.partName"/>'/><s:property value="#item.partnumber"/> <s:property value="#item.partName"/></option>
+   		   			</s:iterator>
+	   		    </select>
+	   		    <input type="hidden"  name="entity.partName"  id="partName" >
 		</div>
 	</div>
 			
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="partName" name="entity.partName" >
+				<span id="spanPartName" name="entity.partName" ></span>
 		</div>
 	</div>
 	<div class="row cl">
@@ -70,7 +76,6 @@
 			<input type="text" class="input-text"  placeholder="" id="partPrice" name="entity.partPrice" >
 		</div>
 	</div>
-	</div>
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onsubmit="return checkId()">
@@ -80,7 +85,7 @@
 </article>
 </body>
 	<!-- _footer 作为公共模版分离出去 -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.0.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
@@ -88,18 +93,24 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2/select2.js"></script> 
 <script type="text/javascript">
 $(function(){
+	  $("#partNumber").select2({
+		 	 placeholder:'请选择',
+			 allowClear:true,
+			 width: "300px",
+	  });
+	  $("#partNumber").val(null).trigger("change"); 
+	  $("#partNumber").change(function(){
+		  var partName =  $(this).find("option:selected").attr("partName");
+		  $("#partName").val(partName);  
+		  $("#spanPartName").text(partName);  
+	 });
 	$("#form-user-add").validate({
 		debug:true,
 		rules:{
 			'entity.id.partnumber':{
-				required:true,
-			},
-			'entity.id.partRev':{
-				required:true,
-			},
-			'entity.partName':{
 				required:true,
 			},
 			'entity.id.supplierName':{

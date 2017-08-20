@@ -18,6 +18,7 @@
 	<bean id="supplierAction" class="com.manager.action.SupplierAction"
 		scope="prototype">
 		<property name="supplierService" ref="supplierService"></property>	
+		<property name="bomService" ref="bomService"></property>	
 	</bean> 
 	<bean id="invlogAction" class="com.manager.action.InvlogAction"
 		scope="prototype">

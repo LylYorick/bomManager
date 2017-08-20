@@ -16,12 +16,12 @@ import java.util.List;
 
 import com.manager.common.Const;
 import com.manager.entity.Material;
-import com.manager.entity.MaterialId;
 import com.manager.entity.Supplier;
 import com.manager.entity.SupplierId;
 import com.manager.entity.common.Pagebean;
 import com.manager.entity.model.SupplierModel;
 import com.manager.entity.view.UserInfoView;
+import com.manager.service.BomService;
 import com.manager.service.SupplierService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -34,6 +34,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SupplierAction  extends BaseAction  implements ModelDriven{
 	private static final long serialVersionUID = 1L;
 	private SupplierService supplierService;
+	private BomService bomService;
 	private SupplierModel  model;
 	
 	public void setModel(SupplierModel model) {
@@ -44,6 +45,13 @@ public class SupplierAction  extends BaseAction  implements ModelDriven{
 	}
 	public void setSupplierService(SupplierService supplierService) {
 		this.supplierService = supplierService;
+	}
+	
+	public BomService getBomService() {
+		return bomService;
+	}
+	public void setBomService(BomService bomService) {
+		this.bomService = bomService;
 	}
 	@Override
 	public Object getModel() {
@@ -93,13 +101,10 @@ public class SupplierAction  extends BaseAction  implements ModelDriven{
 		HashMap formParams = new HashMap<String,Object>();
 		Supplier item = new Supplier(supplier.getId());
 		int count =   supplierService.getCount(formParams, item);
-		
 		if(count>0){
 			setInputStream("2");
 			return "ajax-success";
 		}
-		//默认设置为不激活
-		supplier.setPartActive("Y");
 		supplier.setEditor(currentuser.getU_Number());
 		supplier.setDatetime(new Date());
 		if(supplierService.AddSupplier(supplier)){
@@ -121,16 +126,12 @@ public class SupplierAction  extends BaseAction  implements ModelDriven{
 		}
 		return "ajax-success";
 	}
-	public String delete(){
-			HashMap formParams = new HashMap<String,Object>();
-			Supplier supplier= model.getEntity();
-			boolean flag = supplierService.deleteSupplier(supplier);
-			if(flag){
-				setInputStream("1");
-			}else{
-				setInputStream("0");
-			}
-		return "ajax-success";
+	@Override
+	public String toAdd() {
+		List<Material> materilList = bomService.getAllMertial();
+		request.put(Const.MATERIAL_LIST, materilList);
+		return super.toAdd();
 	}
+	
 }
 

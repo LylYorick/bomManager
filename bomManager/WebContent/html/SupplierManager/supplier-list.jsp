@@ -84,11 +84,8 @@
 						<td>${partActive}</td>
 						<td>${editor}</td>
 						<td class="td-manage">
-							<a title="编辑" href="javascript:;" onclick="admin_edit('材料编辑','supplier-toEdit.action?entity.id.partnumber=${id.partnumber}&&entity.id.supplierName=${id.supplierName}&&entity.id.partRev=${id.partRev}','800','500')" class="ml-5" style="text-decoration:none">
+							<a title="编辑" href="javascript:;" onclick="admin_edit('供应商修改','supplier-toEdit.action?entity.id.partnumber=${id.partnumber}&&entity.id.supplierName=${id.supplierName}&&entity.id.partRev=${id.partRev}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe6df;</i>
-							</a>
-							<a title="删除" href="javascript:;" onclick="admin_del(this,'${id.partnumber}','${id.partRev}','${id.supplierName}')" class="ml-5" style="text-decoration:none">
-							 	<i class="Hui-iconfont">&#xe6e2;</i>
 							</a>
 						</td>
 					</tr>
@@ -139,32 +136,6 @@
 	/*管理员-增加*/
 	function material_add(title,url,w,h){
 		layer_show(title,url,w,h);
-	}
-	/*管理员-删除*/
-	function admin_del(obj,partnumber,partRev,supplierName){
-		layer.confirm('确认要删除吗？',function(index){
-			$.ajax({
-				type: 'POST',
-				url: 'supplier-delete',
-				dataType: 'text',
-				data:{
-					'entity.id.partnumber':partnumber,
-     				'entity.id.partRev':partRev,
-     				'entity.id.supplierName':supplierName,
-				},
-				success: function(data){
-					if (data == "1") {
-						layer.msg('已删除!',{icon:1,time:1000});
-						setTimeout(function(){
-							location.reload();
-						},1000);
-					}
-				},
-				error:function(data) {
-					console.log(data.msg);
-				},
-			});		
-		});
 	}
 	
 	/*管理员-编辑*/

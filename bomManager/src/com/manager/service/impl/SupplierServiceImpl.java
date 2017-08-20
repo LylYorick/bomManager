@@ -17,7 +17,6 @@ import com.manager.common.tools.StringUtil;
 import com.manager.dao.MaterialDAO;
 import com.manager.dao.SupplierDAO;
 import com.manager.entity.Material;
-import com.manager.entity.MaterialId;
 import com.manager.entity.Supplier;
 import com.manager.entity.SupplierId;
 import com.manager.service.SupplierService;
@@ -110,14 +109,12 @@ public class SupplierServiceImpl implements SupplierService{
 		String partActive = supplier.getPartActive();
 		supplierDAO.update(supplier);
 		if("Y".equals(partActive)){
+		
+		
 			//1.修改有效这一栏位为Y时，
 			//提交修改时把这行的材料规格，执行标准，单位，单价这几个值update到
 			//Tblmaterial表中对应的料号和版本，料号有效为Y的这几个对应栏位中。
-			MaterialId id = new MaterialId();
-			id.setPartnumber(supplier.getId().getPartnumber());
-			id.setPartActive("Y");
-			id.setPartRev(supplier.getId().getPartRev());
-			Material material =  (Material) materialDAO.get(Material.class, id);
+			Material material =  (Material) supplierDAO.get(Material.class,supplier.getId().getPartnumber());
 			if(material == null ){
 				//TODO 出现错误，需要事务回滚
 				return false; 
@@ -131,20 +128,22 @@ public class SupplierServiceImpl implements SupplierService{
 				//单价PartPrice
 				material.setPartPrice(supplier.getPartPrice());
 				//执行更新  TODO 这里将这个更新提到supplierDAO.update(supplier); 之前就执行没有效果
-				materialDAO.saveOrUpdate(material);
+				supplierDAO.saveOrUpdate(material);
 			}
+			supplierDAO.saveOrUpdate(supplier);
 			// 2.修改有效这一栏位为Y时，原则是一个料号只能有一笔记录有效，
 			//该料号其他行全部Update成N。
 			StringBuffer hql = new StringBuffer("Update tblsupplier set partActive = 'N' ");
 			hql.append("where  partnumber = '").append(supplier.getId().getPartnumber()+"'");
 			int result = supplierDAO.executeSql(hql.toString());
 		}
-
 		return true;
 	}
 
 	@Override
 	public boolean AddSupplier(Supplier supplier) {
+		//默认设置为不激活
+		supplier.setPartActive("N");
 		return supplierDAO.Add(supplier);
 	}
 

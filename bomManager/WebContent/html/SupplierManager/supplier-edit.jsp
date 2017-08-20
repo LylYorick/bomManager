@@ -26,7 +26,8 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  value="${entity.partName}" placeholder="" id="partName" name="entity.partName">
+			<s:hidden name="entity.partName"></s:hidden>
+			<label class="form-label " >${entity.partName}</label>
 		</div>
 	</div>
 	<div class="row cl">
@@ -73,22 +74,26 @@
 			<input type="text" class="input-text"  placeholder="" id="partPrice" name="entity.partPrice"  value="${entity.partPrice}">
 		</div>
 	</div>
-	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否有效：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<span class="select-box">
-				<select class="select"  name="entity.partActive" id="partActive">
-					<option value="Y" <s:if test="entity.partActive =='Y'.toString()">selected</s:if>>有效</option>
-					<option value="N" <s:if test="entity.partActive =='N'.toString()">selected</s:if>>无效</option>
-				</select>
-			</span>
+	<s:if test="entity.partActive =='N'.toString()">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否有效：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box">
+					<select class="select"  name="entity.partActive" id="partActive">
+						<option value="Y" 	<s:if test="entity.partActive =='Y'.toString()">selected</s:if> >有效</option>
+						<option value="N" <s:if test="entity.partActive =='N'.toString()">selected</s:if> >无效</option>
+					</select>
+				</span>
+			</div>
 		</div>
-	</div>
+	</s:if>
+	<s:else>
+		<s:hidden name="entity.partActive"></s:hidden>
+	</s:else>
 	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" >
 		</div>
-	</div>
 	</div>
 	</form>
 </article>
@@ -107,13 +112,7 @@
 $(function(){
 	$("#form-user-add").validate({
 		rules:{
-			'entity.id.partnumber':{
-				required:true,
-			},
 			'entity.id.partRev':{
-				required:true,
-			},
-			'entity.partName':{
 				required:true,
 			},
 			'entity.id.supplierName':{
@@ -131,6 +130,7 @@ $(function(){
 			'entity.partPrice':{
 				required:true,
 			},
+		},
 		onkeyup:false,
 		focusCleanup:true,
 		success:"valid",
@@ -139,8 +139,6 @@ $(function(){
 				type: 'post',
 				url: "supplier-doEdit", 
 				success: function(data){
-					alert(data);
-					console.log(data);
 					if(data == "1"){
 						layer.msg('修改成功!',{icon:1,time:1000});
 						setTimeout(function(){
@@ -153,13 +151,11 @@ $(function(){
 						layer.msg('修改失败!',{icon:1,time:1000});
 					}
 				},
-                error: function(XmlHttpRequest, textStatus, errorThrown){
+			    error: function(XmlHttpRequest, textStatus, errorThrown){
 					layer.msg('error!',{icon:1,time:1000}); 
 				}
 			});	
-			
-		}
-	
+			}
 	});
 });  
 $(function(){
@@ -176,6 +172,7 @@ $(function(){
 			$("#partCost").attr('readonly',false);
 		}
 	});
-})
+});
+
 </script> 
 </html>
