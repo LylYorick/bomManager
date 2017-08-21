@@ -128,7 +128,6 @@ $(function(){
 				type: 'post',
 				url: "invlog-doDelivery", 
 				success: function(data){
-					alert(data);
 					if(data == "1"){
 						layer.msg('出库成功!',{icon:1,time:1000});
 						setTimeout(function(){

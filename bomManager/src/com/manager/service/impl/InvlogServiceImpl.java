@@ -117,7 +117,7 @@ public class InvlogServiceImpl implements InvlogService {
 			int trueid = id;
 			id = id+1;
 			//查询出通过料号
-			String sql2 = "select PartRev  from tblmaterial where Partnumber='"+item[0]+"'";
+			String sql2 = "select PartRev  from tblsupplier where Partnumber='"+item[0]+"'";
 			List<Object[]> resultList2 = inventoryDAO.executeSqlSelct(sql2);
 			if(resultList2==null || resultList2.isEmpty()){
 				continue;
@@ -160,7 +160,7 @@ public class InvlogServiceImpl implements InvlogService {
 			 inventoryTrees.add(inventoryTree);
 			int trueid = id;
 			id = id+1;
-			//查询出通过料号
+			//通过料号查询出入库的版本
 			String sql2 = "select PartRev  from tblinventory where Partnumber='"+item[0]+"'";
 			List<Object[]> resultList2 = inventoryDAO.executeSqlSelct(sql2);
 			if(resultList2==null || resultList2.isEmpty()){
@@ -171,6 +171,7 @@ public class InvlogServiceImpl implements InvlogService {
 				 inventoryTrees.add(inventoryTree);
 				 int lastid = id;
 				 id = id+1;
+				 //通过版本和料号查询出供应商
 				String sql3 = "select supplierName from tblinventory where Partnumber='"+item[0]+"'"
 						+ "and PartRev ='" + items2 + "'" ;
 				List<Object[]> resultList3 = inventoryDAO.executeSqlSelct(sql3); 

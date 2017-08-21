@@ -125,9 +125,8 @@ $(function(){
 				type: 'post',
 				url: "invlog-doAdd", 
 				success: function(data){
-					alert(data);
 					if(data == "1"){
-						layer.msg('出库成功!',{icon:1,time:1000});
+						layer.msg('入库成功!',{icon:1,time:1000});
 						setTimeout(function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.location.reload();
@@ -135,7 +134,7 @@ $(function(){
 						},1000);
 					}
 					if(data == "0"){
-						layer.msg('出库失败!',{icon:1,time:1000});
+						layer.msg('入库失败!',{icon:1,time:1000});
 					}
 				},
                 error: function(XmlHttpRequest, textStatus, errorThrown){
