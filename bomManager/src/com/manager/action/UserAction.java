@@ -123,6 +123,10 @@ public class UserAction extends BaseAction implements ModelDriven<UserInfoView>{
 		return "toEdit";
 	}
 	
+	public String toRegister() {
+		return "toRegister";
+	}
+	
 	public String doEdit() {
 		try{
 			userService.updateUserInfo(userInfo);
@@ -137,7 +141,7 @@ public class UserAction extends BaseAction implements ModelDriven<UserInfoView>{
 		}
 		return "ajax-success";
 	}
-	public String doAdd() {
+	public String doRegister() {
 		try{
 			userService.AddUserInfo(userInfo);
 			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));

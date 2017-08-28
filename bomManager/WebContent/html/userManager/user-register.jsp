@@ -106,7 +106,7 @@ $(function(){
 		submitHandler:function(form){
 			$(form).ajaxSubmit({
 				type: 'post',
-				url: "user-doAdd", 
+				url: "user-doRegister", 
 				success: function(data){
 					if(data == "1"){
 						layer.msg('注册成功!',{icon:1,time:1000});

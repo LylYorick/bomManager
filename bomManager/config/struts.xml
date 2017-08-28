@@ -15,7 +15,7 @@
          <interceptor-stack name="verify">
         	 <interceptor-ref name="defaultStack"> </interceptor-ref>
              <interceptor-ref name="loginVerify">
-             	<param name="excludeMethods">login,execute</param>
+             	<param name="excludeMethods">login,execute,toRegister,doRegister</param>
              </interceptor-ref>
          </interceptor-stack>
      </interceptors>     
@@ -48,7 +48,7 @@
         	<result name="list">/html/userManager/user-list.jsp</result>
         	<result name="input">login.jsp</result>
         	<result name="toEdit">/html/userManager/user-edit.jsp</result>
-        	<result name="toAdd">/html/userManager/user-add.jsp</result>
+        	<result name="toRegister">/html/userManager/user-register.jsp</result>
         	<result name="toAlterPassword">/html/userManager/user-alterPassword.jsp</result>
         	 <result type="stream" name="ajax-success">
 		        <param name="contentType">text/html</param>
