@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/skin/default/skin.css" id="skin" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/hui/style.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/select2/select2.css" />
+
 </head>
 <body>
 <article class="page-container">
@@ -27,7 +29,14 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 		<div class="form-label col-xs-4 col-sm-3">
-			<input type="text" class="input-text"  placeholder="" id="orderType" name="entity.orderType" >
+			 <select class="multiSelect"   name="entity.orderType" id="orderType">
+   		   			<option value="机械加工">机械加工</option>
+   		   			<option value="3D打印">3D打印</option>
+   		   			<option value="冲压">冲压</option>
+   		   			<option value="注塑">注塑</option>
+   		   			<option value="激光焊接">激光焊接</option>
+   		   			<option value="线圈绕制">线圈绕制</option>
+	   		  </select>
 		</div>
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入机械加工，3D打印或其他工艺</span></div>
 	</div>
@@ -54,32 +63,32 @@
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>数量：</label>
-		<div class="formControls col-xs-8 col-sm-3">
+		<div class="formControls col-xs-4 col-sm-2">
 			<input type="text"  class="input-text"   placeholder="" id="orderQty" name="entity.orderQty" >
 		</div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系人：</label>
-	<div class="formControls col-xs-8 col-sm-3">
-		<label class="text-l" >${currentUser.u_Name}</label>
-	</div>
+		<div class="formControls col-xs-8 col-sm-3">
+			<label class="text-l" >${currentUser.u_Name}</label>
+		</div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
 		<div class="formControls col-xs-8 col-sm-3">
-			<input type="text" class="input-text"  placeholder="" id="cellPhone" name="entity.cellPhone" >
+			<input type="text" class="input-text"  placeholder="" id="cellPhone" name="entity.cellPhone" value="${currentUser.u_Phone}">
 		</div>
 	</div>
 	
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系地址：</label>
-		<div class="formControls col-xs-8 col-sm-3">
-			<input type="text" class="input-text"  placeholder="" id="address" name="entity.address" >
+		<div class="formControls col-xs-12 col-sm-9">
+			<input type="text" class="input-text "  placeholder="" id="address" name="entity.address" value="${currentUser.u_Address}">
 		</div>
 	</div>
 	<div class="row cl">
 	
-		<label class="form-label col-xs-4 col-sm-3"> 图片文件：</label>
+		<label class="form-label col-xs-4 col-sm-3">附件上传：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 		 <span class="btn-upload form-group" style="width:400px">
 			<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
@@ -103,11 +112,24 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
 	<!-- /_footer 作为公共模版分离出去 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2/select2.js"></script>
 <script type="text/javascript">
 $(function(){
+	validateInit();
+	select2Init();
+});  
+function select2Init(){
+	$(".multiSelect").select2({ 
+		  width: "160px",
+		  placeholder:"请选择",
+		  allowClear:true,
+		  tags: true,
+	});
+}
+function validateInit(){
 	$("#form-order-add").validate({
 		debug:true,
 		rules:{
@@ -168,10 +190,6 @@ $(function(){
 		}
 	
 	});
-});  
-
-function loadfile(){
-	
 }
 </script> 
 </html>

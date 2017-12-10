@@ -40,9 +40,10 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public boolean Add(Order order) {
+	public boolean Add(Order  order) {
 		order.setOrderConfirm("N");
-		order.setOrderConfirm("N");
+		order.setDelivered("N");
+		order.setPaid("N");;
 		order.setOrderStatus("待审核");
 		Boolean result=orderDAO.Add(order);
 		if(result){
@@ -79,6 +80,7 @@ public class OrderServiceImpl implements OrderService{
 		// 查询参数列表
 		HashMap sqlParams = new HashMap();
 		builhql(hql, formParams,order,sqlParams);
+
 		List<Order> list = orderDAO.executeHQL(hql.toString(), sqlParams);
 		return list;
 	}

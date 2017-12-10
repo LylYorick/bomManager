@@ -159,7 +159,7 @@ public class BomAction extends BaseAction implements ModelDriven {
 	}
 	
 	public String doExport() throws Exception{
-		HashMap formParams = new HashMap<String,Object>();
+		HashMap formParams = new HashMap<String,Object>(); 
 		Bom bom = model.getEntity();
 		//获取查询结果
 		List<Bom> list = bomService.getList(formParams, bom);

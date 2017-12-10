@@ -33,7 +33,12 @@
 			 	<prop key="hibernate.hbm2ddl.auto">none</prop>
 			 	</props>
 		 	</property>
-			<property name="mappingLocations" value="classpath:com\manager\hbm\*.hbm.xml"></property>
+			<property name="mappingLocations" value="classpath:com/manager/hbm/*.hbm.xml"></property>
+			 <!-- <property name="mappingDirectoryLocations">
+	            <list>
+	                <value>classpath:com/manager/entity/</value>
+	            </list>
+	        </property> -->
 	</bean>
 	
 	<!-- 配置 Spring 的声明式事务 -->

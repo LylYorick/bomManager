@@ -108,7 +108,7 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		order.setFileName(fileName);
 		//获取当前用户
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
-		order.setContact(currentuser.getU_Name());
+		order.setContact(currentuser.getU_Number());
 		order.setAddress(currentuser.getU_Address());
 		
 		//存储文件名到本地的OrderFile文件夹下
@@ -156,9 +156,12 @@ public class OrderAction extends BaseAction implements ModelDriven {
 	public String doVerify(){
 		Order order = model.getEntity();
 		Double orderPrice =	order.getOrderPrice();
+		Date deliveryTime = order.getDeliveryTime();
 		order =  orderService.getOrder(order);
 		//
 		order.setOrderPrice(orderPrice);
+		
+		order.setDeliveryTime(deliveryTime);;
 		order.setOrderStatus("已审核");
 		//获取当前用户
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
@@ -245,6 +248,8 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		HashMap formParams = new HashMap<String,Object>();
 		formParams.put("orderTime", TimeHelper.comverToOrderTime(model.getOrderTime()));
 		formParams.put("orderby", "orderNumber");
+		formParams.put("u_level",currentuser.getU_Level());
+		formParams.put("u_number",currentuser.getU_Number());
 		int sum  = orderService.getCount(formParams,order);
 		Pagebean pageBean = model.getPageBean();
 		pageBean.setOffset();
@@ -261,6 +266,8 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		HashMap formParams = new HashMap<String,Object>();
 		formParams.put("orderTime", TimeHelper.comverToOrderTime(model.getOrderTime()));
 		formParams.put("orderby", "orderNumber");
+		formParams.put("u_level",currentuser.getU_Level());
+		formParams.put("u_number",currentuser.getU_Number());
 		int sum  = orderService.getCount(formParams,order);
 		Pagebean pageBean = model.getPageBean();
 		pageBean.setOffset();

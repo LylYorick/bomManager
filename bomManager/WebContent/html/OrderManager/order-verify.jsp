@@ -108,6 +108,12 @@
 		</div>
 	</div>
 	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>交货日期:</label>
+		<div class="formControls col-xs-4 col-sm-3">
+			<input type="text" class="input-text Wdate"  onclick="WdatePicker({isShowClear:false,readOnly:true})" placeholder="" id="entity.deliveryTime" name="entity.deliveryTime"  value="${entity.deliveryTime}">
+		</div>
+	</div>
+	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" >
 		</div>
@@ -122,10 +128,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
 <!-- /_footer 作为公共模版分离出去 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#form-user-add").validate({

@@ -51,7 +51,7 @@
 		   			<s:iterator value="#request.MaterialList" id="item" >
 		   				<option value='<s:property value="#item.partnumber"/>' partName='<s:property value="#item.partName"/>'
 		   				<s:if test="#item.partnumber.equals(entity.id.partNumber)">selected</s:if>
-		   				/><s:property value="#item.partnumber"/> <s:property value="#item.partName"/></option>
+		   				<s:property value="#item.partnumber"/> <s:property value="#item.partName"/></option>
 		   			</s:iterator>
    		    </select>
 		</div>
@@ -61,7 +61,7 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>本阶料号名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<label class="form-label"  id="partNameSpan">${entity.partName} </label>
-			<input type="hidden"  name="entity.partName"  id="partName" >
+	 		<input type="hidden"  name="entity.partName"  id="partName" >
 		</div>
 	</div>
 	<div class="row cl">

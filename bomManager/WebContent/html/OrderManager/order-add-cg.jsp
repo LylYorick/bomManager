@@ -16,7 +16,7 @@
 <article class="page-container">
 	<form class="form form-horizontal" id="form-order-add">
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>品牌型号：</label>
 		<div class="formControls col-xs-4 col-sm-3">	
 			<input type="text" class="input-text"  placeholder="" id="orderName" name="entity.orderName" >
 		    
@@ -27,7 +27,11 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 		<div class="form-label col-xs-4 col-sm-3">
-			<input type="text" class="input-text"  placeholder="" id="orderType" name="entity.orderType" >
+			<select class="multiSelect"   name="entity.orderType" id="orderType">
+	   			<option value="国内采购">国内采购</option>
+	   			<option value="国外采购">国外采购</option>
+	   			<option value="设备租用">设备租用</option>
+		  	</select>
 		</div>
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入物品所属类型及型号</span></div>
 	</div>
@@ -38,12 +42,13 @@
 		</div>
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入物品材料，品牌或其他要求</span></div>
 	</div>
-		<div class="row cl">
-		  <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>描述：</label>
-		<div class="form-label col-xs-4 col-sm-3">
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>规格描述：</label>
+		<div class="form-label col-xs-4 col-sm-7">
 			<input type="text" class="input-text" placeholder="" id="orderDesc" name="entity.orderDesc">
 		</div>
-		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入其他具体要求</span></div>
+		<div class="formControls col-xs-4 col-sm-2"> <span class="c-red">输入其他具体要求</span></div>
+		</div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>需求日期：</label>
@@ -54,7 +59,7 @@
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>数量：</label>
-		<div class="formControls col-xs-8 col-sm-9">
+		<div class="formControls col-xs-8 col-sm-2">
 			<input type="text"  class="input-text"   placeholder="" id="orderQty" name="entity.orderQty" >
 		</div>
 	</div>
@@ -66,15 +71,14 @@
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="cellPhone" name="entity.cellPhone" >
+		<div class="formControls col-xs-8 col-sm-3">
+			<input type="text" class="input-text"  placeholder="" id="cellPhone" name="entity.cellPhone" value="${currentUser.u_Phone}">
 		</div>
 	</div>
-	
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系地址：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text"  placeholder="" id="address" name="entity.address" >
+		<div class="formControls col-xs-12 col-sm-9">
+			<input type="text" class="input-text "  placeholder="" id="address" name="entity.address" value="${currentUser.u_Address}">
 		</div>
 	</div>
 	<div class="row cl">
@@ -106,8 +110,24 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.validation/1.14.0/messages_zh.js"></script> 
+<!--引入select2插件 -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/select2/select2.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/select2/select2.js"></script>
+
 <script type="text/javascript">
 $(function(){
+	validateInit();
+	select2Init();
+});  
+function select2Init(){
+	$(".multiSelect").select2({ 
+		  width: "160px",
+		  placeholder:"请选择",
+		  allowClear:true,
+		  tags: true,
+	});
+}
+function validateInit(){
 	$("#form-order-add").validate({
 		debug:true,
 		rules:{
@@ -169,7 +189,7 @@ $(function(){
 		}
 	
 	});
-});  
+};  
 
 </script> 
 </html>

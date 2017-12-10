@@ -16,7 +16,7 @@ public class Pagebean {
 	public static String PAGE_SIZE = "pageSize";
 	public static String OFFSET = "offset";
 	//每页显示数量
-	public static int pageSize = 5;
+	public static int pageSize = 50;
 	
 	private int currentPage;
 	private int offset;

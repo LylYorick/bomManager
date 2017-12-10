@@ -61,6 +61,7 @@
 					<th width="100">联系地址</th>
 					<th width="100">报价</th>
 					<th width="100">订单状态</th>
+					<th width="100">交货日期</th>
 					<th width="100">操作</th>
 				</tr>
 			</thead>
@@ -74,12 +75,13 @@
 						<td>${orderQty}</td>
 						<td>${orderMaterial}</td>
 						<td>${orderDesc}</td> 
-						<td><s:date name="reqDate" format="yyyy-MM-dd hh:mm:ss"/></td>
+						<td><s:date name="reqDate" format="yyyy-MM-dd"/></td>
 						<td>${contact}</td>
 						<td>${cellPhone}</td>
 						<td>${address}</td>
 						<td>${orderPrice}</td>
 						<td>${orderStatus}</td>
+						<td><s:date name="deliveryTime" format="yyyy-MM-dd"/></td>
 							<td class="td-manage">
 							<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe715;</i>

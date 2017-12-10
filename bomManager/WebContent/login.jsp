@@ -46,7 +46,7 @@
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-          <img src="randPic.action" onclick="changeValidateCode(this)" title="点击图片刷新验证码"> 
+         	 <img src="randPic.action" onclick="changeValidateCode(this)" title="点击图片刷新验证码"> 
          </div>
       </div>
       
@@ -60,7 +60,7 @@
     </form>
   </div>
 </div>
-<div class="footer">Copyright</div>
+<div class="footer">Copyright © 2017 深圳市鑫汇海科技有限公司保留所有权利</div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>

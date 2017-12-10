@@ -58,8 +58,14 @@ public class UserServiceImpl implements UserService{
 	public boolean checkLogin(UserInfoView userInfo) {
 		String uNumber  = userInfo.getU_Number();
 		String password = userInfo.getU_Password();
+		if(null == password){
+			return false;
+		}
 		password = MD5Util.getMD5(password);
 		UserInfo uInfo =  userDAO.get(uNumber);
+		if(null == uInfo){
+			return false;
+		}
 		if(password.equals(uInfo.getU_Password())&&"Y".equals(uInfo.getU_Active())){
 			userInfo.clone(new UserInfoView(uInfo));
 			return true;

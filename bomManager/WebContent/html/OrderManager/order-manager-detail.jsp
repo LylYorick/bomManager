@@ -68,7 +68,7 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>需求日期：</label>
 		<div class="formControls col-xs-8 col-sm-3">
 				<s:hidden name="entity.reqDate"></s:hidden>
-			<label class="form-label " ><s:date name="entity.reqDate" format="yyyy-MM-dd hh:mm:ss"/></label>
+			<label class="form-label " ><s:date name="entity.reqDate" format="yyyy-MM-dd"/></label>
 		</div>
 	</div>
 	<div class="row cl">
@@ -108,12 +108,6 @@
 	</div>
 
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>订单确认:</label>
-		<div class="formControls col-xs-8 col-sm-3">
-			<label class="form-label " >${entity.orderConfirm}</label>
-		</div>
-	</div>
-	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>审核时间:</label>
 		<div class="formControls col-xs-8 col-sm-3">
 			<label class="form-label " ><s:date name="entity.verifyTime" format="yyyy-MM-dd hh:mm:ss"/></label>
@@ -124,6 +118,19 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>审核人:</label>
 		<div class="formControls col-xs-8 col-sm-3">
 			<label class="form-label " >${entity.verifyBy}</label>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>订单确认:</label>
+		<div class="formControls col-xs-8 col-sm-3">
+			<label class="form-label " >
+			<s:if test="'Y'.toString().equals(entity.orderConfirm)">
+					是
+				</s:if>
+				<s:else>
+					否
+				</s:else>
+			</label>
 		</div>
 	</div>
 	<div class="row cl">
@@ -141,7 +148,15 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否交货:</label>
 		<div class="formControls col-xs-8 col-sm-3">
-			<label class="form-label " >${entity.delivered}</label>
+		
+			<label class="form-label " >
+				<s:if test="'Y'.toString().equals(entity.delivered)">
+					是
+				</s:if>
+				<s:else>
+					否
+				</s:else>
+			</label>
 		</div>
 	</div>
 
@@ -166,7 +181,14 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否结算:</label>
 		<div class="formControls col-xs-8 col-sm-3">
-			<label class="form-label " >${entity.paid}</label>
+			<label class="form-label " >
+				<s:if test="'Y'.toString().equals(entity.paid)">
+					是
+				</s:if>
+				<s:else>
+					否
+				</s:else>
+			</label>
 		</div>
 	</div>
 	<div class="row cl">

@@ -22,7 +22,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/H-ui.admin.js"></script>
 <!-- /_footer 作为公共模版分离出去 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/hui/jquery.contextmenu.r2.js"></script> -->
-<title>bom-首页</title>
+<title>企业e定制平台</title>
 
 </head>
 <body>
@@ -35,9 +35,8 @@
 				<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 				<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 					<ul class="cl">
-						<li>${uName}</li>
 						<li class="dropDown dropDown_hover">
-							<a href="#" class="dropDown_A">admin<i class="Hui-iconfont">&#xe6d5;</i></a>
+							<a href="#" class="dropDown_A">${currentUser.u_Name}<i class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 							    <li><a href="javascript:;" onClick="changePassword()">修改密码</a></li>
 								<li><a href="user-logout.action">退出</a></li>
@@ -74,11 +73,13 @@
 					</dl>
 				</s:if>
 				<dl id="menu-member">
-					<dt><i class="Hui-iconfont"></i> 订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont"></i>订单中心<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li><a data-href="order-list" data-title="建立订单" href="javascript:;">建立订单</a></li>
-							<li><a data-href="order-verifyList" data-title="订单审核" href="javascript:;">订单审核</a></li>
+							<s:if test="#session.currentUser.u_Level > 2">
+								<li><a data-href="order-verifyList" data-title="订单审核" href="javascript:;">订单审核</a></li>
+							</s:if>
 							<li><a data-href="order-toManager" data-title="订单管理" href="javascript:;">订单管理</a></li>
 							<li><a data-href="order-toReport" data-title="订单报表" href="javascript:;">订单报表</a></li>
 						</ul>
