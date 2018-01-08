@@ -85,6 +85,9 @@
 							 	<i class="Hui-iconfont">&#xe6e2;</i>
 							</a>
 							</s:if>
+							<a title="重置密码" href="javascript:;" onclick="admin_reset(this,'${u_Number}')" class="ml-5" style="text-decoration:none">
+								 <i class="Hui-iconfont">&#xe6f7;</i>
+							</a>
 						</td>
 					</tr>
 				</s:iterator>
@@ -136,6 +139,30 @@
 	/*管理员-编辑*/
 	function admin_edit(title,url,id,w,h){
 		layer_show(title,url,w,h);
+	}
+	/*管理员-删除*/
+	function admin_reset(obj,id){
+	
+		layer.confirm('确认要重置密码吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: 'user-doReset?u_Number='+id,
+				dataType: 'text',
+				success: function(data){
+					if (data == "1") {
+						layer.msg('已重置密码为123456!',{icon:1,time:1000});
+						setTimeout(function(){
+							location.reload();
+						},1000);
+					}else if(data == "0"){
+						layer.msg('重置失败!',{icon:5,time:2000});
+					}
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});		
+		});
 	}
 	</script>
 </body>

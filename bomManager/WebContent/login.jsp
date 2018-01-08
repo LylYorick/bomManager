@@ -22,11 +22,12 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 
-<title>bom-登录</title>
+<title>企业e定制平台</title>
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
 <div class="header"></div>
+
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="user-login" method="post">

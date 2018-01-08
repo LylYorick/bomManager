@@ -178,6 +178,13 @@ public class UserServiceImpl implements UserService{
 		return true;
 	}
 
+	@Override
+	public void doResetPassword(UserInfoView userInfoView) {
+		UserInfo property = userDAO.get(userInfoView.getU_Number());	
+		property.setU_Password(initPassword);
+		userDAO.update(property);
+	}
+
 	
 
 }

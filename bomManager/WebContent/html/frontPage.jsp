@@ -31,7 +31,7 @@
 	<header class="navbar-wrapper">
 		
 		<div class="navbar navbar-fixed-top">
-			<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" >bom管理</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
+			<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" >企业e定制平台</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
 				<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 				<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 					<ul class="cl">
@@ -53,7 +53,7 @@
 				<s:if test="#session.currentUser.u_Level > 1">
 					<dt><a data-href="material-list" data-title="材料管理" href="javascript:void(0)">材料管理</a></dt>
 					<dl id="menu-member">
-						<dt><i class="Hui-iconfont"></i> BOM管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+						<dt><i class="Hui-iconfont"></i>BOM管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 						<dd>
 							<ul>
 								<li><a data-href="bom-list" data-title="Bom结构查询" href="javascript:;">Bom结构查询</a></li>

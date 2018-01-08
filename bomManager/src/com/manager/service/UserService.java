@@ -38,6 +38,10 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean updateUserInfo(UserInfoView userInfoView);
+	/**
+	 * 重置用户密码
+	 */
+	void doResetPassword(UserInfoView userInfoView);
 	
 	/**
 	 * 添加普通用户

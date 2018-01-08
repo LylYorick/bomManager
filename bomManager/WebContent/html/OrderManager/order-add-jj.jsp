@@ -88,12 +88,12 @@
 	</div>
 	<div class="row cl">
 	
-		<label class="form-label col-xs-4 col-sm-3">附件上传：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-		 <span class="btn-upload form-group" style="width:400px">
+		<label class="form-label col-xs-4 col-sm-3" >附件上传：</label>
+		<div class="formControls col-xs-12 col-sm-9">
+		 <span class="btn-upload form-group" id="uploadSpan" >
 			<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
 				<input class="input-text upload-url" type="text"  id="" readonly nullmsg="请添加图片！" style="width:200px">
-				<input type="file"  name="img" class="input-file">
+				<input type="file"  name="img" class="input-file" id="uploadFile">
 			</span> 
 		</div>
 	</div>
@@ -132,6 +132,12 @@ function select2Init(){
 function validateInit(){
 	$("#form-order-add").validate({
 		debug:true,
+		errorPlacement: function(error, element) {
+			var name = element.attr( "name" );
+			if(name == "img" ){
+				$("#uploadSpan").before(error);
+			}
+		},
 		rules:{
 			'entity.orderName':{
 				required:true,
@@ -149,6 +155,7 @@ function validateInit(){
 			},
 			'entity.reqDate':{
 				required:true,
+				isFuturer:true,
 			},
 			'entity.cellPhone':{
 				required:true,
@@ -158,6 +165,7 @@ function validateInit(){
 			},
 			'img':{
 				required:true,
+				checkPicSize:true,
 			},
 		},
 		onkeyup:false,

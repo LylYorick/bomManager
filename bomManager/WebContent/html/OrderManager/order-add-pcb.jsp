@@ -16,7 +16,7 @@
 <article class="page-container">
 	<form class="form form-horizontal" id="form-order-add">
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>板层板厚：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
 		<div class="formControls col-xs-4 col-sm-3">	
 			<input type="text" class="input-text"  placeholder="" id="orderName" name="entity.orderName" >
 		    
@@ -38,7 +38,7 @@
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入PCB板，PCB贴片或其他PCB工艺</span></div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>材料：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>板层板厚：</label>
 		<div class="form-label col-xs-4 col-sm-3">
 			<input type="text" class="input-text"   placeholder="" id="orderMaterial" name="entity.orderMaterial" >
 		</div>
@@ -84,10 +84,10 @@
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3">附件上传：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-		 <span class="btn-upload form-group" style="width:400px">
+		<div class="formControls col-xs-8 col-sm-9" >
+		 <span class="btn-upload form-group" id="uploadSpan" style="width:400px">
 			<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
-				<input class="input-text upload-url" type="text"  id="" readonly nullmsg="请添附件！" style="width:200px">
+				<input class="input-text upload-url" type="text"  id="uploadInput" readonly nullmsg="请添附件！"  style="width:200px">
 				<input type="file"  name="img" class="input-file">
 			</span> 
 		</div>
@@ -131,6 +131,12 @@ function select2Init(){
 function validateInit(){
 	$("#form-order-add").validate({
 		debug:true,
+		errorPlacement: function(error, element) {
+			var name = element.attr( "name" );
+			if(name == "img" ){
+				$("#uploadSpan").before(error);
+			}
+		},
 		rules:{
 			'entity.orderName':{
 				required:true,
@@ -148,6 +154,7 @@ function validateInit(){
 			},
 			'entity.reqDate':{
 				required:true,
+				isFuturer:true,
 			},
 			'entity.contact':{
 				required:true,
@@ -157,12 +164,18 @@ function validateInit(){
 			},
 			'entity.address':{
 				required:true,
-			}
+			},
+			'img':{
+				required:true,
+				checkPicSize:true,
+			},
 		},
 		onkeyup:false,
 		focusCleanup:true,
 		success:"valid",
 		submitHandler:function(form){
+			
+			
 			$(form).ajaxSubmit({
 				type: 'post',
 				url: "order-doAdd", 

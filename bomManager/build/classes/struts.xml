@@ -7,13 +7,16 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" /> 
     <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.maxSize" value="5500000"/><!-- 可上传5M的文件 -->  
     <package name="default" namespace="/" extends="json-default">
     <!-- 拦截器 -->
  	 <interceptors>
          <interceptor name="loginVerify" class="com.manager.intercept.LoginInterceptor">
          </interceptor>
          <interceptor-stack name="verify">
-        	 <interceptor-ref name="defaultStack"> </interceptor-ref>
+        	 <interceptor-ref name="defaultStack"> 
+        	 	
+        	 </interceptor-ref>
              <interceptor-ref name="loginVerify">
              	<param name="excludeMethods">login,execute,toRegister,doRegister</param>
              </interceptor-ref>
@@ -174,14 +177,3 @@
 
 
 
-<!-- 定义新的拦截器栈, 配置 prepare 拦截器栈的 alwaysInvokePrepare 参数值为 false -->
-	<!-- 	<interceptors>
-			<interceptor-stack name="sshStack">
-				<interceptor-ref name="paramsPrepareParamsStack">
-					<param name="prepare.alwaysInvokePrepare">false</param>
-				</interceptor-ref>
-			</interceptor-stack>
-		</interceptors>
-		
-		使用新的拦截器栈
-		<default-interceptor-ref name="sshStack"></default-interceptor-ref> -->

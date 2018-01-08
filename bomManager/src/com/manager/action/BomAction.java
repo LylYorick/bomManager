@@ -57,6 +57,8 @@ public class BomAction extends BaseAction implements ModelDriven {
 		}
 		return model;
 	}
+
+	
 	public String list(){
 		HashMap formParams = new HashMap<String,Object>();
 		Bom bom = model.getEntity();

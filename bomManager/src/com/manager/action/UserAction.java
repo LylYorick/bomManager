@@ -141,6 +141,21 @@ public class UserAction extends BaseAction implements ModelDriven<UserInfoView>{
 		}
 		return "ajax-success";
 	}
+	public String doReset() {
+		try{
+			String u_Number = userInfo.getU_Number();
+			userService.doResetPassword(userInfo);
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
+			try {
+				inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return "ajax-success";
+	}
 	public String doRegister() {
 		try{
 			userService.AddUserInfo(userInfo);
