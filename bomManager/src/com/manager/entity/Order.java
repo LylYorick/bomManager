@@ -35,7 +35,7 @@ public class Order implements java.io.Serializable {
 	private String express;
 	private String expressNum;
 	private String fileName;
-	
+	private String quotationFile;
 	
 
 	public Order() {
@@ -254,6 +254,14 @@ public class Order implements java.io.Serializable {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public String getQuotationFile() {
+		return quotationFile;
+	}
+
+	public void setQuotationFile(String quotationFile) {
+		this.quotationFile = quotationFile;
 	}
 
 	

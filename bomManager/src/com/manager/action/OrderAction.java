@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
@@ -25,7 +26,6 @@ import com.manager.common.tools.DateUtil;
 import com.manager.common.tools.FileUtil;
 import com.manager.common.tools.TimeHelper;
 import com.manager.entity.Order;
-import com.manager.entity.Supplier;
 import com.manager.entity.common.Pagebean;
 import com.manager.entity.common.PoiUtil;
 import com.manager.entity.model.OrderModel;
@@ -155,23 +155,37 @@ public class OrderAction extends BaseAction implements ModelDriven {
 	
 	public String doVerify(){
 		Order order = model.getEntity();
+		
 		Double orderPrice =	order.getOrderPrice();
 		Date deliveryTime = order.getDeliveryTime();
 		order =  orderService.getOrder(order);
-		//
 		order.setOrderPrice(orderPrice);
 		
 		order.setDeliveryTime(deliveryTime);;
 		order.setOrderStatus("已审核");
+
+		
 		//获取当前用户
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
 		order.setVerifyBy(currentuser.getU_Number());
 		order.setVerifyTime(new Date());
-		if(orderService.verify(order)){
-			setInputStream("1");
-		}else{
-			setInputStream("0");
+		//保存订单附件
+		String path = ServletActionContext.getServletContext().getRealPath("/quotationFile/"+order.getOrderNumber());
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("path", path);
+		File img = model.getImg();
+		params.put("img", img);
+		String imgFileName = model.getImgFileName();
+		params.put("imgFileName", imgFileName);
+		try {
+			orderService.verify(params, order);
+			this.setInputStream("1");
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setInputStream("0");
 		}
+		
+
 		return "ajax-success";
 	}
 	public String toManager(){

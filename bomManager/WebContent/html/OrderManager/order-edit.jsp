@@ -78,7 +78,7 @@
 		</div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"> 图片文件：</label>
+		<label class="form-label col-xs-4 col-sm-3"> 订单附件：</label>
 		<div class="formControls col-xs-8 col-sm-4">
 		<a class="form-a"  href="${pageContext.request.contextPath}/OrderFile/${entity.fileName}" download="${entity.fileName}">${entity.fileName}</a>
 		</div>

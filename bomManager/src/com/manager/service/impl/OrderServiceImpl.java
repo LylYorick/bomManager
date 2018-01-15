@@ -8,19 +8,25 @@
  */
 package com.manager.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.manager.common.tools.FileUtil;
 import com.manager.common.tools.StringUtil;
 import com.manager.dao.OrderDAO;
 import com.manager.entity.Order;
-import com.manager.entity.Supplier;
-import com.manager.entity.SupplierId;
 import com.manager.service.OrderService;
-import com.manager.service.SupplierService;
+
+import sun.print.resources.serviceui;
 
 /**
  * TODO添加类描述
@@ -154,7 +160,33 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Boolean verify(Order order) {
+	public Boolean verify(Map params, Order order) throws IOException {
+		File file = (File) params.get("img");
+		// 获取文件名
+		String fileName = (String) params.get("imgFileName");
+		String path = (String) params.get("path");
+		
+		//存储文件名到本地的OrderFile文件夹下
+	/*	ServletContext servletContext = ServletActionContext.getServletContext();
+		String targetFileName = servletContext.getRealPath("/quotationFile/" + fileName);*/
+		//判断文件夹是否存在
+		File dir = new File(path);
+		if(!dir.exists()){
+			dir.mkdir();
+		}
+		// 获取文件的后缀名,即文件类型
+		String[] arry = fileName.split("\\.");
+		String fileType = arry[arry.length - 1];
+		// 获取订单编号
+		String orderNumber = order.getOrderNumber();
+		// 重命名文件名,以订单号+文件类型命名
+		fileName = "quotation" + orderNumber + "." + fileType;
+		
+		String targetFileName = path  + "/" + fileName;
+		
+		FileUtil.writeFile(targetFileName, file);
+		//设置订单的报价单文件名
+		order.setQuotationFile(fileName);
 		return  orderDAO.update(order);
 	}
 

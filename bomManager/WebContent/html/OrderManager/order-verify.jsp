@@ -114,6 +114,16 @@
 		</div>
 	</div>
 	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3" >上传报价单文件：</label>
+		<div class="formControls col-xs-12 col-sm-9">
+		 <span class="btn-upload form-group" id="uploadSpan" >
+			<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input class="input-text upload-url" type="text"  id="" readonly nullmsg="请添加文件！" style="width:200px">
+				<input type="file"  name="img" class="input-file" id="uploadFile">
+			</span> 
+		</div>
+	</div>
+	<div class="row cl">
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" >
 		</div>
@@ -141,6 +151,16 @@ $(function(){
 				minNumber:true,
 				isFloatGteZero:true,
 			},
+			'img':{
+				required:true,
+				checkPicSize:true,
+			},
+		},
+		errorPlacement: function(error, element) {
+			var name = element.attr( "name" );
+			if(name == "img" ){
+				$("#uploadSpan").before(error);
+			}
 		},
 		onkeyup:false,
 		focusCleanup:true,

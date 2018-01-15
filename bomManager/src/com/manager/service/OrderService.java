@@ -8,14 +8,12 @@
  */
 package com.manager.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.manager.entity.Material;
 import com.manager.entity.Order;
-import com.manager.entity.Supplier;
-import com.manager.entity.SupplierId;
 
 /**
  * TODO添加类描述
@@ -39,7 +37,7 @@ public interface OrderService {
 	public boolean Add(Order order);
 	
 	public Order getOrder(Order order);
-	public Boolean verify(Order order);
+	public Boolean verify(Map params, Order order) throws IOException;
 	public Boolean edit(Order order);
 	public Boolean confirm(Order order);
 	public Boolean complete(Order order);

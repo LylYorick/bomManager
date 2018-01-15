@@ -83,5 +83,8 @@
         <property name="fileName" type="string">
             <column name="FileName" length="255" />
         </property>
+        <property name="quotationFile" type="string">
+            <column name="quotationFile" length="255" />
+        </property>
     </class>
 </hibernate-mapping>
