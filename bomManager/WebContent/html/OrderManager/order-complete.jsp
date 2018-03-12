@@ -202,8 +202,21 @@ $(function(){
 			'entity.orderPrice':{
 				required:true,
 				minNumber:true,
+				isNumber:true,
 				isFloatGteZero:true,
 			},
+			'entity.deliveryTime':{
+				required:true,
+			},
+			'entity.payWay':{
+				required:true,
+			},
+			'entity.express':{
+				required:true,
+			},
+			'entity.expressNum':{
+				required:true,
+			}
 		},
 		onkeyup:false,
 		focusCleanup:true,

@@ -149,6 +149,7 @@ $(function(){
 			'entity.orderPrice':{
 				required:true,
 				minNumber:true,
+				isNumber:true,
 				isFloatGteZero:true,
 			},
 			'img':{

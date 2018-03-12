@@ -29,11 +29,13 @@
 		<div class="form-label col-xs-4 col-sm-3">
 			<select class="multiSelect"   name="entity.orderType" id="orderType">
    		   			<option value="企业网站">企业网站</option>
-   		   			<option value="生产管理系统">生产管理系统</option>
-   		   			<option value="办公软件">办公软件</option>
-   		   			<option value="进销存管理系统">进销存管理系统</option>
-   		   			<option value="BOM管理系统">BOM管理系统</option>
-   		   			<option value="APP开发">APP开发</option>
+   		   			<option value="BOM管理">BOM管理</option>
+   		   			<option value="产品管理">产品管理</option>
+   		   			<option value="生产管理">生产管理</option>
+   		   			<option value="实验管理">实验管理</option>
+   		   			<option value="无人地面站">无人地面站</option>
+   		   			<option value="虚拟仪器">虚拟仪器</option>
+   		   			<option value="其它">其它</option>
 	   		  </select>
 		</div>
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入系统所属类型</span></div>
@@ -176,7 +178,7 @@ function validateInit(){
 			$(form).ajaxSubmit({
 				type: 'post',
 				url: "order-doAdd", 
-				data:{"entity.orderMode":"系统定制"},
+				data:{"entity.orderMode":"定制软件"},
 				success: function(data){
 					//alert(data);
 					if(data == "1"){

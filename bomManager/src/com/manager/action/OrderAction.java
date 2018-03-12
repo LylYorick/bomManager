@@ -109,8 +109,8 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		//获取当前用户
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
 		order.setContact(currentuser.getU_Number());
-		order.setAddress(currentuser.getU_Address());
-		
+		String cellPhone = order.getCellPhone();
+		order.setCellPhone(currentuser.getU_Name() + cellPhone);
 		//存储文件名到本地的OrderFile文件夹下
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		String targetFileName = servletContext.getRealPath("/OrderFile/" + fileName);
@@ -133,7 +133,7 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		Order order = model.getEntity();
 		//获取分页帮助类
 		order.setOrderConfirm("N");
-		order.setOrderStatus("待审核");
+		order.setOrderStatus("待报价");
 		int sum  = orderService.getCount(formParams,order);
 		
 		Pagebean pageBean = model.getPageBean();
@@ -162,7 +162,7 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		order.setOrderPrice(orderPrice);
 		
 		order.setDeliveryTime(deliveryTime);;
-		order.setOrderStatus("已审核");
+		order.setOrderStatus("已报价");
 
 		
 		//获取当前用户
@@ -319,5 +319,9 @@ public class OrderAction extends BaseAction implements ModelDriven {
 			setInputStream("0");
 		}
 		return "ajax-success";
+	}
+	
+	public String showSaleman(){
+		return "showSaleman";
 	}
 }

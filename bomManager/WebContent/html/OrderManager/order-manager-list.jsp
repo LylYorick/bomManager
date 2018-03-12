@@ -86,7 +86,7 @@
 							<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
 								 <i class="Hui-iconfont">&#xe715;</i>
 							</a>
-							<s:if test="orderStatus.equals('已审核') ">
+							<s:if test="orderStatus.equals('已报价') ">
 								<a title="确认订单" href="javascript:;" onclick="confirm(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
 									 <i class="Hui-iconfont">&#xe6e1;</i>
 								</a>

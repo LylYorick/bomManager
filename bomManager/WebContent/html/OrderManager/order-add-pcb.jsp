@@ -28,14 +28,18 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 		<div class="form-label col-xs-4 col-sm-3">
 		 	<select class="multiSelect"   name="entity.orderType" id="orderType">
-   		   			<option value="原理图设计">原理图设计</option>
-   		   			<option value="PCB电路图设计">PCB电路图设计</option>
-   		   			<option value="PCB制板">PCB制板</option>
-   		   			<option value="元器件配BOM">元器件配BOM</option>
-   		   			<option value="PCBA贴片焊接">PCBA贴片焊接</option>
+   		   			<option value="结构设计">结构设计</option>
+   		   			<option value="2维机械设计">2维机械设计</option>
+   		   			<option value="3D模型设计">3D模型设计</option>
+   		   			<option value="电路原理图">电路原理图</option>
+   		   			<option value="PCB绘图">PCB绘图</option>
+   		   			<option value="模压模具设计">模压模具设计</option>
+   		   			<option value="嵌入式编程">嵌入式编程</option>
+   		   			<option value="其它">其它</option>
+   		   			
 	   		  </select>
 		</div>
-		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入PCB板，PCB贴片或其他PCB工艺</span></div>
+		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入结构设计、2维机械设计或其他PCB工艺</span></div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>板层板厚：</label>
@@ -179,7 +183,7 @@ function validateInit(){
 			$(form).ajaxSubmit({
 				type: 'post',
 				url: "order-doAdd", 
-				data:{"entity.orderMode":"PCB定制"},
+				data:{"entity.orderMode":"定制设计"},
 				success: function(data){
 					//alert(data);
 					if(data == "1"){

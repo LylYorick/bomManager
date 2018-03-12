@@ -30,12 +30,15 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 		<div class="form-label col-xs-4 col-sm-3">
 			 <select class="multiSelect"   name="entity.orderType" id="orderType">
+			 机械加工，PCB加工，电路装调，3D打印，模压，注塑，激光焊接
    		   			<option value="机械加工">机械加工</option>
    		   			<option value="3D打印">3D打印</option>
-   		   			<option value="冲压">冲压</option>
+   		   			<option value="PCB加工">PCB加工</option>
+   		   			<option value="电路装调">电路装调</option>
+   		   			<option value="模压">模压</option>
    		   			<option value="注塑">注塑</option>
    		   			<option value="激光焊接">激光焊接</option>
-   		   			<option value="线圈绕制">线圈绕制</option>
+   		   			<option value="其它">其它</option>
 	   		  </select>
 		</div>
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入机械加工，3D打印或其他工艺</span></div>
@@ -175,7 +178,7 @@ function validateInit(){
 			$(form).ajaxSubmit({
 				type: 'post',
 				url: "order-doAdd", 
-				data:{"entity.orderMode":"机加定制"},
+				data:{"entity.orderMode":"定制加工"},
 				success: function(data){
 					if(data == "1"){
 						layer.msg('添加成功!',{icon:1,time:1000});

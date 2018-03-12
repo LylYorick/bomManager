@@ -34,45 +34,47 @@
 		
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 		 <span>
-		 	<a href="javascript:;" onclick="order_add('加工定制订单建立','order-toAddjj.action','800','600')" class="btn btn-primary radius">
-		 	<i class="Hui-iconfont">&#xe600;</i> 加工定制订单建立
+		 	<a href="javascript:;" onclick="order_add('定制加工订单建立','order-toAddjj.action','800','600')" class="btn btn-primary radius">
+		 	<i class="Hui-iconfont">&#xe600;</i> 定制加工订单建立
 			</a>
 		 </span>
-			机械加工，3D打印，冲压，注塑，激光焊接，线圈绕制
+			机械加工，PCB加工，电路装调，3D打印，模压，注塑，激光焊接
 		 </div>
 		 <div class="cl pd-5 bg-1 bk-gray mt-20">
 		  <span>
-		 	<a href="javascript:;" onclick="order_add('电路开发订单建立','order-toAddpcb.action','800','600')" class="btn btn-primary radius">
-		 	<i class="Hui-iconfont">&#xe600;</i> 电路开发订单建立
+		 	<a href="javascript:;" onclick="order_add('定制设计订单建立','order-toAddpcb.action','800','600')" class="btn btn-primary radius">
+		 	<i class="Hui-iconfont">&#xe600;</i> 定制设计订单建立
 		 </a>
 		 </span>
-		 	原理图设计，PCB电路图设计，PCB制板，元器件配BOM，PCBA贴片焊接
+		 	结构设计，2维机械设计，3D模型设计，电路原理图，PCB绘图，模压模具设计，嵌入式编程
 		  </div>
 		  <div class="cl pd-5 bg-1 bk-gray mt-20">
 			  <span>
-			 	<a href="javascript:;" onclick="order_add('结构设计订单建立','order-toAddgx.action','800','600')" class="btn btn-primary radius">
-			 	<i class="Hui-iconfont">&#xe600;</i>结构设计订单建立
+			 	<a href="javascript:;" onclick="order_add('定制采购订单建立','order-toAddgx.action','800','600')" class="btn btn-primary radius">
+			 	<i class="Hui-iconfont">&#xe600;</i>定制采购订单建立
 			 </a>
 			 </span>
-			 方案设计，3D模型，二维图设计，模压模具设计，工装设计
+			电子元器件，BOM配单，激光配件，姿态传感，磁性元件，特种轴承，海外采购
 		 </div>
 		  <div class="cl pd-5 bg-1 bk-gray mt-20">
 			  <span>
-			 	<a href="javascript:;" onclick="order_add('系统开发订单建立','order-toAddxt.action','800','600')" class="btn btn-primary radius">
-			 		<i class="Hui-iconfont">&#xe600;</i> 系统开发订单建立
+			 	<a href="javascript:;" onclick="order_add('定制软件订单建立','order-toAddxt.action','800','600')" class="btn btn-primary radius">
+			 		<i class="Hui-iconfont">&#xe600;</i> 定制软件订单建立
 				 </a>
-				企业网站，生产管理系统，办公软件，进销存管理系统，BOM管理系统，APP开发
+				企业网站，BOM管理，产品管理，生产管理，实验管理，无人地面站，虚拟仪器
 			 </span>
 		  </div>
-		 <div class="cl pd-5 bg-1 bk-gray mt-20">
+		<%--  <div class="cl pd-5 bg-1 bk-gray mt-20">
 		  <span>
 		 	<a href="javascript:;" onclick="order_add('全球定制采购订单建立','order-toAddcg.action','800','600')" class="btn btn-primary radius">
 		 		<i class="Hui-iconfont">&#xe600;</i> 全球定制采购订单建立
 			 </a>
 		 </span>
 		 	国内采购，国外采购，设备租用
-		  </div>
-
+		  </div> --%>
+ 		<img
+		src="images/order-background.jpg"
+		border="0"/>
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript" src="js/hui/jquery.dataTables.min.js"></script> 
 	<script type="text/javascript" src="js/hui/laypage/1.2/laypage.js"></script>

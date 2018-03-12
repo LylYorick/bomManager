@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService{
 		order.setOrderConfirm("N");
 		order.setDelivered("N");
 		order.setPaid("N");;
-		order.setOrderStatus("待审核");
+		order.setOrderStatus("待报价");
 		Boolean result=orderDAO.Add(order);
 		if(result){
 			return true;
@@ -203,7 +203,7 @@ public class OrderServiceImpl implements OrderService{
 		item.setCellPhone(order.getCellPhone());
 		item.setAddress(order.getAddress());
 		item.setOrderPrice(order.getOrderPrice());
-		item.setOrderStatus("待审核");
+		item.setOrderStatus("待报价");
 		return orderDAO.update(item);
 	}
 

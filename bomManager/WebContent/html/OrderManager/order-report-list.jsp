@@ -44,8 +44,8 @@
 				<span class="select-box">
 					<select class="select"  name="entity.orderStatus" id="orderStatus">
 		    			<option value="">==请选择==</option>
-		    			<option value="待审核" <s:if test="'待审核'.equals(entity.orderStatus)">selected</s:if> >待审核</option>
-		    			<option value="已审核"  <s:if test="'已审核'.equals(entity.orderStatus)">selected</s:if>>已审核</option>
+		    			<option value="待报价" <s:if test="'待报价'.equals(entity.orderStatus)">selected</s:if> >待报价</option>
+		    			<option value="已报价"  <s:if test="'已报价'.equals(entity.orderStatus)">selected</s:if>>已报价</option>
 		    			<option value="已确认" <s:if test="'已确认'.equals(entity.orderStatus)">selected</s:if>>已确认</option>
 		    			<option value="已完成"  <s:if test="'已完成'.equals(entity.orderStatus)">selected</s:if>>已完成</option>
 		   		   </select>
@@ -58,11 +58,10 @@
 				<span class="select-box">
 					<select class="select"  name="entity.orderMode" id="orderMode" >
 		    			<option value="">==请选择==</option>
-		    			<option value="机加定制" <s:if test="'机加定制'.equals(entity.orderMode)">selected</s:if> >机加定制</option>
-		    			<option value="PCB定制"  <s:if test="'PCB定制'.equals(entity.orderMode)">selected</s:if>>PCB定制</option>
-		    			<option value="定制采购" <s:if test="'定制采购'.equals(entity.orderMode)">selected</s:if>>定制采购</option>
-		    			<option value="系统定制" <s:if test="'系统定制'.equals(entity.orderMode)">selected</s:if>>系统定制</option>
-		    			<option value="个性定制" <s:if test="'个性定制'.equals(entity.orderMode)">selected</s:if>>个性定制</option>
+		    			<option value="定制加工" <s:if test="'定制加工'.equals(entity.orderMode)">selected</s:if> >定制加工</option>
+						<option value="定制设计"  <s:if test="'定制设计'.equals(entity.orderMode)">selected</s:if>>定制设计</option>
+						<option value="定制采购" <s:if test="'定制采购'.equals(entity.orderMode)">selected</s:if>>定制采购</option>
+						<option value="定制软件" <s:if test="'定制软件'.equals(entity.orderMode)">selected</s:if>>定制软件</option>
 		   		   </select>
 				</span>
 			</td>

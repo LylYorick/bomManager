@@ -28,11 +28,14 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 		<div class="form-label col-xs-4 col-sm-3">
 		 	<select class="multiSelect"   name="entity.orderType" id="orderType">
-   		   			<option value="方案设计">方案设计</option>
-   		   			<option value="3D模型">3D模型</option>
-   		   			<option value="二维图设计">二维图设计</option>
-   		   			<option value="模压模具设计">模压模具设计</option>
-   		   			<option value="工装设计">工装设计</option>
+   		   			<option value="电子元器件">电子元器件</option>
+   		   			<option value="BOM配单">BOM配单</option>
+   		   			<option value="激光配件">激光配件</option>
+   		   			<option value="姿态传感">姿态传感</option>
+   		   			<option value="磁性元件">磁性元件</option>
+   		   			<option value="特种轴承">特种轴承</option>
+   		   			<option value="海外采购">海外采购</option>
+					<option value="其它">其它</option>
 	   		  </select>
 		</div>
 		<div class="formControls col-xs-4 col-sm-3"> <span class="c-red">输入所属类型</span></div>
@@ -176,7 +179,7 @@ function validateInit(){
 			$(form).ajaxSubmit({
 				type: 'post',
 				url: "order-doAdd", 
-				data:{"entity.orderMode":"个性定制"},
+				data:{"entity.orderMode":"定制采购"},
 				success: function(data){
 					//alert(data);
 					if(data == "1"){

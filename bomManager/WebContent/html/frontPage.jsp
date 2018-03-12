@@ -82,9 +82,11 @@
 							</s:if>
 							<li><a data-href="order-toManager" data-title="订单管理" href="javascript:;">订单管理</a></li>
 							<li><a data-href="order-toReport" data-title="订单报表" href="javascript:;">订单报表</a></li>
+							<li><a data-href="order-showSaleman" data-title="联系我们" href="javascript:void(0)">联系我们</a></li>
 						</ul>
 					</dd>
 				</dl>
+
 				<s:if test="#session.currentUser.u_Level > 1">
 					<dt><a data-href="executeSql-executeSql" data-title="sql执行页" href="javascript:void(0)">sql执行页</a></dt>
 				</s:if>
