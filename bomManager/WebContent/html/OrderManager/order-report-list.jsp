@@ -33,7 +33,7 @@
 		</nav>
 		<div class="page-container">
 		<div class="text-c">
-		<form id="orderForm" class="Huiform" method="get" action="order-toReport"  target="_self">
+		<form id="orderForm" class="Huiform" method="post" action="order-toReport"  atarget="_self" accept-charset="utf-8" >
 			
 			<table class="table table-border table-bordered radius">
 			<tr>
