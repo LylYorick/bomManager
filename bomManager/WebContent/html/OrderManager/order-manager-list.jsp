@@ -40,25 +40,21 @@
 		</form>
 		</div>
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-		 <span class="r">共有数据：<strong>${request.sum}</strong> 条</span> 
+		 <strong class="l">管理列表</strong> <span class="r">共有数据：<strong>${request.sum}</strong> 条</span> 
 		</div>
 		<table class="table table-border table-bordered table-bg">
 			<thead>
-				<tr>
-					<th scope="col" colspan="18">管理列表</th>
-				</tr>
 				<tr class="text-c">
-					<th width="150">订单编号</th>
+					<th width="250">订单编号</th>
 					<th width="100">订单分类</th>
-					<th width="100">名称</th>
+					<th width="100">项目名称</th>
 					<th width="100">类型</th>
 					<th width="100">数量</th>
 					<th width="100">材料</th>
-					<th width="100">描述</th>
 					<th width="100">需求日期</th>
-					<th width="100">联系人</th>
-					<th width="100">联系电话</th>
-					<th width="100">联系地址</th>
+					<th width="200">联系人</th>
+					<!-- <th width="200">联系电话</th> -->
+					<!-- <th width="100">联系地址</th> -->
 					<th width="100">报价</th>
 					<th width="100">订单状态</th>
 					<th width="100">交货日期</th>
@@ -74,33 +70,32 @@
 						<td>${orderType}</td>
 						<td>${orderQty}</td>
 						<td>${orderMaterial}</td>
-						<td>${orderDesc}</td> 
 						<td><s:date name="reqDate" format="yyyy-MM-dd"/></td>
-						<td>${contact}</td>
-						<td>${cellPhone}</td>
-						<td>${address}</td>
+						<%-- <td>${contact}</td> --%>
+						<td>${contact} -- ${cellPhone}</td>
+						<%-- <td>${address}</td> --%>
 						<td>${orderPrice}</td>
 						<td>${orderStatus}</td>
 						<td><s:date name="deliveryTime" format="yyyy-MM-dd"/></td>
 							<td class="td-manage">
 							<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-								 <i class="Hui-iconfont">&#xe715;</i>
+									 <input class="btn btn-primary radius" type="button" value="详情">
 							</a>
 							<s:if test="orderStatus.equals('已报价') ">
 								<a title="确认订单" href="javascript:;" onclick="confirm(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
-									 <i class="Hui-iconfont">&#xe6e1;</i>
+									 <input class="btn btn-primary radius" type="button" value="确认订单">
 								</a>
 							</s:if>
 							<s:if test="#session.currentUser.u_Level >2 ">
 								<a title="编辑" href="javascript:;" onclick="admin_edit('编辑','order-toEdit.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-									 <i class="Hui-iconfont">&#xe6df;</i>
+									 <input class="btn btn-primary radius" type="button" value="编辑">
 								</a>
 								<a title="完成订单" href="javascript:;" onclick="admin_detail('完成订单','order-toComplete.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-									 <i class="Hui-iconfont">&#xe637;</i>
+									 <input class="btn btn-primary radius" type="button" value="完成订单">
 								</a>
 								<s:if test="!orderStatus.equals('已完成') ">
 									<a title="删除" href="javascript:;" onclick="admin_del(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
-									 	<i class="Hui-iconfont">&#xe6e2;</i>
+									 	<input class="btn btn-danger radius" type="button" value="删除">
 									</a>
 								</s:if>
 							</s:if>

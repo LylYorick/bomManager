@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3">名称：</label>
+		<label class="form-label col-xs-4 col-sm-3">项目名称：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<s:hidden name="entity.orderName"></s:hidden>
 			<label class="form-label " >${entity.orderName}</label>
@@ -76,23 +76,23 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系人：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<s:hidden name="entity.contact"></s:hidden>
-			<label class="form-label " >${entity.contact}</label>
+			<label class="form-label " >${entity.contact} -- ${entity.cellPhone}</label>
 		</div>
 	</div>
-	<div class="row cl">
+<%-- 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<s:hidden name="entity.cellPhone"></s:hidden>
 			<label class="form-label " >${entity.cellPhone}</label>
 		</div>
-	</div>
-	<div class="row cl">
+	</div> --%>
+<%-- 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系地址:</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<s:hidden name="entity.address"></s:hidden>
 			<label class="form-label " >${entity.address}</label>
 		</div>
-	</div>
+	</div> --%>
 	
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>订单状态:</label>

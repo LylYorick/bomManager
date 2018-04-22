@@ -148,6 +148,19 @@ public class OrderServiceImpl implements OrderService{
 				hql.append(" and e.delivered = :delivered");
 				sqlParams.put("delivered", delivered);
 			}
+			//搜索
+			String contactSearch = order.getContact();
+			if(!StringUtil.isNullOrWhiteSpace(contactSearch)){
+				contactSearch = "%" + contactSearch + "%"; 
+				hql.append(" and e.contact like :contactSearch");
+				sqlParams.put("contactSearch", contactSearch);
+			}
+			String orderName = order.getOrderName();
+			if(!StringUtil.isNullOrWhiteSpace(orderName)){
+				orderName = "%" + orderName + "%"; 
+				hql.append(" and e.orderName like :orderName");
+				sqlParams.put("orderName", orderName);
+			}
 			
 			String orderby = (String) formParams.get("orderby");
 			if(!StringUtil.isNullOrWhiteSpace(orderby)){

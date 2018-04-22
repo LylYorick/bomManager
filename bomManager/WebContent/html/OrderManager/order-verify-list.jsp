@@ -33,24 +33,19 @@
 		</nav>
 		<div class="page-container">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
-		 <span class="r">共有数据：<strong>${request.sum}</strong> 条</span> 
+		<strong class="l">管理列表</strong> <span class="r">共有数据：<strong>${request.sum}</strong> 条</span> 
 		</div>
 		<table class="table table-border table-bordered table-bg">
 			<thead>
-				<tr>
-					<th scope="col" colspan="18">未复核列表</th>
-				</tr>
 				<tr class="text-c">
-					<th width="150">订单编号</th>
+					<th width="250">订单编号</th>
 					<th width="100">订单分类</th>
-					<th width="100">名称</th>
+					<th width="100">项目名称</th>
 					<th width="100">类型</th>
 					<th width="100">数量</th>
 					<th width="100">材料</th>
-					<th width="100">描述</th>
 					<th width="100">需求日期</th>
-					<th width="100">联系人</th>
-					<th width="100">联系电话</th>
+					<th width="200">联系人</th>
 					<th width="100">联系地址</th>
 					<th width="100">报价</th>
 					<th width="100">订单状态</th>
@@ -67,10 +62,8 @@
 						<td>${orderType}</td>
 						<td>${orderQty}</td>
 						<td>${orderMaterial}</td>
-						<td>${orderDesc}</td> 
 						<td><s:date name="reqDate" format="yyyy-MM-dd"/></td>
-						<td>${contact}</td>
-						<td>${cellPhone}</td>
+						<td>${contact} -- ${cellPhone}</td>
 						<td>${address}</td>
 						<td>${orderPrice}</td>
 						<td>${orderStatus}</td>

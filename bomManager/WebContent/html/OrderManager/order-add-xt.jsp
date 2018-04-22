@@ -16,7 +16,7 @@
 <article class="page-container">
 	<form class="form form-horizontal" id="form-order-add">
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>系统平台：</label>
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目名称：</label>
 		<div class="formControls col-xs-4 col-sm-3">	
 			<input type="text" class="input-text"  placeholder="" id="orderName" name="entity.orderName" >
 		    

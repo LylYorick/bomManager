@@ -256,6 +256,7 @@ public class OrderAction extends BaseAction implements ModelDriven {
 		}
 		return "ajax-success";
 	}
+	@SuppressWarnings("unchecked")
 	public String toReport(){
 		Order order = model.getEntity();
 		UserInfoView currentuser = (UserInfoView) session.get(Const.currentUser);
