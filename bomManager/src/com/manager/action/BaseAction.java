@@ -30,6 +30,7 @@ public class BaseAction extends ActionSupport implements SessionAware ,RequestAw
 	private static final long serialVersionUID = 1L;
 
 	public static String LIST = "list";
+	public final static String JSON = "json";
 	
 	
 	protected Map<String, Object> session;

@@ -165,6 +165,15 @@
 		     <param name="contentDisposition">attachment;filename="${docFileName}"</param>
 		    </result>	
         </action>
+         <action name="message-*" class="messageAction" method="{1}">
+         	<result >/html/newMessage/{1}.jsp</result>
+         	<result type='json' name="json-img">
+		       		<param name="root">view.result.data</param>
+		    </result>
+         	<result type='json' name="json">
+		       		<param name="root">view.result</param>
+		    </result>
+         </action>
     </package> 
 </struts>
    

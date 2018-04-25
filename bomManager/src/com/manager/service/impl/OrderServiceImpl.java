@@ -149,11 +149,11 @@ public class OrderServiceImpl implements OrderService{
 				sqlParams.put("delivered", delivered);
 			}
 			//搜索
-			String contactSearch = order.getContact();
-			if(!StringUtil.isNullOrWhiteSpace(contactSearch)){
-				contactSearch = "%" + contactSearch + "%"; 
-				hql.append(" and e.contact like :contactSearch");
-				sqlParams.put("contactSearch", contactSearch);
+			String cellPhone = order.getCellPhone();
+			if(!StringUtil.isNullOrWhiteSpace(cellPhone)){
+				cellPhone = "%" + cellPhone + "%"; 
+				hql.append(" and e.cellPhone like :cellPhone");
+				sqlParams.put("cellPhone", cellPhone);
 			}
 			String orderName = order.getOrderName();
 			if(!StringUtil.isNullOrWhiteSpace(orderName)){

@@ -125,10 +125,10 @@
 				<input type="text" class="input-text"   id="" name="entity.orderName" value="${entity.orderName}">
 			</td>
 			<td> 
-				</span>联系人：</label>
+				</span>联系人或联系电话：</label>
 			</td> 
 			<td>
-				<input type="text" class="input-text"   id="" name="entity.contact" value="${entity.contact}">
+				<input type="text" class="input-text"   id="" name="entity.cellPhone" value="${entity.cellPhone}">
 			</td>
 			<td>
 				<button type="button" class="btn btn-success radius" id="" name=""  onclick="doExportExcel()">导出订单信息</button>
@@ -169,7 +169,7 @@
 						<td>${orderQty}</td>
 						<td>${orderMaterial}</td>
 						<td><s:date name="reqDate" format="yyyy-MM-dd"/></td>
-						<td>${contact} -- ${cellPhone}</td>
+						<td>${cellPhone}</td>
 					<%-- 	<td>${cellPhone}</td> --%>
 					<%-- 	<td>${address}</td> --%>
 						<td>${orderPrice}</td>

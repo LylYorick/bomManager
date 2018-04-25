@@ -56,7 +56,7 @@ public class Pagebean {
 		this.offset = offset;
 	}
 	public void setOffset() {
-		if(currentPage == 0 ){
+		if(currentPage == 0  ){
 			currentPage = 1;
 		}
 		offset = (currentPage - 1) * pageSize;

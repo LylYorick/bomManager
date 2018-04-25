@@ -83,6 +83,10 @@
 							<li><a data-href="order-toManager" data-title="订单管理" href="javascript:;">订单管理</a></li>
 							<li><a data-href="order-toReport" data-title="订单报表" href="javascript:;">订单报表</a></li>
 							<li><a data-href="order-showSaleman" data-title="联系我们" href="javascript:void(0)">联系我们</a></li>
+							<s:if test="#session.currentUser.u_Level > 2">
+							<li><a data-href="message-manageMessage" data-title="消息发布" href="javascript:void(0)">消息发布</a></li>
+							</s:if>
+							<li><a data-href="message-listMessage" data-title="消息浏览" href="javascript:void(0)">消息浏览</a></li>
 						</ul>
 					</dd>
 				</dl>

@@ -63,7 +63,7 @@
 						<td>${orderQty}</td>
 						<td>${orderMaterial}</td>
 						<td><s:date name="reqDate" format="yyyy-MM-dd"/></td>
-						<td>${contact} -- ${cellPhone}</td>
+						<td>${cellPhone}</td>
 						<td>${address}</td>
 						<td>${orderPrice}</td>
 						<td>${orderStatus}</td>

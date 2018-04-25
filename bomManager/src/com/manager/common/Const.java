@@ -10,6 +10,11 @@ public class Const {
 	 * 当前用户
 	 */
 	public static String currentUser="currentUser";
+	
+	/**
+	 * 上传图片dir
+	 */
+	public static String MESSGE_IMG_DIR="messageImg/";
 	/**
 	 * 用户列表
 	 */
@@ -50,6 +55,10 @@ public class Const {
 	 */
 	public static String TOP_BOM_LIST="TopBomList";
 	
+	/**
+	 * 消息列表
+	 */
+	public static String MESSAGE_LIST = "messageList";
 	public static String SUM="sum";
 	
 	/*public static  int [] allLevels =  {1,2,3,4,5};*/

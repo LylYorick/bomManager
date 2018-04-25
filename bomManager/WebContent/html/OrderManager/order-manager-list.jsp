@@ -72,32 +72,39 @@
 						<td>${orderMaterial}</td>
 						<td><s:date name="reqDate" format="yyyy-MM-dd"/></td>
 						<%-- <td>${contact}</td> --%>
-						<td>${contact} -- ${cellPhone}</td>
+						<td>${cellPhone}</td>
 						<%-- <td>${address}</td> --%>
 						<td>${orderPrice}</td>
 						<td>${orderStatus}</td>
 						<td><s:date name="deliveryTime" format="yyyy-MM-dd"/></td>
 							<td class="td-manage">
 							<a title="详情" href="javascript:;" onclick="admin_detail('详情','order-toDetai.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-									 <input class="btn btn-primary radius" type="button" value="详情">
+								<!-- <i class="Hui-iconfont">&#xe715;</i> -->
+								<span class="btn size-MINI btn-secondary radius"> 详情 </span>
 							</a>
 							<s:if test="orderStatus.equals('已报价') ">
 								<a title="确认订单" href="javascript:;" onclick="confirm(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
-									 <input class="btn btn-primary radius" type="button" value="确认订单">
+ 									<!-- <i class="Hui-iconfont">&#xe6e1;</i> -->
+ 									 <span class="btn size-MINI btn-secondary radius">确认订单</span>
 								</a>
 							</s:if>
 							<s:if test="#session.currentUser.u_Level >2 ">
 								<a title="编辑" href="javascript:;" onclick="admin_edit('编辑','order-toEdit.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-									 <input class="btn btn-primary radius" type="button" value="编辑">
+									  <!-- <i class="Hui-iconfont">&#xe6df;</i> -->
+									   <span class="btn size-MINI btn-secondary radius">编辑</span>
 								</a>
-								<a title="完成订单" href="javascript:;" onclick="admin_detail('完成订单','order-toComplete.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
-									 <input class="btn btn-primary radius" type="button" value="完成订单">
-								</a>
-								<s:if test="!orderStatus.equals('已完成') ">
-									<a title="删除" href="javascript:;" onclick="admin_del(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
-									 	<input class="btn btn-danger radius" type="button" value="删除">
+								<s:if test="orderStatus.equals('已确认') ">
+									<a title="完成订单" href="javascript:;" onclick="admin_detail('完成订单','order-toComplete.action?entity.orderNumber=${orderNumber}','800','500')" class="ml-5" style="text-decoration:none">
+										<!-- <i class="Hui-iconfont">&#xe637;</i> -->
+										 <span class="btn size-MINI btn-secondary radius">完成订单</span>
 									</a>
 								</s:if>
+							</s:if>
+							<s:if test="!orderStatus.equals('已完成') ">
+								<a title="删除" href="javascript:;" onclick="admin_del(this,'${orderNumber}')" class="ml-5" style="text-decoration:none">
+								 <!-- 	<i class="Hui-iconfont">&#xe6e2;</i> -->
+								 <span class="btn size-MINI btn-danger radius"> 删除</span>
+								</a>
 							</s:if>
 						</td>
 					</tr>

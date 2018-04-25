@@ -40,6 +40,10 @@
 		scope="prototype">
 		 <property name="bomService" ref="bomService"></property>	
 	</bean>
+	<bean id="messageAction" class="com.manager.action.MessageAction"
+		scope="prototype">
+		<property name="messageService" ref="messageService"></property>
+	</bean>
 	<!-- service层 -->
 	<bean id="userService" class="com.manager.service.impl.UserServiceImpl">
 		<property name="userDAO" ref="userDAO"></property>
@@ -64,6 +68,9 @@
 	<bean id="bomService" class="com.manager.service.impl.BomServiceImpl">
 		<property name="bomDAO" ref="bomDAO"></property>
 	</bean>
+	<bean id="messageService" class="com.manager.service.impl.MessageServiceImpl">
+		<property name="messageDAO" ref="messageDAO"></property>
+	</bean>
 	
 	<!-- dao层 -->
 	<bean id="baseDAO" class="com.manager.dao.impl.BaseDAOImpl">
@@ -82,5 +89,7 @@
 	<bean id="orderDAO" class="com.manager.dao.impl.OrderDAOImpl" parent="baseDAO">
 	</bean>	
 	<bean id="bomDAO" class="com.manager.dao.impl.BomDAOImpl" parent="baseDAO">
+	</bean>	
+	<bean id="messageDAO" class="com.manager.dao.impl.MessageDAOImpl" parent="baseDAO">
 	</bean>	
 </beans>

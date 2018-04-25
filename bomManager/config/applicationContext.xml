@@ -28,7 +28,7 @@
 			<property name="hibernateProperties">
 			 	<props>
 			 	<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-			 	<prop key="shibernate.how_sql">true</prop>
+			 	<prop key="hibernate.how_sql">true</prop>
 			 	<prop key="hibernate.format_sql">true</prop>
 			 	<prop key="hibernate.hbm2ddl.auto">none</prop>
 			 	<prop key="hibernate.autoReconnect">true</prop>
