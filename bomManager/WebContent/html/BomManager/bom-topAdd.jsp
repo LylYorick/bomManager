@@ -21,7 +21,7 @@
 		<div class="formControls col-xs-8 col-sm-9">	
 				 <select class="multiSelect"  name="entity.id.topPartnumber" id="topPartnumber">
    		   			<s:iterator value="#request.MaterialList" id="item" >
-   		   				<option value='<s:property value="#item.id.partnumber"/>' topName='<s:property value="#item.partName"/>'/><s:property value="#item.id.partnumber"/> <s:property value="#item.partName"/></option>
+   		   				<option value='<s:property value="#item.partnumber"/>' topName='<s:property value="#item.partName"/>'/><s:property value="#item.partnumber"/> <s:property value="#item.partName"/></option>
    		   			</s:iterator>
 	   		    </select>
 				<input type="hidden"  name="entity.topName"  id="topName" >
