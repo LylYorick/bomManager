@@ -69,13 +69,20 @@ public class UserAction extends BaseAction implements ModelDriven<UserInfoView>{
 		this.userService = userService;
 	}
 	
+	
 	/**
 	 * 登录
 	 * @return
 	 */
 	public String login(){
 		//判断是否允许登录
-  		boolean islogin= userService.checkLogin(userInfo);
+		boolean islogin =false;
+		try {
+			islogin= userService.checkLogin(userInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return LOGIN;
+		}
 		if(islogin){
 			//将当前用户放入到session中
 			session.put(Const.currentUser, userInfo);
